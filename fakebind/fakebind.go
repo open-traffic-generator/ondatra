@@ -16,14 +16,16 @@
 package fakebind
 
 import (
-	"golang.org/x/net/context"
+	"fmt"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -68,6 +70,8 @@ func (b *Binding) Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTim
 	if b.ReserveFn == nil {
 		log.Fatal("fakebind Reserve called but ReserveFn not set")
 	}
+	fmt.Println(&tb)
+	fmt.Println(ctx)
 	return b.ReserveFn(ctx, tb, runTime, waitTime, partial)
 }
 
@@ -95,8 +99,8 @@ type DUT struct {
 	DialConsoleFn func(context.Context, ...grpc.DialOption) (binding.StreamClient, error)
 	DialGNMIFn    func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 	DialGNOIFn    func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error)
-	DialGRIBIFn func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
-	DialP4RTFn  func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+	DialGRIBIFn   func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
+	DialP4RTFn    func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 }
 
 // PushConfig delegates to d.PushConfigFn.
