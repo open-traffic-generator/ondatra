@@ -73,10 +73,13 @@ func Reserve(ctx context.Context, fv *flags.Values) error {
 	if err := validateTB(tb); err != nil {
 		return err
 	}
+	fmt.Println("Hi-3")
 
 	var r *binding.Reservation
 	if fv.ResvID == "" {
+		fmt.Println("Hi-4")
 		r, err = bind.Reserve(ctx, tb, fv.RunTime, fv.WaitTime, fv.ResvPartial)
+		fmt.Println("Hi-5")
 	} else {
 		r, err = bind.FetchReservation(ctx, fv.ResvID)
 		fetched = true
@@ -84,9 +87,11 @@ func Reserve(ctx context.Context, fv *flags.Values) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println("Hi-6")
 	if err := validateRes(tb, r); err != nil {
 		return err
 	}
+	fmt.Println("Hi-7")
 	res = r
 	return nil
 }
