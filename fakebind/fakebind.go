@@ -16,7 +16,6 @@
 package fakebind
 
 import (
-	"fmt"
 	"time"
 
 	"golang.org/x/net/context"
@@ -70,8 +69,6 @@ func (b *Binding) Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTim
 	if b.ReserveFn == nil {
 		log.Fatal("fakebind Reserve called but ReserveFn not set")
 	}
-	fmt.Println(&tb)
-	fmt.Println(ctx)
 	return b.ReserveFn(ctx, tb, runTime, waitTime, partial)
 }
 

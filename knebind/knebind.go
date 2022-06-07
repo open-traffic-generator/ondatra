@@ -17,7 +17,6 @@ package knebind
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"crypto/tls"
 	"errors"
 	"fmt"
@@ -25,16 +24,18 @@ import (
 	"os/exec"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"golang.org/x/crypto/ssh"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/open-traffic-generator/snappi/gosnappi"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"golang.org/x/crypto/ssh"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	tpb "github.com/google/kne/proto/topo"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -72,7 +73,9 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println(string(out[:]))
 	topo := new(tpb.Topology)
+	fmt.Println(topo)
 	if err := prototext.Unmarshal(out, topo); err != nil {
 		return nil, fmt.Errorf("error unmarshalling KNE topology proto: %w", err)
 	}
