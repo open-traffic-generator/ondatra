@@ -16,16 +16,17 @@
 package testbed
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"regexp"
 	"sync"
 
-	"google.golang.org/protobuf/encoding/prototext"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -64,6 +65,7 @@ func Reserve(ctx context.Context, fv *flags.Values) error {
 	if err != nil {
 		return fmt.Errorf("failed to read testbed proto %s: %w", fv.TestbedPath, err)
 	}
+	fmt.Println("Hi")
 	if err := prototext.Unmarshal(s, tb); err != nil {
 		return fmt.Errorf("failed to parse testbed proto %s: %w", fv.TestbedPath, err)
 	}
