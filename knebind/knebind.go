@@ -73,9 +73,7 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(string(out[:]))
 	topo := new(tpb.Topology)
-	fmt.Println(topo)
 	if err := prototext.Unmarshal(out, topo); err != nil {
 		return nil, fmt.Errorf("error unmarshalling KNE topology proto: %w", err)
 	}
