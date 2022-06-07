@@ -65,11 +65,11 @@ func Reserve(ctx context.Context, fv *flags.Values) error {
 	if err != nil {
 		return fmt.Errorf("failed to read testbed proto %s: %w", fv.TestbedPath, err)
 	}
-	fmt.Println("Hi")
+	fmt.Println("Hi-1")
 	if err := prototext.Unmarshal(s, tb); err != nil {
 		return fmt.Errorf("failed to parse testbed proto %s: %w", fv.TestbedPath, err)
 	}
-	fmt.Println("Hi-1")
+	fmt.Println("Hi-2")
 	if err := validateTB(tb); err != nil {
 		return err
 	}
