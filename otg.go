@@ -15,9 +15,10 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
@@ -122,6 +123,58 @@ func (o *OTG) StopTraffic(t testing.TB) {
 	}
 	if len(warns) > 0 {
 		t.Logf("StopTraffic(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// WithdrawRoutes withdraw routes on the ATE.
+func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "withdrawing routes for %v", o.ate)
+	warns, err := otg.WithdrawRoutes(context.Background(), o.ate, routes)
+	if err != nil {
+		t.Fatalf("WithdrawRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("WithdrawRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// AdvertiseRoutes advertise routes on the ATE.
+func (o *OTG) AdvertiseRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "advertising routes for %v", o.ate)
+	warns, err := otg.AdvertiseRoutes(context.Background(), o.ate, routes)
+	if err != nil {
+		t.Fatalf("AdvertiseRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("AdvertiseRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// UpLacpMember up lacp member ports on the ATE.
+func (o *OTG) UpLacpMember(t testing.TB, lagMemberPorts []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "UpLacpMember for %v", o.ate)
+	warns, err := otg.UpLacpMember(context.Background(), o.ate, lagMemberPorts)
+	if err != nil {
+		t.Fatalf("UpLacpMember(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("UpLacpMember(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// DownLacpMember down lacp member ports on the ATE.
+func (o *OTG) DownLacpMember(t testing.TB, lagMemberPorts []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "DownLacpMember for %v", o.ate)
+	warns, err := otg.DownLacpMember(context.Background(), o.ate, lagMemberPorts)
+	if err != nil {
+		t.Fatalf("DownLacpMember(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("DownLacpMember(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }
 

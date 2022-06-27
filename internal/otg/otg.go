@@ -16,13 +16,14 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -133,6 +134,78 @@ func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.Trans
 		return nil, err
 	}
 	resp, err := api.SetTransmitState(api.NewTransmitState().SetState(state))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// WithdrawRoutes withdraw routes on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func WithdrawRoutes(ctx context.Context, ate binding.ATE, routes []string) ([]string, error) {
+	return setRouteState(ctx, ate, routes, gosnappi.RouteStateState.WITHDRAW)
+}
+
+// AdvertiseRoutes advertise routes on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func AdvertiseRoutes(ctx context.Context, ate binding.ATE, routes []string) ([]string, error) {
+	return setRouteState(ctx, ate, routes, gosnappi.RouteStateState.ADVERTISE)
+}
+
+func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state gosnappi.RouteStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetRouteState(api.NewRouteState().SetState(state).SetNames(routes))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// WithdrawRoutes up port links on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func UpLink(ctx context.Context, ate binding.ATE, ports []string) ([]string, error) {
+	return setLinkState(ctx, ate, ports, gosnappi.LinkStateState.UP)
+}
+
+// DownLink down port links on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func DownLink(ctx context.Context, ate binding.ATE, ports []string) ([]string, error) {
+	return setLinkState(ctx, ate, ports, gosnappi.LinkStateState.DOWN)
+}
+
+func setLinkState(ctx context.Context, ate binding.ATE, ports []string, state gosnappi.LinkStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetLinkState(api.NewLinkState().SetState(state).SetPortNames(ports))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// UpLacpMember up lacp member ports on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func UpLacpMember(ctx context.Context, ate binding.ATE, lagMemberPorts []string) ([]string, error) {
+	return setLacpMemberState(ctx, ate, lagMemberPorts, gosnappi.LacpMemberStateState.UP)
+}
+
+// DownLacpMember down lacp member ports on the specified ATE.
+// The first return value are any non-fatal warnings encountered.
+func DownLacpMember(ctx context.Context, ate binding.ATE, lagMemberPorts []string) ([]string, error) {
+	return setLacpMemberState(ctx, ate, lagMemberPorts, gosnappi.LacpMemberStateState.DOWN)
+}
+
+func setLacpMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []string, state gosnappi.LacpMemberStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetDeviceState(api.NewDeviceState().SetLacpMemberState(gosnappi.NewLacpMemberState().SetLagMemberPortNames(lagMemberPorts).SetState(state)))
 	if err != nil {
 		return nil, err
 	}
