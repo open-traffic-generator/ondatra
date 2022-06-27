@@ -9,6 +9,7 @@ using the following YANG input files:
 	- public/release/models/acl/openconfig-acl.yang
 	- public/release/models/acl/openconfig-packet-match.yang
 	- public/release/models/aft/openconfig-aft.yang
+	- public/release/models/aft/openconfig-aft-network-instance.yang
 	- public/release/models/ate/openconfig-ate-flow.yang
 	- public/release/models/ate/openconfig-ate-intf.yang
 	- public/release/models/bfd/openconfig-bfd.yang
@@ -814,7 +815,9 @@ func (n *ComponentPathAny) LastRebootReason() *Component_LastRebootReasonPathAny
 	}
 }
 
-// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// LastRebootTime (leaf): This reports the time of the last reboot of the component. The
+// value is the timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
 // ----------------------------------------
 // Defining module: "openconfig-platform"
 // Instantiating module: "openconfig-platform"
@@ -830,7 +833,9 @@ func (n *ComponentPath) LastRebootTime() *Component_LastRebootTimePath {
 	}
 }
 
-// LastRebootTime (leaf): This reports the time of the last reboot of the component.
+// LastRebootTime (leaf): This reports the time of the last reboot of the component. The
+// value is the timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
 // ----------------------------------------
 // Defining module: "openconfig-platform"
 // Instantiating module: "openconfig-platform"
@@ -887,7 +892,8 @@ func (n *ComponentPathAny) LastSwitchoverReason() *Component_LastSwitchoverReaso
 // LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
 // supervisors in a device, one as primary the other as
 // secondary), this reports the time of the last change of
-// the component's role.
+// the component's role. The value is the timestamp in
+// nanoseconds relative to the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
 // ----------------------------------------
 // Defining module: "openconfig-platform"
 // Instantiating module: "openconfig-platform"
@@ -906,7 +912,8 @@ func (n *ComponentPath) LastSwitchoverTime() *Component_LastSwitchoverTimePath {
 // LastSwitchoverTime (leaf): For components that have redundant roles (e.g. two
 // supervisors in a device, one as primary the other as
 // secondary), this reports the time of the last change of
-// the component's role.
+// the component's role. The value is the timestamp in
+// nanoseconds relative to the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
 // ----------------------------------------
 // Defining module: "openconfig-platform"
 // Instantiating module: "openconfig-platform"

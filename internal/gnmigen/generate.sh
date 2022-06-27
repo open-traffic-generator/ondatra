@@ -18,7 +18,6 @@
 
 set -e
 
-go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
@@ -51,6 +50,7 @@ YANG_FILES=(
   public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
   public/release/models/aft/openconfig-aft.yang
+  public/release/models/aft/openconfig-aft-network-instance.yang
   public/release/models/ate/openconfig-ate-flow.yang
   public/release/models/ate/openconfig-ate-intf.yang
   public/release/models/bfd/openconfig-bfd.yang
@@ -99,7 +99,7 @@ YANG_FILES=(
 )
 
 # Generate Schema Structs
-generator \
+go run github.com/openconfig/ygot/generator \
   -path=public/release/models,public/third_party/ietf \
   -generate_structs \
   -generate_path_structs=false \
@@ -122,7 +122,7 @@ go run internal/gnmigen/main/main.go \
 
 # Generate Config API.
 mkdir -p config/device
-generator \
+go run github.com/openconfig/ygot/generator \
   -path=public/release/models,public/third_party/ietf \
   -generate_path_structs \
   -generate_structs=false \
@@ -158,7 +158,7 @@ go run internal/gnmigen/main/main.go \
 
 # Generate Telemetry API.
 mkdir -p telemetry/device
-generator \
+go run github.com/openconfig/ygot/generator \
   -path=public/release/models,public/third_party/ietf \
   -generate_path_structs \
   -generate_structs=false \
@@ -200,7 +200,7 @@ OTG_YANG_FILES=(
 
 # Generate OTG Schema Structs
 mkdir -p telemetry/otg
-generator \
+go run github.com/openconfig/ygot/generator \
     -path=models-yang/models \
     -generate_structs \
     -generate_path_structs=false \
@@ -224,7 +224,7 @@ go run internal/gnmigen/main/main.go \
 
 # Generate OTG Telemetry API
 mkdir -p telemetry/otg/device
-generator \
+go run github.com/openconfig/ygot/generator \
     -path=models-yang/models \
     -generate_structs=false \
     -generate_path_structs \

@@ -10,6 +10,7 @@ using the following YANG input files:
 	- public/release/models/acl/openconfig-acl.yang
 	- public/release/models/acl/openconfig-packet-match.yang
 	- public/release/models/aft/openconfig-aft.yang
+	- public/release/models/aft/openconfig-aft-network-instance.yang
 	- public/release/models/ate/openconfig-ate-flow.yang
 	- public/release/models/ate/openconfig-ate-intf.yang
 	- public/release/models/bfd/openconfig-bfd.yang
@@ -1992,6 +1993,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack": {
 			reflect.TypeOf((E_MplsTypes_MplsLabel_Enum)(0)),
 		},
+		"/network-instances/network-instance/afts/next-hops/next-hop/state/decapsulate-header": {
+			reflect.TypeOf((E_AftTypes_EncapsulationHeaderType)(0)),
+		},
 		"/network-instances/network-instance/afts/next-hops/next-hop/state/encapsulate-header": {
 			reflect.TypeOf((E_AftTypes_EncapsulationHeaderType)(0)),
 		},
@@ -2941,6 +2945,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/segment-routing/srlbs/srlb/state/dataplane-type": {
 			reflect.TypeOf((E_SegmentRoutingTypes_SrDataplaneType)(0)),
+		},
+		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/state/decapsulate-header": {
+			reflect.TypeOf((E_AftTypes_EncapsulationHeaderType)(0)),
 		},
 		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/state/encapsulate-header": {
 			reflect.TypeOf((E_AftTypes_EncapsulationHeaderType)(0)),
