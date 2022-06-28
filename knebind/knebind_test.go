@@ -15,19 +15,20 @@
 package knebind
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"strings"
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"golang.org/x/crypto/ssh"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"golang.org/x/crypto/ssh"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -54,6 +55,12 @@ func TestReserve(t *testing.T) {
 			  key: "eth2"
 				value: {
 				  name: "Ethernet2"
+				}
+			}
+			interfaces: {
+			 key: "eth3"
+				value: {
+				  name: "Ethernet3"
 				}
 			}
     }
@@ -96,6 +103,12 @@ func TestReserve(t *testing.T) {
 			  key: "eth1"
 				value: {}
 			}
+			interfaces: {
+			  key: "eth2"
+				value: {
+				  group: "lag"
+				}
+			}
     }
 		links: {
 		  a_node: "node1"
@@ -114,11 +127,17 @@ func TestReserve(t *testing.T) {
 		  a_int: "eth2"
 		  z_node: "node4"
 		  z_int: "eth1"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth3"
+		  z_node: "node4"
+		  z_int: "eth2"
 		}`
 	dut1 := &opb.Device{
 		Id:     "dut1",
 		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}},
 	}
 	dut2 := &opb.Device{
 		Id:    "dut2",
@@ -131,7 +150,7 @@ func TestReserve(t *testing.T) {
 	}
 	ate := &opb.Device{
 		Id:    "ate",
-		Ports: []*opb.Port{{Id: "port1"}},
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2", Group: "lag"}},
 	}
 	link12 := &opb.Link{
 		A: "dut1:port1",
@@ -144,6 +163,10 @@ func TestReserve(t *testing.T) {
 	link14 := &opb.Link{
 		A: "dut1:port2",
 		B: "ate:port1",
+	}
+	link15 := &opb.Link{
+		A: "dut1:port3",
+		B: "ate:port2",
 	}
 
 	var gotResets int
@@ -170,6 +193,7 @@ func TestReserve(t *testing.T) {
 				Ports: map[string]*binding.Port{
 					"port1": {Name: "Ethernet1"},
 					"port2": {Name: "Ethernet2"},
+					"port3": {Name: "Ethernet3"},
 				},
 			}},
 			Services: map[string]*tpb.Service{
@@ -222,6 +246,7 @@ func TestReserve(t *testing.T) {
 				SoftwareVersion: "IXIA_TG",
 				Ports: map[string]*binding.Port{
 					"port1": {Name: "eth1"},
+					"port2": {Name: "eth2"},
 				},
 			}},
 			Services: make(map[string]*tpb.Service),
@@ -273,7 +298,7 @@ func TestReserve(t *testing.T) {
 		tb: &opb.Testbed{
 			Duts:  []*opb.Device{dut1},
 			Ates:  []*opb.Device{ate},
-			Links: []*opb.Link{link14},
+			Links: []*opb.Link{link14, link15},
 		},
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
