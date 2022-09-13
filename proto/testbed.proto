@@ -100,7 +100,6 @@ message Port {
     string pmd_regex = 5;
   }
 
-  // Group name
   string group = 6;
 }
 

@@ -2978,6 +2978,7 @@ type Component struct {
 	AllocatedPower       *uint32                                 `path:"state/allocated-power" module:"openconfig-platform/openconfig-platform"`
 	Backplane            *Component_Backplane                    `path:"backplane" module:"openconfig-platform"`
 	Chassis              *Component_Chassis                      `path:"chassis" module:"openconfig-platform"`
+	CleiCode             *string                                 `path:"state/clei-code" module:"openconfig-platform/openconfig-platform"`
 	ControllerCard       *Component_ControllerCard               `path:"controller-card" module:"openconfig-platform"`
 	Cpu                  *Component_Cpu                          `path:"cpu" module:"openconfig-platform"`
 	Description          *string                                 `path:"state/description" module:"openconfig-platform/openconfig-platform"`
@@ -3595,6 +3596,22 @@ func (t *Component) GetAllocatedPower() uint32 {
 	return *t.AllocatedPower
 }
 
+// GetCleiCode retrieves the value of the leaf CleiCode from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CleiCode is set, it can
+// safely use t.GetCleiCode() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CleiCode == nil' before retrieving the leaf's value.
+func (t *Component) GetCleiCode() string {
+	if t == nil || t.CleiCode == nil {
+		return ""
+	}
+	return *t.CleiCode
+}
+
 // GetDescription retrieves the value of the leaf Description from the Component
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -4101,6 +4118,7 @@ func (*Component_Backplane) ΛBelongingModule() string {
 
 // Component_Chassis represents the /openconfig-platform/components/component/chassis YANG schema element.
 type Component_Chassis struct {
+	Id          *uint32                        `path:"state/id" module:"openconfig-platform/openconfig-p4rt" shadow-path:"config/id" shadow-module:"openconfig-platform/openconfig-p4rt"`
 	Utilization *Component_Chassis_Utilization `path:"utilization" module:"openconfig-platform"`
 }
 
@@ -4127,6 +4145,22 @@ func (t *Component_Chassis) GetUtilization() *Component_Chassis_Utilization {
 		return t.Utilization
 	}
 	return nil
+}
+
+// GetId retrieves the value of the leaf Id from the Component_Chassis
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *Component_Chassis) GetId() uint32 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Component_Chassis

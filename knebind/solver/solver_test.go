@@ -18,11 +18,11 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/encoding/prototext"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/gnmi/errdiff"
 	tpb "github.com/openconfig/kne/proto/topo"
 	"github.com/openconfig/ondatra/binding"
+	"google.golang.org/protobuf/encoding/prototext"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -31,66 +31,66 @@ func TestSolve(t *testing.T) {
 	const topoText = `
 		nodes: {
 		  name: "node1"
-      type: ARISTA_CEOS
-      services: {
-        key: 1234
-        value: {
-          name: "gnmi"
-				}
-			}
-			interfaces: {
-			  key: "eth1"
-				value: {
-				  name: "Ethernet1"
-				}
-			}
-			interfaces: {
-			  key: "eth2"
-				value: {
-				  name: "Ethernet2"
-				}
-			}
-    }
+		  type: ARISTA_CEOS
+		  services: {
+		    key: 1234
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {
+		      name: "Ethernet1"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {
+		      name: "Ethernet2"
+		    }
+		  }
+		}
 		nodes: {
 		  name: "node2"
-      type: CISCO_CXR
-      services: {
-        key: 2345
-        value: {
-          name: "gnmi"
-				}
-			}
-			interfaces: {
-			  key: "eth1"
-				value: {}
-			}
-			interfaces: {
-			  key: "eth2"
-				value: {}
-			}
-    }
+		  type: CISCO_CXR
+		  services: {
+		    key: 2345
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {}
+		  }
+		}
 		nodes: {
 		  name: "node3"
-      type: JUNIPER_CEVO
-      services: {
-        key: 3456
-        value: {
-          name: "gnmi"
-				}
-			}
-			interfaces: {
-			  key: "eth1"
-				value: {}
-			}
-    }
+		  type: JUNIPER_CEVO
+		  services: {
+		    key: 3456
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		}
 		nodes: {
 		  name: "node4"
-      type: IXIA_TG
-			interfaces: {
-			  key: "eth1"
-				value: {}
-			}
-    }
+		  type: IXIA_TG
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		}
 		links: {
 		  a_node: "node1"
 		  a_int: "eth1"
@@ -283,35 +283,35 @@ func TestSolve(t *testing.T) {
 	}
 }
 
-func TestSolveGroup(t *testing.T) {
+func TestSolvePortGroups(t *testing.T) {
 	const topoText = `
 		nodes: {
-			name: "node1"
-			type: IXIA_TG
-			interfaces: {
-				key: "eth1"
-				value: {group: "lag1"}
-			}
-			interfaces: {
-				key: "eth2"
-				value: {group: "lag1"}
-			}
-			interfaces: {
-				key: "eth3"
-				value: {group: "lag2"}
-			}
-			interfaces: {
-				key: "eth4"
-				value: {group: "lag2"}
-			}
-			interfaces: {
-				key: "eth5"
-				value: {group: "lag3"}
-			}
+		  name: "node1"
+		  type: IXIA_TG
+		  interfaces: {
+		    key: "eth1"
+		    value: {group: "lag1"}
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {group: "lag1"}
+		  }
+		  interfaces: {
+		    key: "eth3"
+		    value: {group: "lag2"}
+		  }
+		  interfaces: {
+		    key: "eth4"
+		    value: {group: "lag2"}
+		  }
+		  interfaces: {
+		    key: "eth5"
+		    value: {group: "lag3"}
+		  }
 		}
 		nodes: {
-			name: "node2"
-			type: ARISTA_CEOS
+		  name: "node2"
+		  type: ARISTA_CEOS
 		}
 		links: {
 		  a_node: "node1"
@@ -350,73 +350,73 @@ func TestSolveGroup(t *testing.T) {
 		  z_int: "eth6"
 		}
 		links: {
-			a_node: "node1"
-			a_int: "eth7"
-			z_node: "node2"
-			z_int: "eth7"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth8"
-			z_node: "node2"
-			z_int: "eth8"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth9"
-			z_node: "node2"
-			z_int: "eth9"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth10"
-			z_node: "node2"
-			z_int: "eth10"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth11"
-			z_node: "node2"
-			z_int: "eth11"
-		  }
-		  links: {
+		  a_node: "node1"
+		  a_int: "eth7"
+		  z_node: "node2"
+		  z_int: "eth7"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth8"
+		  z_node: "node2"
+		  z_int: "eth8"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth9"
+		  z_node: "node2"
+		  z_int: "eth9"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth10"
+		  z_node: "node2"
+		  z_int: "eth10"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth11"
+		  z_node: "node2"
+		  z_int: "eth11"
+		}
+		links: {
 			a_node: "node1"
 			a_int: "eth12"
 			z_node: "node2"
 			z_int: "eth12"
-		  }
-		  links: {
+		}
+		links: {
 			a_node: "node1"
 			a_int: "eth13"
 			z_node: "node2"
 			z_int: "eth13"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth14"
-			z_node: "node2"
-			z_int: "eth14"
-		  }
-		  links: {
-			a_node: "node1"
-			a_int: "eth15"
-			z_node: "node2"
-			z_int: "eth15"
-		  }`
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth14"
+		  z_node: "node2"
+		  z_int: "eth14"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth15"
+		  z_node: "node2"
+		  z_int: "eth15"
+		}`
 	topo := unmarshalTopo(t, topoText)
 
 	dut1 := &opb.Device{
 		Id:     "dut1",
 		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"},
-						 {Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11"}, {Id: "port12"},
-						 {Id: "port13"}, {Id: "port14"}, {Id: "port15"}},
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"},
+			{Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11"}, {Id: "port12"},
+			{Id: "port13"}, {Id: "port14"}, {Id: "port15"}},
 	}
 	ate := &opb.Device{
-		Id:    "ate",
+		Id: "ate",
 		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"},
-						 {Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11", Group: "G1"},
-						 {Id: "port12", Group: "G2"}, {Id: "port13", Group: "G2"}, {Id: "port14", Group: "G3"}, {Id: "port15", Group: "G3"}},
+			{Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11", Group: "G1"},
+			{Id: "port12", Group: "G2"}, {Id: "port13", Group: "G2"}, {Id: "port14", Group: "G3"}, {Id: "port15", Group: "G3"}},
 	}
 	link1 := &opb.Link{
 		A: "dut1:port1",
@@ -517,11 +517,10 @@ func TestSolveErrors(t *testing.T) {
 			}},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-        type: CISCO_CXR
-		  }
-		`,
+			nodes: {
+			  name: "node1"
+			  type: CISCO_CXR
+			}`,
 		wantErr: "no node in KNE topology to match testbed",
 	}, {
 		desc: "no match for ATE",
@@ -531,11 +530,10 @@ func TestSolveErrors(t *testing.T) {
 			}},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-        type: CISCO_CXR
-		  }
-		`,
+			nodes: {
+			  name: "node1"
+			  type: CISCO_CXR
+			}`,
 		wantErr: "no node in KNE topology to match testbed",
 	}, {
 		desc: "no node combination",
@@ -549,15 +547,14 @@ func TestSolveErrors(t *testing.T) {
 			}},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-        type: ARISTA_CEOS
-		  }
-		  nodes: {
-		    name: "node2"
-        type: CISCO_CXR
-		  }
-		`,
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
+			}
+			nodes: {
+			  name: "node2"
+			  type: CISCO_CXR
+			}`,
 		wantErr: "no KNE topology",
 	}, {
 		desc: "no link combination",
@@ -585,42 +582,41 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-        type: ARISTA_CEOS
-		  }
-		  nodes: {
-		    name: "node2"
-        type: ARISTA_CEOS
-		  }
-		  nodes: {
-		    name: "node3"
-        type: JUNIPER_VMX
-		  }
-		  nodes: {
-		    name: "node4"
-        type: JUNIPER_VMX
-		  }
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
+			}
+			nodes: {
+			  name: "node2"
+			  type: ARISTA_CEOS
+			}
+			nodes: {
+			  name: "node3"
+			  type: JUNIPER_VMX
+			}
+			nodes: {
+			  name: "node4"
+			  type: JUNIPER_VMX
+			}
 			links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node3"
-		    z_int: "eth1"
-		  }
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node3"
+			  z_int: "eth1"
+			}
 			links: {
-		    a_node: "node2"
-		    a_int: "eth1"
-		    z_node: "node4"
-		    z_int: "eth1"
-		  }
-		`,
+			  a_node: "node2"
+			  a_int: "eth1"
+			  z_node: "node4"
+			  z_int: "eth1"
+			}`,
 		wantErr: "no KNE topology matches the testbed",
 	}, {
 		desc: "port group specified on both ends of link in topology",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
-				Id: "ate1",
-				Ports:  []*opb.Port{{Id: "port1"}},
+				Id:    "ate1",
+				Ports: []*opb.Port{{Id: "port1"}},
 			}},
 			Duts: []*opb.Device{{
 				Id:     "dut1",
@@ -632,36 +628,35 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: IXIA_TG
-			interfaces: {
-				key: "eth1"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node1"
+			  type: IXIA_TG
+			  interfaces: {
+			    key: "eth1"
+			    value: {group: "lag"}
+			  }
 			}
-		  }
-		  nodes: {
-		    name: "node2"
-            type: ARISTA_CEOS
-			interfaces: {
-				key: "eth1"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node2"
+			  type: ARISTA_CEOS
+			  interfaces: {
+			    key: "eth1"
+			    value: {group: "lag"}
+			  }
 			}
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		`,
-		wantErr: "Unsupported configuration found in topology, with group specified at both ends of link",
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}`,
+		wantErr: "unsupported configuration",
 	}, {
 		desc: "bad port group config in topology",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
-				Id: "ate1",
-				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+				Id:    "ate1",
+				Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 			}},
 			Duts: []*opb.Device{{
 				Id:     "dut1",
@@ -678,46 +673,45 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: ARISTA_CEOS
-		  }
-		  nodes: {
-		    name: "node2"
-            type: IXIA_TG
-			interfaces: {
-				key: "eth1"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
 			}
-			interfaces: {
-				key: "eth2"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node2"
+			  type: IXIA_TG
+			  interfaces: {
+			    key: "eth1"
+			    value: {group: "lag"}
+			  }
+			  interfaces: {
+			    key: "eth2"
+			    value: {group: "lag"}
+			  }
 			}
-		  }
-		  nodes: {
-		    name: "node3"
-            type: ARISTA_CEOS
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		  links: {
-		    a_node: "node2"
-		    a_int: "eth2"
-		    z_node: "node3"
-		    z_int: "eth1"
-		  }
-		`,
-		wantErr: "Inconsistent port group configuration found in topology",
+			nodes: {
+			  name: "node3"
+			  type: ARISTA_CEOS
+			}
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}
+			links: {
+			  a_node: "node2"
+			  a_int: "eth2"
+			  z_node: "node3"
+			  z_int: "eth1"
+			}`,
+		wantErr: "inconsistent port group",
 	}, {
 		desc: "port group specified on both ends of link in testbed",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
-				Id: "ate1",
-				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}},
+				Id:    "ate1",
+				Ports: []*opb.Port{{Id: "port1", Group: "G1"}},
 			}},
 			Duts: []*opb.Device{{
 				Id:     "dut1",
@@ -729,28 +723,27 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: IXIA_TG
-		  }
-		  nodes: {
-		    name: "node2"
-            type: ARISTA_CEOS
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		`,
-		wantErr: "Unsupported configuration found in testbed, with group specified at both ends of link",
+			nodes: {
+			  name: "node1"
+			  type: IXIA_TG
+			}
+			nodes: {
+			  name: "node2"
+			  type: ARISTA_CEOS
+			}
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}`,
+		wantErr: "unsupported configuration",
 	}, {
 		desc: "bad port group config in testbed",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
-				Id: "ate1",
-				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G1"}},
+				Id:    "ate1",
+				Ports: []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G1"}},
 			}},
 			Duts: []*opb.Device{{
 				Id:     "dut1",
@@ -767,32 +760,31 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: ARISTA_CEOS
-		  }
-		  nodes: {
-		    name: "node2"
-            type: IXIA_TG
-		  }
-		  nodes: {
-		    name: "node3"
-            type: ARISTA_CEOS
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		  links: {
-		    a_node: "node2"
-		    a_int: "eth2"
-		    z_node: "node3"
-		    z_int: "eth1"
-		  }
-		`,
-		wantErr: "Inconsistent port group configuration found in testbed",
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
+			}
+			nodes: {
+			  name: "node2"
+			  type: IXIA_TG
+			}
+			nodes: {
+			  name: "node3"
+			  type: ARISTA_CEOS
+			}
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}
+			links: {
+			  a_node: "node2"
+			  a_int: "eth2"
+			  z_node: "node3"
+			  z_int: "eth1"
+			}`,
+		wantErr: "inconsistent port group",
 	}, {
 		desc: "required port group size not found",
 		tb: &opb.Testbed{
@@ -811,34 +803,33 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: ARISTA_CEOS
-			interfaces: {
-				key: "eth1"
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
+			  interfaces: {
+			    key: "eth1"
+			  }
+			  interfaces: {
+			    key: "eth2"
+			    value: {group: "lag"}
+			  }
 			}
-			interfaces: {
-				key: "eth2"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node2"
+			  type: ARISTA_CEOS
 			}
-		  }
-		  nodes: {
-		    name: "node2"
-            type: ARISTA_CEOS
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth2"
-		    z_node: "node2"
-		    z_int: "eth2"
-		  }
-		`,
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}
+			links: {
+			  a_node: "node1"
+			  a_int: "eth2"
+			  z_node: "node2"
+			  z_int: "eth2"
+			}`,
 		wantErr: "no KNE topology matches the testbed",
 	}, {
 		desc: "required number of port groups not found",
@@ -858,34 +849,33 @@ func TestSolveErrors(t *testing.T) {
 			},
 		},
 		topo: `
-		  nodes: {
-		    name: "node1"
-            type: ARISTA_CEOS
-			interfaces: {
-				key: "eth1"
+			nodes: {
+			  name: "node1"
+			  type: ARISTA_CEOS
+			  interfaces: {
+			    key: "eth1"
+			  }
+			  interfaces: {
+			    key: "eth2"
+			    value: {group: "lag"}
+			  }
 			}
-			interfaces: {
-				key: "eth2"
-				value: {group: "lag"}
+			nodes: {
+			  name: "node2"
+			  type: ARISTA_CEOS
 			}
-		  }
-		  nodes: {
-		    name: "node2"
-            type: ARISTA_CEOS
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth1"
-		    z_node: "node2"
-		    z_int: "eth1"
-		  }
-		  links: {
-		    a_node: "node1"
-		    a_int: "eth2"
-		    z_node: "node2"
-		    z_int: "eth2"
-		  }
-		`,
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}
+			links: {
+			  a_node: "node1"
+			  a_int: "eth2"
+			  z_node: "node2"
+			  z_int: "eth2"
+			}`,
 		wantErr: "no KNE topology matches the testbed",
 	}}
 	for _, test := range tests {
