@@ -16,18 +16,19 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"sync"
 	"testing"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/telemetry/otg/device"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -167,10 +168,10 @@ func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.Proto
 }
 
 // StartTraffic starts traffic on the ATE.
-func (o *OTG) StartTraffic(t testing.TB) {
+func (o *OTG) StartTraffic(t testing.TB, flowNames ...string) {
 	t.Helper()
 	debugger.ActionStarted(t, "Starting traffic on %s", o.ate)
-	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.START)
+	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.START, flowNames...)
 	if err != nil {
 		t.Fatalf("StartTraffic(t) on %s: %v", o.ate, err)
 	}
@@ -180,10 +181,10 @@ func (o *OTG) StartTraffic(t testing.TB) {
 }
 
 // StopTraffic stops traffic on the ATE.
-func (o *OTG) StopTraffic(t testing.TB) {
+func (o *OTG) StopTraffic(t testing.TB, flowNames ...string) {
 	t.Helper()
 	debugger.ActionStarted(t, "Stopping traffic on %s", o.ate)
-	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.STOP)
+	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.STOP, flowNames...)
 	if err != nil {
 		t.Fatalf("StopTraffic(t) on %s: %v", o.ate, err)
 	}
@@ -192,12 +193,12 @@ func (o *OTG) StopTraffic(t testing.TB) {
 	}
 }
 
-func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([]string, error) {
+func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.TransmitStateStateEnum, flowNames ...string) ([]string, error) {
 	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetTransmitState(api.NewTransmitState().SetState(state))
+	resp, err := api.SetTransmitState(api.NewTransmitState().SetFlowNames(flowNames).SetState(state))
 	if err != nil {
 		return nil, err
 	}
