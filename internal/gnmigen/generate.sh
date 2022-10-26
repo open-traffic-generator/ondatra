@@ -44,6 +44,7 @@ YGOT_COMMON_ARGS=(
   -generate_rename
   -generate_delete
   -generate_leaf_getters
+  -generate_leaf_setters
   -generate_populate_defaults
   -list_builder_key_threshold=4
 )
@@ -69,6 +70,7 @@ YANG_FILES=(
   public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   public/release/models/interfaces/openconfig-if-ip-ext.yang
   public/release/models/interfaces/openconfig-if-ip.yang
+  public/release/models/interfaces/openconfig-if-sdn-ext.yang
   public/release/models/interfaces/openconfig-interfaces.yang
   public/release/models/isis/openconfig-isis.yang
   public/release/models/lacp/openconfig-lacp.yang

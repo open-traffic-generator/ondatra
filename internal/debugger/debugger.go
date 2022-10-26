@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"runtime"
 	"strings"
 	"sync"
 
@@ -30,11 +31,11 @@ import (
 
 var (
 	writer       = bufio.NewWriter(os.Stdout)
-	reader       *stdinReader
+	reader       *ttyReader
 	reservePause bool
 
 	// To be stubbed out by tests.
-	readStringFn  = (*bufio.Reader).ReadString
+	openTTYFn     = openTTY
 	reservationFn = testbed.Reservation
 )
 
@@ -42,7 +43,11 @@ var (
 // mode should be enabled.
 func TestStarted(debugMode bool) {
 	if debugMode {
-		reader = new(stdinReader)
+		readFn, closeFn, err := openTTYFn()
+		if err != nil {
+			log.Exitf("No controlling terminal available for debug mode: %v", err)
+		}
+		reader = &ttyReader{readFn: readFn, closeFn: closeFn}
 		reader.start()
 		showMenu("Welcome to Ondatra Debug Mode!")
 	}
@@ -94,7 +99,7 @@ func ReservationDone() {
 		"Testbed Reservation Complete",
 		fmt.Sprintf("ID: %s\n", res.ID),
 	}
-	addLine := func(format string, args ...interface{}) {
+	addLine := func(format string, args ...any) {
 		lines = append(lines, fmt.Sprintf(format, args...))
 	}
 	addAssign := func(id, name string) {
@@ -132,7 +137,7 @@ func ReservationDone() {
 // LoggerT is a minimal subset of the testing.T API for logging only.
 type LoggerT interface {
 	Helper()
-	Log(...interface{})
+	Log(...any)
 }
 
 // ActionStarted notifies the debugger that the specific action has started.
@@ -147,6 +152,7 @@ func Breakpoint(t LoggerT) error {
 	if reader == nil {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
+	t.Helper()
 	t.Log(bannerMsg("Breakpoint: Press ENTER to continue."))
 	reader.readLine()
 	return nil
@@ -179,36 +185,61 @@ func actionMsg(action string) string {
 	return fmt.Sprintf("\n*** %s...\n\n", action)
 }
 
-// stdinReader continuously reads lines from stdin. It ensures that user input
-// that is entered prior to a user prompt is _not_ interpreted as a response to
-// that prompt. As there is no easy way to clear prior user input, it instead
-// reads stdin asynchrously and is signalled when a prompt has been displayed.
-type stdinReader struct {
+type readStringFn func(byte) (string, error)
+type closeFn func() error
+
+func openTTY() (readStringFn, closeFn, error) {
+	path := "/dev/tty"
+	if runtime.GOOS == "windows" {
+		path = "CONIN$"
+	}
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, nil, err
+	}
+	buf := bufio.NewReader(file)
+	return buf.ReadString, file.Close, nil
+}
+
+// ttyReader continuously reads lines from the controlling terminal. It ensures
+// that user input entered prior to a user prompt is _not_ interpreted as a
+// response to that prompt. As there is no easy way to clear prior user input,
+// it reads asynchrously and is signalled when a prompt has been displayed.
+type ttyReader struct {
+	readFn  readStringFn
+	closeFn closeFn
+
 	mu   sync.Mutex
 	keep bool
 	done bool
 	ch   chan string
 }
 
-func (r *stdinReader) start() {
-	buf := bufio.NewReader(os.Stdin)
+func (r *ttyReader) start() {
 	r.ch = make(chan string)
 	go func() {
 		for done := false; !done; {
-			line, _ := readStringFn(buf, '\n')
+			line, err := r.readFn('\n')
 			r.mu.Lock()
+			done = r.done
+			if err != nil {
+				if done {
+					r.mu.Unlock()
+					break
+				}
+				log.Fatalf("Error reading from terminal: %v", err)
+			}
 			if r.keep {
 				r.mu.Unlock()
 				r.ch <- line
 				r.mu.Lock()
 			}
-			done = r.done
 			r.mu.Unlock()
 		}
 	}()
 }
 
-func (r *stdinReader) readLine() string {
+func (r *ttyReader) readLine() string {
 	r.mu.Lock()
 	r.keep = true
 	r.mu.Unlock()
@@ -219,9 +250,9 @@ func (r *stdinReader) readLine() string {
 	return line
 }
 
-func (r *stdinReader) stop() {
+func (r *ttyReader) stop() {
 	r.mu.Lock()
 	r.done = true
 	r.mu.Unlock()
-	os.Stdin.Close()
+	r.closeFn()
 }

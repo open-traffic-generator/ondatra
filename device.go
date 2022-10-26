@@ -76,6 +76,8 @@ const (
 	PALOALTO = Vendor(opb.Device_PALOALTO)
 	// ZPE vendor.
 	ZPE = Vendor(opb.Device_ZPE)
+	// NOKIA vendor.
+	NOKIA = Vendor(opb.Device_NOKIA)
 )
 
 // String returns the name of the vendor.
@@ -86,7 +88,7 @@ func (v Vendor) String() string {
 // GNMI returns a gNMI client for the device.
 func (d *Device) GNMI() *gnmi.Client {
 	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
-	return gnmi.NewClient(d.ID(), useGetForCfg, d.clientFn)
+	return gnmi.NewClient(d.Name(), useGetForCfg, d.clientFn)
 }
 
 // Telemetry returns a telemetry path root for the device.
