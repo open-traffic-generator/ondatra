@@ -16,7 +16,6 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"net"
@@ -25,18 +24,20 @@ import (
 	"sync"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
-	"github.com/patrickmn/go-cache"
-	"github.com/openconfig/ygot/util"
-	"github.com/openconfig/ygot/ygot"
 	gcache "github.com/openconfig/gnmi/cache"
 	"github.com/openconfig/gnmi/subscribe"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/ygot/util"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/patrickmn/go-cache"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/local"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -311,7 +312,16 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to update cache: %w", err)
 	}
-	node, ok := peerCache[pi.intf][pi.neighbor]
+	neighbor := pi.neighbor
+	if pi.neighbor == "*" {
+		neighbors := []string{}
+		for n := range peerCache[pi.intf] {
+			neighbors = append(neighbors, n)
+		}
+		neighbor = neighbors[0]
+	}
+
+	node, ok := peerCache[pi.intf][neighbor]
 	if !ok {
 		return nil, fmt.Errorf("no peer %q on interface %q", pi.neighbor, pi.intf)
 	}
@@ -412,9 +422,9 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 	}
 
 	var oldRIB *telemetry.Device
-	if old, ok := c.fresh.Get(oldRibCacheKey); ok {
-		oldRIB = old.(*telemetry.Device)
-	}
+	// if old, ok := c.fresh.Get(oldRibCacheKey); ok {
+	// 	oldRIB = old.(*telemetry.Device)
+	// }
 
 	notif, err := ygot.Diff(oldRIB, dev)
 	if err != nil {
