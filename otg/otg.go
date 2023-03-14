@@ -316,7 +316,7 @@ func setCaptureState(ctx context.Context, ate binding.ATE, state gosnappi.Captur
 }
 
 // SendBGPPeerNotification sends a notification from BGP peers.
-func (o *OTG) SendBGPPeerNotification(t testing.TB, portNames []string, code int32, subCode int32) {
+func (o *OTG) SendBGPPeerNotification(t testing.TB, peerNames []string, code int32, subCode int32) {
 	t.Helper()
 	t = events.ActionStarted(t, "SendBGPPeerNotification on %v", o.ate)
 
@@ -327,6 +327,7 @@ func (o *OTG) SendBGPPeerNotification(t testing.TB, portNames []string, code int
 		SetChoice(gosnappi.ActionProtocolBgpChoice.NOTIFICATION).
 		Notification().
 		SetChoice(gosnappi.ActionProtocolBgpNotificationChoice.CUSTOM).
+		SetNames(peerNames).
 		Custom().
 		SetCode(code).
 		SetSubcode(subCode)
