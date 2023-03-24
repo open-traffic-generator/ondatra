@@ -337,6 +337,26 @@ func (o *OTG) SendBGPPeerNotification(t testing.TB, peerNames []string, code int
 	}
 }
 
+// SendBGPPeerGracefulRestart sends a initiate graceful restart from BGP peers.
+func (o *OTG) SendBGPPeerGracefulRestart(t testing.TB, peerNames []string, restartDelay int32) {
+	t.Helper()
+	t = events.ActionStarted(t, "SendBGPPeerGracefulRestart on %v", o.ate)
+
+	action := gosnappi.NewControlAction()
+	action.Protocol().
+		Bgp().
+		InitiateGracefulRestart().
+		SetPeerNames(peerNames).
+		SetRestartDelay(restartDelay)
+	warns, err := setControlAction(context.Background(), o.ate, action)
+	if err != nil {
+		t.Fatalf("v(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("SendBGPPeerGracefulRestart(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
 func setControlAction(ctx context.Context, ate binding.ATE, action gosnappi.ControlAction) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
