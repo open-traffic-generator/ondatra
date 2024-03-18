@@ -52,6 +52,17 @@ var (
 	atenode12port3 = &ConcretePort{Desc: "atenode12:port3", Attrs: map[string]string{"speed": "S_400GB"}}
 	atenode12port4 = &ConcretePort{Desc: "atenode12:port4", Attrs: map[string]string{"speed": "S_400GB"}}
 
+	dutnode13port1 = &ConcretePort{Desc: "dutnode13:port1", Attrs: map[string]string{"speed": "S_400GB"}}
+	dutnode13port2 = &ConcretePort{Desc: "dutnode13:port2", Attrs: map[string]string{"speed": "S_400GB"}}
+	dutnode13port3 = &ConcretePort{Desc: "dutnode13:port3", Attrs: map[string]string{"speed": "S_400GB"}}
+	dutnode13port4 = &ConcretePort{Desc: "dutnode13:port4", Attrs: map[string]string{"speed": "S_400GB"}}
+	dutnode13port5 = &ConcretePort{Desc: "dutnode13:port5", Attrs: map[string]string{"speed": "S_400GB"}}
+	atenode14port1 = &ConcretePort{Desc: "atenode14:port1", Attrs: map[string]string{"speed": "S_400GB"}}
+	atenode14port2 = &ConcretePort{Desc: "atenode14:port2", Attrs: map[string]string{"speed": "S_400GB"}}
+	atenode14port3 = &ConcretePort{Desc: "atenode14:port3", Attrs: map[string]string{"speed": "S_400GB"}}
+	atenode14port4 = &ConcretePort{Desc: "atenode14:port4", Attrs: map[string]string{"speed": "S_400GB"}}
+	atenode14port5 = &ConcretePort{Desc: "atenode14:port5", Attrs: map[string]string{"speed": "S_400GB"}}
+
 	switchnode9port1  = &ConcretePort{Desc: "switchnode9:port1"}
 	switchnode9port2  = &ConcretePort{Desc: "switchnode9:port2"}
 	switchnode9port3  = &ConcretePort{Desc: "switchnode9:port3"}
@@ -80,6 +91,23 @@ var (
 	switchnode12port4 = &ConcretePort{Desc: "switchnode12:port4"}
 	switchnode12port5 = &ConcretePort{Desc: "switchnode12:port5"}
 
+	switchnode13port1 = &ConcretePort{Desc: "switchnode13:port1"}
+	switchnode13port2 = &ConcretePort{Desc: "switchnode13:port2"}
+	switchnode13port3 = &ConcretePort{Desc: "switchnode13:port3"}
+	switchnode13port4 = &ConcretePort{Desc: "switchnode13:port4"}
+	switchnode13port5 = &ConcretePort{Desc: "switchnode13:port5"}
+	switchnode13port6 = &ConcretePort{Desc: "switchnode13:port6"}
+
+	switchnode14port1 = &ConcretePort{Desc: "switchnode14:port1"}
+	switchnode15port1 = &ConcretePort{Desc: "switchnode15:port1"}
+	
+	switchnode16port1 = &ConcretePort{Desc: "switchnode16:port1"}
+	switchnode16port2 = &ConcretePort{Desc: "switchnode16:port2"}
+	switchnode16port3 = &ConcretePort{Desc: "switchnode16:port3"}
+	switchnode16port4 = &ConcretePort{Desc: "switchnode16:port4"}
+	switchnode16port5 = &ConcretePort{Desc: "switchnode16:port5"}
+	switchnode16port6 = &ConcretePort{Desc: "switchnode16:port6"}
+
 	dutnode1  = &ConcreteNode{Desc: "dutnode1", Ports: []*ConcretePort{dutnode1port1, dutnode1port2}, Attrs: map[string]string{"vendor": "CISCO"}}
 	atenode2  = &ConcreteNode{Desc: "atenode2", Ports: []*ConcretePort{atenode2port1, atenode2port2}, Attrs: map[string]string{"vendor": "TGEN"}}
 	dutnode3  = &ConcreteNode{Desc: "dutnode3", Ports: []*ConcretePort{dutnode3port1, dutnode3port2}, Attrs: map[string]string{"vendor": "CISCO"}}
@@ -92,17 +120,24 @@ var (
 	atenode10 = &ConcreteNode{Desc: "atenode10", Ports: []*ConcretePort{atenode10port1, atenode10port2}, Attrs: map[string]string{"attr": "multi2"}}
 	dutnode11 = &ConcreteNode{Desc: "dutnode11", Ports: []*ConcretePort{dutnode11port1, dutnode11port2, dutnode11port3, dutnode11port4}, Attrs: map[string]string{"vendor": "CISCO"}}
 	atenode12 = &ConcreteNode{Desc: "atenode12", Ports: []*ConcretePort{atenode12port1, atenode12port2, atenode12port3, atenode12port4}, Attrs: map[string]string{"vendor": "TGEN"}}
+	dutnode13 = &ConcreteNode{Desc: "dutnode13", Ports: []*ConcretePort{dutnode13port1, dutnode13port2, dutnode13port3, dutnode13port4, dutnode13port5}, Attrs: map[string]string{"vendor": "CISCO"}}
+	atenode14 = &ConcreteNode{Desc: "atenode14", Ports: []*ConcretePort{atenode14port1, atenode14port2, atenode14port3, atenode14port4, atenode14port5}, Attrs: map[string]string{"vendor": "TGEN"}}
 
 	switchnode9  = &ConcreteNode{Desc: "switchnode9", Ports: []*ConcretePort{switchnode9port1, switchnode9port2, switchnode9port3, switchnode9port4, switchnode9port5, switchnode9port6, switchnode9port7, switchnode9port8}, Attrs: map[string]string{"role": "Switch", "name": "sw1"}}
 	switchnode10 = &ConcreteNode{Desc: "switchnode10", Ports: []*ConcretePort{switchnode10port1, switchnode10port2, switchnode10port3, switchnode10port4, switchnode10port5, switchnode10port6, switchnode10port7, switchnode10port8}, Attrs: map[string]string{"role": "Switch", "name": "sw2"}}
 	switchnode11 = &ConcreteNode{Desc: "switchnode11", Ports: []*ConcretePort{switchnode11port1, switchnode11port2, switchnode11port3, switchnode11port4, switchnode11port5}, Attrs: map[string]string{"role": "Switch", "name": "sw3"}}
 	switchnode12 = &ConcreteNode{Desc: "switchnode12", Ports: []*ConcretePort{switchnode12port1, switchnode12port2, switchnode12port3, switchnode12port4, switchnode12port5}, Attrs: map[string]string{"role": "Switch", "name": "sw4"}}
+	
+	switchnode13 = &ConcreteNode{Desc: "switchnode13", Ports: []*ConcretePort{switchnode13port1, switchnode13port2, switchnode13port3, switchnode13port4, switchnode13port5, switchnode13port6}, Attrs: map[string]string{"role": "Switch", "name": "sw5"}}
+	switchnode14 = &ConcreteNode{Desc: "switchnode14", Ports: []*ConcretePort{switchnode14port1}, Attrs: map[string]string{"role": "Switch", "name": "sw6"}}
+	switchnode15 = &ConcreteNode{Desc: "switchnode15", Ports: []*ConcretePort{switchnode15port1}, Attrs: map[string]string{"role": "Switch", "name": "sw7"}}
+	switchnode16 = &ConcreteNode{Desc: "switchnode16", Ports: []*ConcretePort{switchnode16port1, switchnode16port2, switchnode16port3, switchnode16port4, switchnode16port5, switchnode16port6}, Attrs: map[string]string{"role": "Switch", "name": "sw8"}}
 )
 
 var superGraphTest = &ConcreteGraph{
 	Desc: "super",
 	Nodes: []*ConcreteNode{
-		dutnode1, atenode2, dutnode3, atenode4, dutnode5, atenode6, dutnode7, atenode8, dutnode9, atenode10, dutnode11, atenode12, switchnode9, switchnode10, switchnode11, switchnode12,
+		dutnode1, atenode2, dutnode3, atenode4, dutnode5, atenode6, dutnode7, atenode8, dutnode9, atenode10, dutnode11, atenode12, dutnode13, atenode14, switchnode9, switchnode10, switchnode11, switchnode12, switchnode13, switchnode14, switchnode15, switchnode16,
 	},
 	Edges: []*ConcreteEdge{
 		{Src: dutnode1port1, Dst: switchnode9port1},
@@ -131,6 +166,19 @@ var superGraphTest = &ConcreteGraph{
 		{Src: switchnode12port2, Dst: atenode12port2},
 		{Src: switchnode12port3, Dst: atenode12port3},
 		{Src: switchnode12port4, Dst: atenode12port4},
+
+		{Src: dutnode13port1, Dst: switchnode13port1},
+		{Src: dutnode13port2, Dst: switchnode13port2},
+		{Src: dutnode13port3, Dst: switchnode13port3},
+		{Src: dutnode13port4, Dst: switchnode13port4},
+		{Src: dutnode13port5, Dst: switchnode13port5},
+		{Src: switchnode13port6, Dst: switchnode14port1},
+		{Src: switchnode15port1, Dst: switchnode16port6},
+		{Src: switchnode16port1, Dst: atenode14port1},
+		{Src: switchnode16port2, Dst: atenode14port2},
+		{Src: switchnode16port3, Dst: atenode14port3},
+		{Src: switchnode16port4, Dst: atenode14port4},
+		{Src: switchnode16port5, Dst: atenode14port5},
 	},
 }
 
@@ -166,6 +214,19 @@ var (
 	abst8port2 = &AbstractPort{Desc: "abst8:port2", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 	abst8port3 = &AbstractPort{Desc: "abst8:port3", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 	abst8port4 = &AbstractPort{Desc: "abst8:port4", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+
+	abst9      = &AbstractNode{Desc: "abst9", Ports: []*AbstractPort{abst9port1, abst9port2, abst9port3, abst9port4, abst9port5}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO")}}
+	abst10      = &AbstractNode{Desc: "abst10", Ports: []*AbstractPort{abst10port1, abst10port2, abst10port3, abst10port4, abst10port5}, Constraints: map[string]NodeConstraint{"vendor": Equal("TGEN")}}
+	abst9port1 = &AbstractPort{Desc: "abst9:port1", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst9port2 = &AbstractPort{Desc: "abst9:port2", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst9port3 = &AbstractPort{Desc: "abst9:port3", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst9port4 = &AbstractPort{Desc: "abst9:port4", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst9port5 = &AbstractPort{Desc: "abst9:port5", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst10port1 = &AbstractPort{Desc: "abst10:port1", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst10port2 = &AbstractPort{Desc: "abst10:port2", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst10port3 = &AbstractPort{Desc: "abst10:port3", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst10port4 = &AbstractPort{Desc: "abst10:port4", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
+	abst10port5 = &AbstractPort{Desc: "abst10:port5", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 )
 
 func TestSolveTest(t *testing.T) {
@@ -206,11 +267,10 @@ func TestSolveTest(t *testing.T) {
 			abst6port1: atenode6port1,
 		},
 	}, {
-		desc: "Two nodes, interconnected via multiple Switch",
+		desc: "Two nodes, interconnected via multiple Switch (between single switch)",
 		graph: &AbstractGraph{
-			Desc:  "two nodes, interconnected via multiple Switch",
+			Desc:  "Two nodes, interconnected via multiple Switch (between single switch)",
 			Nodes: []*AbstractNode{abst7, abst8},
-			// Edges: []*AbstractEdge{{abst7port1, abst8port1}, {abst7port2, abst8port2}},
 			Edges: []*AbstractEdge{{abst7port1, abst8port1}, {abst7port2, abst8port2}, {abst7port3, abst8port3}, {abst7port4, abst8port4}},
 		},
 		wantNodes: map[*AbstractNode]*ConcreteNode{abst7: dutnode11, abst8: atenode12},
@@ -223,6 +283,26 @@ func TestSolveTest(t *testing.T) {
 			abst8port2: atenode12port2,
 			abst8port3: atenode12port3,
 			abst8port4: atenode12port4,
+		},
+	}, {
+		desc: "Two nodes, interconnected via multiple Switch between two switches",
+		graph: &AbstractGraph{
+			Desc:  "Two nodes, interconnected via multiple Switch between two switches",
+			Nodes: []*AbstractNode{abst9, abst10},
+			Edges: []*AbstractEdge{{abst9port1, abst10port1}, {abst9port2, abst10port2}, {abst9port3, abst10port3}, {abst9port4, abst10port4}, {abst9port5, abst10port5}},
+		},
+		wantNodes: map[*AbstractNode]*ConcreteNode{abst9: dutnode13, abst10: atenode14},
+		wantPorts: map[*AbstractPort]*ConcretePort{
+			abst9port1: dutnode13port1,
+			abst9port2: dutnode13port2,
+			abst9port3: dutnode13port3,
+			abst9port4: dutnode13port4,
+			abst9port5: dutnode13port5,
+			abst10port1: atenode14port1,
+			abst10port2: atenode14port2,
+			abst10port3: atenode14port3,
+			abst10port4: atenode14port4,
+			abst10port5: atenode14port5,
 		},
 	}}
 	for _, tc := range tests {

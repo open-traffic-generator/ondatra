@@ -351,11 +351,11 @@ func isSwitchPort(portSrc, portDst string, swName string, switchPorts []string, 
 	return ""
 }
 
-func getMultiSwitchDevices(portSrc, portDst string, swName string, switchToSwitchConn map[string]string) string {
+func getMultiSwitchDevices(portSrc, portDst string, swName string, switchToSwitchConn map[string]string, switches []string) string {
 	if found, match := isStringMatch(switchToSwitchConn, swName); found {
-		if !strings.Contains(match, portSrc) && strings.Contains(match, portDst) && strings.Contains(match, swName) {
+		if !strings.Contains(match, portSrc) && strings.Contains(match, portDst) && strings.Contains(match, swName) && !contains(switches, portSrc) {
 			return portSrc
-		} else if !strings.Contains(match, portDst) && strings.Contains(match, portSrc) && strings.Contains(match, swName) {
+		} else if !strings.Contains(match, portDst) && strings.Contains(match, portSrc) && strings.Contains(match, swName) && !contains(switches, portDst) {
 			return portDst
 		}
 	}
@@ -458,7 +458,7 @@ func removeDuplicatesAndEmpty(slices [][]string) [][]string {
 	return result
 }
 
-func processEdges(connectedDevices *[]string, connectedDevicesSw *[]string, switchName string, switchPorts []string, switchToSwitchConn map[string]string, edges []*ConcreteEdge, mu *sync.Mutex) {
+func processEdges(connectedDevices *[]string, connectedDevicesSw *[]string, switchName string, switchPorts []string, switchToSwitchConn map[string]string, switches []string, edges []*ConcreteEdge, mu *sync.Mutex) {
 	for _, edge := range edges {
 		if connectedDevice := isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts, switchToSwitchConn); connectedDevice != "" {
 			mu.Lock()
@@ -470,7 +470,7 @@ func processEdges(connectedDevices *[]string, connectedDevicesSw *[]string, swit
 		if len(switchToSwitchConn) != 0 {
 			for src, dst := range switchToSwitchConn {
 				if switchName == src || switchName == dst {
-					if connectedDeviceSw := getMultiSwitchDevices(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchToSwitchConn); connectedDeviceSw != "" {
+					if connectedDeviceSw := getMultiSwitchDevices(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchToSwitchConn, switches); connectedDeviceSw != "" {
 						mu.Lock()
 						if !contains(*connectedDevicesSw, connectedDeviceSw) {
 							*connectedDevicesSw = append(*connectedDevicesSw, connectedDeviceSw)
@@ -481,6 +481,32 @@ func processEdges(connectedDevices *[]string, connectedDevicesSw *[]string, swit
 			}
 		}
 	}
+}
+
+func filterSwitchToSwitchConn(conn map[string]string, nodesList []string) map[string]string {
+	filteredConn := make(map[string]string)
+	addKey := ""
+	addValue := ""
+	for key, value := range conn {
+		if contains(nodesList, key) && contains(nodesList, value) {
+			filteredConn[key] = value
+		} else {
+			if contains(nodesList, key) {
+				if addKey == "" {
+					addKey = key
+				}
+			}
+			if contains(nodesList, value) {
+				if addValue == "" {
+					addValue = value
+				}
+			}
+		}
+		if addKey != "" && addValue != "" {
+			filteredConn[addKey] = addValue
+		}
+	}
+	return filteredConn
 }
 
 func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
@@ -496,8 +522,24 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 		}
 	}
 	switches := getSwitchesByRole(s.superGraph.Nodes)
-	fmt.Println(switches)
 	switchNameList := getSwitchKeys(switches)
+	var switchConfigNodesList []string
+	for _, edge := range s.superGraph.Edges {
+		portSrc := extractDeviceSwitchName(edge.Src.Desc)
+		portDst := extractDeviceSwitchName(edge.Dst.Desc)
+		srcSwitch := contains(switchNameList, portSrc)
+		dstSwitch := contains(switchNameList, portDst)
+
+		if srcSwitch && !dstSwitch {
+			if !contains(switchConfigNodesList, portSrc) {
+				switchConfigNodesList = append(switchConfigNodesList, portSrc)
+			}
+		} else if !srcSwitch && dstSwitch {
+			if !contains(switchConfigNodesList, portDst) {
+				switchConfigNodesList = append(switchConfigNodesList, portDst)
+			}
+		}
+	}
 	switchToSwitchConn := make(map[string]string)
 	for _, edge := range s.superGraph.Edges {
 		portSrc := extractDeviceSwitchName(edge.Src.Desc)
@@ -516,6 +558,8 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 			switchToSwitchConn[key] = value
 		}
 	}
+	filteredConn := filterSwitchToSwitchConn(switchToSwitchConn, switchConfigNodesList)
+
 	var allConnectedDevices [][]string
 	var wg sync.WaitGroup
 	var mu sync.Mutex
@@ -526,11 +570,11 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 			wg.Add(2)
 			go func() {
 				defer wg.Done()
-				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, switchToSwitchConn, s.superGraph.Edges, &mu)
+				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, filteredConn, switchNameList, s.superGraph.Edges, &mu)
 			}()
 			go func() {
 				defer wg.Done()
-				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, switchToSwitchConn, s.superGraph.Edges, &mu)
+				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, filteredConn, switchNameList, s.superGraph.Edges, &mu)
 			}()
 			wg.Wait()
 			allConnectedDevices = append(allConnectedDevices, connectedDevices, connectedDevicesSw)
