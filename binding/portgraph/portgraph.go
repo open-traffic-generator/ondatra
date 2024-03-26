@@ -20,7 +20,6 @@ import (
 	"regexp"
 	"sort"
 	"strings"
-	"sync"
 
 	"golang.org/x/net/context"
 
@@ -209,8 +208,10 @@ type solver struct {
 	conNode2Node2NumEdges map[*ConcreteNode]map[*ConcreteNode]int           // Map Node to Node and how many edges there are.
 	conPort2Port2Edge     map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
 	absPort2Port2Edge     map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
-
-	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
+	switchNodes           []*ConcreteNode
+	switchPorts           []*ConcretePort
+	notSwitchPorts        []*ConcretePort
+	maxAssign             *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
 	// Constraints are ordered for deterministic iteration.
@@ -292,6 +293,18 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		conNode2Node2NumEdges[dstNode][srcNode]++
 	}
 
+	var swNodes []*ConcreteNode
+	var swPorts []*ConcretePort
+	var notSwPorts []*ConcretePort
+	for _, n := range superGraph.Nodes {
+		if role, ok := n.Attrs["role"]; ok && strings.ToLower(role) == "switch" {
+			swNodes = append(swNodes, n)
+			swPorts = append(swPorts, n.Ports...)
+		} else {
+			notSwPorts = append(notSwPorts, n.Ports...)
+		}
+	}
+
 	s := &solver{
 		abstractGraph:           abstractGraph,
 		superGraph:              superGraph,
@@ -299,6 +312,9 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		absPort2Node:            absPort2Node,
 		absPort2Port2Edge:       absPort2Port2Edge,
 		conNode2Node2NumEdges:   conNode2Node2NumEdges,
+		switchNodes:             swNodes,
+		switchPorts:             swPorts,
+		notSwitchPorts:          notSwPorts,
 		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
 		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
 		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
@@ -314,201 +330,147 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 	return a, nil
 }
 
-// solve provides a mapping of abstract nodes and ports to concrete nodes and ports.
-// 1. Find all concrete nodes that match the abstract node (check attributes and # of ports).
-// 2. For each mapping, check the concrete nodes and satisfy the edges of the abstract graph.
-// 3. Assign concrete ports.
-// solve always returns the max assignment and true if the solve completed.
-
-func extractDeviceSwitchName(portDesc string) string {
-	parts := strings.Split(portDesc, ":")
-	if len(parts) != 2 {
-		return ""
-	}
-	return parts[0]
-}
-
-func isStringMatch(switchToSwitchConn map[string]string, port string) (bool, string) {
-	for key, value := range switchToSwitchConn {
-		if key == port || value == port {
-			return true, key + value
-		}
-	}
-	return false, ""
-}
-
-func isSwitchPort(portSrc, portDst string, swName string, switchPorts []string, switchToSwitchConn map[string]string) string {
-	for _, switchPort := range switchPorts {
-		swport := extractDeviceSwitchName(switchPort)
-		if found, _ := isStringMatch(switchToSwitchConn, swName); !found {
-			if portSrc != swport && swport == swName && portDst == swName {
-				return portSrc
-			} else if portDst != swport && swport == swName && portSrc == swName {
-				return portDst
-			}
-		}
-	}
-	return ""
-}
-
-func getMultiSwitchDevices(portSrc, portDst string, swName string, switchToSwitchConn map[string]string, switches []string) string {
-	if found, match := isStringMatch(switchToSwitchConn, swName); found {
-		if !strings.Contains(match, portSrc) && strings.Contains(match, portDst) && strings.Contains(match, swName) && !contains(switches, portSrc) {
-			return portSrc
-		} else if !strings.Contains(match, portDst) && strings.Contains(match, portSrc) && strings.Contains(match, swName) && !contains(switches, portDst) {
-			return portDst
-		}
-	}
-	return ""
-}
-
-func getSwitchesByRole(nodes []*ConcreteNode) map[string][]string {
-	switches := make(map[string][]string)
-	for _, node := range nodes {
-		if role, ok := node.Attrs["role"]; ok && strings.ToLower(role) == "switch" {
-			var portDescs []string
-			for _, port := range node.Ports {
-				portDescs = append(portDescs, port.Desc)
-			}
-			switches[node.Desc] = portDescs
-		}
-	}
-	return switches
-}
-
-func getSwitchKeys(switches map[string][]string) []string {
-	keys := make([]string, 0)
-	for key := range switches {
-		keys = append(keys, key)
-	}
-	return keys
-}
-
-func processDestinations(srcPort *ConcretePort, srcNode *ConcreteNode, dstNodes []*ConcreteNode, connectedDevicesList []string, processedPorts map[string]bool, mutex *sync.Mutex, s *solver) {
-	for _, dstNode := range dstNodes {
-		if srcNode != dstNode && contains(connectedDevicesList, dstNode.Desc) {
-			for _, dstPort := range dstNode.Ports {
-				if srcPort != dstPort { // Skip if source and destination ports are the same
-					key := fmt.Sprintf("%s-%s", srcPort.Desc, dstPort.Desc)
-					reverseKey := fmt.Sprintf("%s-%s", dstPort.Desc, srcPort.Desc)
-					mutex.Lock()
-					if !processedPorts[key] && !processedPorts[reverseKey] {
-						edge := &ConcreteEdge{Src: srcPort, Dst: dstPort}
-						s.superGraph.Edges = append(s.superGraph.Edges, edge)
-						processedPorts[key] = true
-					}
-					mutex.Unlock()
+func checkIfConnectedToSwitch(cn *ConcreteNode, s *solver) (*ConcreteNode, bool) {
+	for _, p := range cn.Ports {
+		for _, swNode := range s.switchNodes {
+			for _, e := range s.superGraph.Edges {
+				if edgeConnectsToSwitch(e, p, swNode.Ports) {
+					return swNode, true
 				}
 			}
 		}
 	}
+	return nil, false
 }
 
-func processPorts(srcNode *ConcreteNode, abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesList []string, processedPorts map[string]bool, mutex *sync.Mutex, s *solver, wg *sync.WaitGroup) {
-	for _, srcPort := range srcNode.Ports {
-		wg.Add(1)
-		go func(srcPort *ConcretePort) {
-			defer wg.Done()
-			for _, dstNodes := range abs2ConNodes {
-				processDestinations(srcPort, srcNode, dstNodes, connectedDevicesList, processedPorts, mutex, s)
-			}
-		}(srcPort)
-	}
+func edgeConnectsToSwitch(e *ConcreteEdge, p *ConcretePort, swPorts []*ConcretePort) bool {
+	return (e.Src == p && contains(e.Dst, swPorts)) || (e.Dst == p && contains(e.Src, swPorts))
 }
 
-func AddEdges(abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesList []string, s *solver) {
-	processedPorts := make(map[string]bool)
-	var mutex sync.Mutex
-	var wg sync.WaitGroup
-
-	for _, conNodes := range abs2ConNodes {
-		for _, srcNode := range conNodes {
-			// Check if the source node is in the connectedDevicesList
-			if contains(connectedDevicesList, srcNode.Desc) {
-				processPorts(srcNode, abs2ConNodes, connectedDevicesList, processedPorts, &mutex, s, &wg)
-			}
-		}
-	}
-	wg.Wait()
-}
-
-// Function to check if a string exists in a slice of strings
-func contains(s []string, e string) bool {
-	for _, a := range s {
-		if a == e {
+func containsSwitch(switches []*ConcreteNode, sw *ConcreteNode) bool {
+	for _, s := range switches {
+		if s == sw {
 			return true
 		}
 	}
 	return false
 }
 
-func removeDuplicatesAndEmpty(slices [][]string) [][]string {
-	encountered := map[string]bool{}
-	result := [][]string{}
-	for _, slice := range slices {
-		if len(slice) == 0 {
-			continue
-		}
-		key := strings.Join(slice, "-")
-		if !encountered[key] {
-			encountered[key] = true
-			result = append(result, slice)
-		}
-	}
-	return result
-}
-
-func processEdges(connectedDevices *[]string, connectedDevicesSw *[]string, switchName string, switchPorts []string, switchToSwitchConn map[string]string, switches []string, edges []*ConcreteEdge, mu *sync.Mutex) {
-	for _, edge := range edges {
-		if connectedDevice := isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts, switchToSwitchConn); connectedDevice != "" {
-			mu.Lock()
-			if !contains(*connectedDevices, connectedDevice) {
-				*connectedDevices = append(*connectedDevices, connectedDevice)
-			}
-			mu.Unlock()
-		}
-		if len(switchToSwitchConn) != 0 {
-			for src, dst := range switchToSwitchConn {
-				if switchName == src || switchName == dst {
-					if connectedDeviceSw := getMultiSwitchDevices(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchToSwitchConn, switches); connectedDeviceSw != "" {
-						mu.Lock()
-						if !contains(*connectedDevicesSw, connectedDeviceSw) {
-							*connectedDevicesSw = append(*connectedDevicesSw, connectedDeviceSw)
-						}
-						mu.Unlock()
-					}
+func genEdgeCombosConnectedViaSwitch(sw *ConcreteNode, s *solver, conPortsConnToSw []*ConcretePort, completedSwitches []*ConcreteNode) {
+	for _, e := range s.superGraph.Edges {
+		for _, port := range sw.Ports {
+			if edgeConnectsToNode(e, port, s.notSwitchPorts) {
+				conPortsConnToSw = append(conPortsConnToSw, getConnectedPort(e, port))
+			} else if isSwitchToSwitchEdge(e, sw, s) {
+				otherEndSwitch := getOtherEndSwitch(e.Src, e.Dst, sw, s)				
+				if otherEndSwitch != nil && !containsSwitch(completedSwitches, otherEndSwitch) {
+					newCompletedSwitches := append(completedSwitches, sw)
+					genEdgeCombosConnectedViaSwitch(otherEndSwitch, s, conPortsConnToSw, newCompletedSwitches)
 				}
 			}
 		}
 	}
+	edges := generateEdgesConnectedViaSwitch(conPortsConnToSw)
+	if len(edges) > 0 {
+		s.superGraph.Edges = append(edges, s.superGraph.Edges...)
+	}
 }
 
-func filterSwitchToSwitchConn(conn map[string]string, nodesList []string) map[string]string {
-	filteredConn := make(map[string]string)
-	addKey := ""
-	addValue := ""
-	for key, value := range conn {
-		if contains(nodesList, key) && contains(nodesList, value) {
-			filteredConn[key] = value
-		} else {
-			if contains(nodesList, key) {
-				if addKey == "" {
-					addKey = key
-				}
-			}
-			if contains(nodesList, value) {
-				if addValue == "" {
-					addValue = value
-				}
-			}
-		}
-		if addKey != "" && addValue != "" {
-			filteredConn[addKey] = addValue
+func edgeConnectsToNode(e *ConcreteEdge, p *ConcretePort, notSwitchPorts []*ConcretePort) bool {
+	return (e.Src == p && contains(e.Dst, notSwitchPorts)) || (e.Dst == p && contains(e.Src, notSwitchPorts))
+}
+
+func getConnectedPort(e *ConcreteEdge, p *ConcretePort) *ConcretePort {
+	if e.Src == p {
+		return e.Dst
+	}
+	return e.Src
+}
+
+func removeDuplicates(strings []string) []string {
+	seen := make(map[string]bool)
+	uniqueStrings := []string{}
+	for _, str := range strings {
+		if !seen[str] {
+			seen[str] = true
+			uniqueStrings = append(uniqueStrings, str)
 		}
 	}
-	return filteredConn
+	return uniqueStrings
 }
 
+func getConcretePortsWithoutDuplicate(ports []*ConcretePort) []*ConcretePort {
+	nodeList := []string{}
+	for _, port := range ports {
+		descParts := strings.Split(port.Desc, ":")
+		desc := descParts[0]
+		nodeList = append(nodeList, desc)
+	}
+	removeduplicate := removeDuplicates(nodeList)
+	if len(removeduplicate) > 1 {
+		return ports
+	} else {
+		var ports []*ConcretePort
+		return ports
+	}
+}
+
+func generateEdgesConnectedViaSwitch(ports []*ConcretePort) []*ConcreteEdge {
+	concretePorts := getConcretePortsWithoutDuplicate(ports)
+	edges := make([]*ConcreteEdge, 0)
+	for i := 0; i < len(concretePorts)-1; i++ {
+		src := concretePorts[i]
+		for j := i + 1; j < len(concretePorts); j++ {
+			dst := concretePorts[j]
+			srcDescParts := strings.Split(src.Desc, ":")
+			dstDescParts := strings.Split(dst.Desc, ":")
+			if srcDescParts[0] != dstDescParts[0] {
+				edges = append(edges, &ConcreteEdge{Src: src, Dst: dst})
+			}
+		}
+	}
+	return edges
+}
+
+func deleteEdgesWithSwitch(swPorts []*ConcretePort, s *solver) {
+	newEdges := make([]*ConcreteEdge, 0)
+	for _, e := range s.superGraph.Edges {
+		if !contains(e.Src, swPorts) && !contains(e.Dst, swPorts) {
+			newEdges = append(newEdges, e)
+		}
+	}
+	s.superGraph.Edges = newEdges
+}
+
+func contains(port *ConcretePort, Ports []*ConcretePort) bool {
+	for _, item := range Ports {
+		if item == port {
+			return true
+		}
+	}
+	return false
+}
+
+func isSwitchToSwitchEdge(e *ConcreteEdge, sw *ConcreteNode, s *solver) bool {
+	return contains(e.Src, s.switchPorts) && contains(e.Dst, s.switchPorts) && (contains(e.Src, sw.Ports) || contains(e.Dst, sw.Ports))
+}
+
+func getOtherEndSwitch(srcPort *ConcretePort, dstPort *ConcretePort, sw *ConcreteNode, s *solver) *ConcreteNode {
+	for _, swit := range s.switchNodes {
+		if contains(srcPort, swit.Ports) && !contains(srcPort, sw.Ports) {
+			return swit
+		} else if contains(dstPort, swit.Ports) && !contains(dstPort, sw.Ports) {
+			return swit
+		}
+	}
+	return nil
+}
+
+// solve provides a mapping of abstract nodes and ports to concrete nodes and ports.
+// 1. Find all concrete nodes that match the abstract node (check attributes and # of ports).
+// 2. For each mapping, check the concrete nodes and satisfy the edges of the abstract graph.
+// 3. Assign concrete ports.
+// solve always returns the max assignment and true if the solve completed.
 func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 	abs2ConNodes := make(map[*AbstractNode][]*ConcreteNode)
 	s.processConstraints()
@@ -521,71 +483,18 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 			abs2ConNodes[n] = append(abs2ConNodes[n], conNode)
 		}
 	}
-	switches := getSwitchesByRole(s.superGraph.Nodes)
-	switchNameList := getSwitchKeys(switches)
-	var switchConfigNodesList []string
-	for _, edge := range s.superGraph.Edges {
-		portSrc := extractDeviceSwitchName(edge.Src.Desc)
-		portDst := extractDeviceSwitchName(edge.Dst.Desc)
-		srcSwitch := contains(switchNameList, portSrc)
-		dstSwitch := contains(switchNameList, portDst)
 
-		if srcSwitch && !dstSwitch {
-			if !contains(switchConfigNodesList, portSrc) {
-				switchConfigNodesList = append(switchConfigNodesList, portSrc)
-			}
-		} else if !srcSwitch && dstSwitch {
-			if !contains(switchConfigNodesList, portDst) {
-				switchConfigNodesList = append(switchConfigNodesList, portDst)
-			}
-		}
-	}
-	switchToSwitchConn := make(map[string]string)
-	for _, edge := range s.superGraph.Edges {
-		portSrc := extractDeviceSwitchName(edge.Src.Desc)
-		portDst := extractDeviceSwitchName(edge.Dst.Desc)
-		key := ""
-		value := ""
-		for _, switchName := range switchNameList {
-			if switchName == portSrc {
-				key = portSrc
-			}
-			if switchName == portDst {
-				value = portDst
+	processedSwitches := make(map[*ConcreteNode]bool)
+	for _, conNodes := range abs2ConNodes {
+		for _, cn := range conNodes {
+			sw, ok := checkIfConnectedToSwitch(cn, s)
+			if ok && !processedSwitches[sw] {
+				genEdgeCombosConnectedViaSwitch(sw, s, []*ConcretePort{}, []*ConcreteNode{})				
+				processedSwitches[sw] = true
 			}
 		}
-		if key != "" && value != "" {
-			switchToSwitchConn[key] = value
-		}
-	}
-	filteredConn := filterSwitchToSwitchConn(switchToSwitchConn, switchConfigNodesList)
-
-	var allConnectedDevices [][]string
-	var wg sync.WaitGroup
-	var mu sync.Mutex
-	for switchName, switchPorts := range switches {
-		if len(switchPorts) != 0 {
-			var connectedDevices []string   // List to store connected devices
-			var connectedDevicesSw []string // List to store connected devices with multiple switches
-			wg.Add(2)
-			go func() {
-				defer wg.Done()
-				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, filteredConn, switchNameList, s.superGraph.Edges, &mu)
-			}()
-			go func() {
-				defer wg.Done()
-				processEdges(&connectedDevices, &connectedDevicesSw, switchName, switchPorts, filteredConn, switchNameList, s.superGraph.Edges, &mu)
-			}()
-			wg.Wait()
-			allConnectedDevices = append(allConnectedDevices, connectedDevices, connectedDevicesSw)
-		}
-	}
-	allConnectedDevices = removeDuplicatesAndEmpty(allConnectedDevices)
-	for _, connDevice := range allConnectedDevices {
-		if len(connDevice) != 0 {
-			AddEdges(abs2ConNodes, connDevice, s)
-		}
-	}
+	}	
+	deleteEdgesWithSwitch(s.switchPorts, s)
 	s.conPort2Port2Edge = s.superGraph.fetchPort2Port2EdgeMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
