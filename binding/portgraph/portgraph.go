@@ -321,7 +321,14 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		portConstraints:         orderedmap.NewOrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]](),
 		deferredPortConstraints: orderedmap.NewOrderedMap[*AbstractPort, []deferredPortConstraint](),
 	}
-
+	processedSwitches := make(map[*ConcreteNode]bool)
+	for _, sw := range s.switchNodes {
+		if !processedSwitches[sw] {
+			genEdgeCombosConnectedViaSwitch(sw, s, []*ConcretePort{}, []*ConcreteNode{})
+			processedSwitches[sw] = true
+		}
+	}
+	deleteEdgesWithSwitch(s.switchPorts, s)
 	a, ok := s.solve(ctx)
 	if !ok {
 		solveErr.maxAssign = s.maxAssign.assignment
@@ -330,22 +337,22 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 	return a, nil
 }
 
-func checkIfConnectedToSwitch(cn *ConcreteNode, s *solver) (*ConcreteNode, bool) {
-	for _, p := range cn.Ports {
-		for _, swNode := range s.switchNodes {
-			for _, e := range s.superGraph.Edges {
-				if edgeConnectsToSwitch(e, p, swNode.Ports) {
-					return swNode, true
-				}
-			}
-		}
-	}
-	return nil, false
-}
+// func checkIfConnectedToSwitch(cn *ConcreteNode, s *solver) (*ConcreteNode, bool) {
+// 	for _, p := range cn.Ports {
+// 		for _, swNode := range s.switchNodes {
+// 			for _, e := range s.superGraph.Edges {
+// 				if edgeConnectsToSwitch(e, p, swNode.Ports) {
+// 					return swNode, true
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return nil, false
+// }
 
-func edgeConnectsToSwitch(e *ConcreteEdge, p *ConcretePort, swPorts []*ConcretePort) bool {
-	return (e.Src == p && contains(e.Dst, swPorts)) || (e.Dst == p && contains(e.Src, swPorts))
-}
+// func edgeConnectsToSwitch(e *ConcreteEdge, p *ConcretePort, swPorts []*ConcretePort) bool {
+// 	return (e.Src == p && contains(e.Dst, swPorts)) || (e.Dst == p && contains(e.Src, swPorts))
+// }
 
 func containsSwitch(switches []*ConcreteNode, sw *ConcreteNode) bool {
 	for _, s := range switches {
@@ -362,7 +369,7 @@ func genEdgeCombosConnectedViaSwitch(sw *ConcreteNode, s *solver, conPortsConnTo
 			if edgeConnectsToNode(e, port, s.notSwitchPorts) {
 				conPortsConnToSw = append(conPortsConnToSw, getConnectedPort(e, port))
 			} else if isSwitchToSwitchEdge(e, sw, s) {
-				otherEndSwitch := getOtherEndSwitch(e.Src, e.Dst, sw, s)				
+				otherEndSwitch := getOtherEndSwitch(e.Src, e.Dst, sw, s)
 				if otherEndSwitch != nil && !containsSwitch(completedSwitches, otherEndSwitch) {
 					newCompletedSwitches := append(completedSwitches, sw)
 					genEdgeCombosConnectedViaSwitch(otherEndSwitch, s, conPortsConnToSw, newCompletedSwitches)
@@ -484,17 +491,17 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 		}
 	}
 
-	processedSwitches := make(map[*ConcreteNode]bool)
-	for _, conNodes := range abs2ConNodes {
-		for _, cn := range conNodes {
-			sw, ok := checkIfConnectedToSwitch(cn, s)
-			if ok && !processedSwitches[sw] {
-				genEdgeCombosConnectedViaSwitch(sw, s, []*ConcretePort{}, []*ConcreteNode{})				
-				processedSwitches[sw] = true
-			}
-		}
-	}	
-	deleteEdgesWithSwitch(s.switchPorts, s)
+	// processedSwitches := make(map[*ConcreteNode]bool)
+	// for _, conNodes := range abs2ConNodes {
+	// 	for _, cn := range conNodes {
+	// 		sw, ok := checkIfConnectedToSwitch(cn, s)
+	// 		if ok && !processedSwitches[sw] {
+	// 			genEdgeCombosConnectedViaSwitch(sw, s, []*ConcretePort{}, []*ConcreteNode{})
+	// 			processedSwitches[sw] = true
+	// 		}
+	// 	}
+	// }
+	// deleteEdgesWithSwitch(s.switchPorts, s)
 	s.conPort2Port2Edge = s.superGraph.fetchPort2Port2EdgeMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
