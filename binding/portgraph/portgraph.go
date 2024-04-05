@@ -279,19 +279,6 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 
 	// Map how many links there are between each ConcreteNode to calculate matches.
 	conNode2Node2NumEdges := make(map[*ConcreteNode]map[*ConcreteNode]int)
-	for _, e := range superGraph.Edges {
-		srcNode, dstNode := conPort2Node[e.Src], conPort2Node[e.Dst]
-		// Count the edges from src -> dst
-		if _, ok := conNode2Node2NumEdges[srcNode]; !ok {
-			conNode2Node2NumEdges[srcNode] = make(map[*ConcreteNode]int)
-		}
-		conNode2Node2NumEdges[srcNode][dstNode]++
-		// Count the edges from dst -> src
-		if _, ok := conNode2Node2NumEdges[dstNode]; !ok {
-			conNode2Node2NumEdges[dstNode] = make(map[*ConcreteNode]int)
-		}
-		conNode2Node2NumEdges[dstNode][srcNode]++
-	}
 
 	var swNodes []*ConcreteNode
 	var swPorts []*ConcretePort
@@ -329,6 +316,23 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		}
 	}
 	deleteEdgesWithSwitch(s.switchPorts, s)
+
+	for _, e := range superGraph.Edges {
+		srcNode, dstNode := conPort2Node[e.Src], conPort2Node[e.Dst]
+		// Count the edges from src -> dst
+		if _, ok := conNode2Node2NumEdges[srcNode]; !ok {
+			conNode2Node2NumEdges[srcNode] = make(map[*ConcreteNode]int)
+		}
+		conNode2Node2NumEdges[srcNode][dstNode]++
+		// Count the edges from dst -> src
+		if _, ok := conNode2Node2NumEdges[dstNode]; !ok {
+			conNode2Node2NumEdges[dstNode] = make(map[*ConcreteNode]int)
+		}
+		conNode2Node2NumEdges[dstNode][srcNode]++
+	}
+
+	s.conNode2Node2NumEdges = conNode2Node2NumEdges
+
 	a, ok := s.solve(ctx)
 	if !ok {
 		solveErr.maxAssign = s.maxAssign.assignment
