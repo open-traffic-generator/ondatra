@@ -387,7 +387,7 @@ func createSwitchConnectionMap(graph *ConcreteGraph) (
 	// Identify all switches in the graph
 	switches := make(map[*ConcreteNode]bool)
 	for _, node := range graph.Nodes {
-		if role, ok := node.Attrs["role"]; ok && role == "L1S" {
+		if role, ok := node.Attrs["role"]; ok && strings.ToLower(role) == "l1s" {
 			switches[node] = true
 		}
 	}
