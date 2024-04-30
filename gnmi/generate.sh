@@ -21,6 +21,9 @@ set -e
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
+cd models-yang
+git checkout bd0199b
+cd ..
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 

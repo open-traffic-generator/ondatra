@@ -71,7 +71,7 @@ func TestExecute(t *testing.T) {
 			}
 			var got fakeResult
 			gotErr := testt.CaptureFatal(t, func(t testing.TB) {
-				got = Execute(t, dut, op)
+				got = Execute(t, dut, op.Operation)
 			})
 			if got != tt.want {
 				t.Errorf("Execute() got unexpected response %v, want %v", got, tt.want)
