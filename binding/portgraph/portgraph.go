@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"regexp"
 	"sort"
+	"strings"
 
 	"golang.org/x/net/context"
 
@@ -207,8 +208,10 @@ type solver struct {
 	conNode2Node2NumEdges map[*ConcreteNode]map[*ConcreteNode]int           // Map Node to Node and how many edges there are.
 	conPort2Port2Edge     map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
 	absPort2Port2Edge     map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
-
-	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
+	switchNodes           []*ConcreteNode
+	switchPorts           []*ConcretePort
+	notSwitchPorts        []*ConcretePort
+	maxAssign             *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
 	// Constraints are ordered for deterministic iteration.
@@ -276,6 +279,57 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 
 	// Map how many links there are between each ConcreteNode to calculate matches.
 	conNode2Node2NumEdges := make(map[*ConcreteNode]map[*ConcreteNode]int)
+
+	var swNodes []*ConcreteNode
+	var swPorts []*ConcretePort
+	var notSwPorts []*ConcretePort
+	for _, n := range superGraph.Nodes {
+		if role, ok := n.Attrs["role"]; ok && strings.ToLower(role) == "l1s" {
+			swNodes = append(swNodes, n)
+			swPorts = append(swPorts, n.Ports...)
+		} else {
+			notSwPorts = append(notSwPorts, n.Ports...)
+		}
+	}
+
+	s := &solver{
+		abstractGraph:           abstractGraph,
+		superGraph:              superGraph,
+		absNode2Node2NumEdges:   absNode2Node2NumEdges,
+		absPort2Node:            absPort2Node,
+		absPort2Port2Edge:       absPort2Port2Edge,
+		conNode2Node2NumEdges:   conNode2Node2NumEdges,
+		switchNodes:             swNodes,
+		switchPorts:             swPorts,
+		notSwitchPorts:          notSwPorts,
+		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
+		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
+		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
+		portConstraints:         orderedmap.NewOrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]](),
+		deferredPortConstraints: orderedmap.NewOrderedMap[*AbstractPort, []deferredPortConstraint](),
+	}
+
+	if len(s.switchNodes) > 0 {
+		switchPortMap, swToSwConnections := createSwitchConnectionMap(s.superGraph)
+
+		finalEdges := []*ConcreteEdge{}
+		// Collect ports for each switch node and its connections recursively.
+		visited := map[*ConcreteNode]bool{}
+		for _, sw := range s.switchNodes {
+			portsToGenerateCombinations := collectPortsRecursively(
+				sw,
+				switchPortMap,
+				swToSwConnections,
+				visited,
+			)
+			finalEdges = append(finalEdges, createEdges(portsToGenerateCombinations)...)
+		}
+
+		s.superGraph.Edges = append(superGraph.Edges, finalEdges...)
+
+	}
+
+	deleteSwitchCombination(&superGraph.Edges, s.switchPorts)
 	for _, e := range superGraph.Edges {
 		srcNode, dstNode := conPort2Node[e.Src], conPort2Node[e.Dst]
 		// Count the edges from src -> dst
@@ -290,19 +344,7 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		conNode2Node2NumEdges[dstNode][srcNode]++
 	}
 
-	s := &solver{
-		abstractGraph:           abstractGraph,
-		superGraph:              superGraph,
-		absNode2Node2NumEdges:   absNode2Node2NumEdges,
-		absPort2Node:            absPort2Node,
-		absPort2Port2Edge:       absPort2Port2Edge,
-		conNode2Node2NumEdges:   conNode2Node2NumEdges,
-		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
-		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
-		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
-		portConstraints:         orderedmap.NewOrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]](),
-		deferredPortConstraints: orderedmap.NewOrderedMap[*AbstractPort, []deferredPortConstraint](),
-	}
+	s.conNode2Node2NumEdges = conNode2Node2NumEdges
 
 	a, ok := s.solve(ctx)
 	if !ok {
@@ -310,6 +352,159 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		return nil, solveErr
 	}
 	return a, nil
+}
+
+// Define helper functions to find the node for a given port
+func findNodeForPort(nodes []*ConcreteNode, port *ConcretePort) *ConcreteNode {
+	for _, node := range nodes {
+		for _, p := range node.Ports {
+			if p == port {
+				return node
+			}
+		}
+	}
+	return nil
+}
+
+// Helper function to check if a slice contains a specific node
+func containsNode(slice []*ConcreteNode, node *ConcreteNode) bool {
+	for _, n := range slice {
+		if n == node {
+			return true
+		}
+	}
+	return false
+}
+
+// Create a combined map of switch-to-port and switch-to-switch connections
+func createSwitchConnectionMap(graph *ConcreteGraph) (
+	map[*ConcreteNode][]*ConcretePort,
+	map[*ConcreteNode][]*ConcreteNode,
+) {
+	switchPortMap := make(map[*ConcreteNode][]*ConcretePort)
+	switchConnMap := make(map[*ConcreteNode][]*ConcreteNode)
+
+	// Identify all switches in the graph
+	switches := make(map[*ConcreteNode]bool)
+	for _, node := range graph.Nodes {
+		if role, ok := node.Attrs["role"]; ok && strings.ToLower(role) == "l1s" {
+			switches[node] = true
+		}
+	}
+
+	// Iterate over all edges in the graph
+	for _, edge := range graph.Edges {
+		srcNode := findNodeForPort(graph.Nodes, edge.Src)
+		dstNode := findNodeForPort(graph.Nodes, edge.Dst)
+
+		// If the source node is a switch, add the destination port to its list
+		if srcNode != nil && switches[srcNode] {
+			switchPortMap[srcNode] = append(switchPortMap[srcNode], edge.Dst)
+		}
+
+		// If the destination node is a switch, add the source port to its list
+		if dstNode != nil && switches[dstNode] {
+			switchPortMap[dstNode] = append(switchPortMap[dstNode], edge.Src)
+		}
+
+		// Add switch-to-switch connections
+		if srcNode != nil && dstNode != nil && switches[srcNode] && switches[dstNode] {
+			if !containsNode(switchConnMap[srcNode], dstNode) {
+				switchConnMap[srcNode] = append(switchConnMap[srcNode], dstNode)
+			}
+
+			if !containsNode(switchConnMap[dstNode], srcNode) {
+				switchConnMap[dstNode] = append(switchConnMap[dstNode], srcNode)
+			}
+		}
+	}
+
+	return switchPortMap, switchConnMap
+}
+
+func collectPortsRecursively(
+	sw *ConcreteNode,
+	switchPortMap map[*ConcreteNode][]*ConcretePort,
+	swToSwConnections map[*ConcreteNode][]*ConcreteNode,
+	visited map[*ConcreteNode]bool,
+) []*ConcretePort {
+	// If already visited, return empty list to avoid cycles.
+	if visited[sw] {
+		return nil
+	}
+
+	// Mark the current node as visited.
+	visited[sw] = true
+
+	ports := []*ConcretePort{}
+
+	// Collect ports for the current node.
+	if nodePorts, exists := switchPortMap[sw]; exists {
+		ports = append(ports, nodePorts...)
+	}
+
+	// Recurse through all connected nodes.
+	if connections, exists := swToSwConnections[sw]; exists {
+		for _, connectedNode := range connections {
+			collectedPorts := collectPortsRecursively(
+				connectedNode,
+				switchPortMap,
+				swToSwConnections,
+				visited,
+			)
+			ports = append(ports, collectedPorts...)
+		}
+	}
+
+	return ports
+}
+
+func createEdges(ports []*ConcretePort) []*ConcreteEdge {
+	edgeSet := make(map[string]bool) // To track unique edges
+	edges := []*ConcreteEdge{}
+
+	for i := 0; i < len(ports); i++ {
+		for j := i + 1; j < len(ports); j++ {
+			// Create a unique key for the edge, independent of the order of source and destination
+			src := ports[i]
+			dst := ports[j]
+			edgeKey := src.Desc + "-" + dst.Desc
+			reverseEdgeKey := dst.Desc + "-" + src.Desc
+
+			// Ensure the edge doesn't exist already, considering both forward and reverse
+			if !edgeSet[edgeKey] && !edgeSet[reverseEdgeKey] {
+				edge := &ConcreteEdge{
+					Src: src,
+					Dst: dst,
+				}
+				edges = append(edges, edge)
+				edgeSet[edgeKey] = true
+			}
+		}
+	}
+	return edges
+}
+
+func deleteSwitchCombination(edges *[]*ConcreteEdge, switchPorts []*ConcretePort) {
+	for edgeIndex := 0; edgeIndex < len(*edges); {
+		edge := (*edges)[edgeIndex]
+		if contains(switchPorts, edge.Src) || contains(switchPorts, edge.Dst) {
+			// Remove the edge from edges
+			*edges = append((*edges)[:edgeIndex], (*edges)[edgeIndex+1:]...)
+			// Continue without incrementing edgeIndex
+			continue
+		}
+		edgeIndex++
+	}
+}
+
+func contains(s []*ConcretePort, p *ConcretePort) bool {
+	for _, v := range s {
+		if v == p {
+			return true
+		}
+	}
+	return false
 }
 
 // solve provides a mapping of abstract nodes and ports to concrete nodes and ports.
