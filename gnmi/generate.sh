@@ -17,10 +17,13 @@
 # This script is used to generate the Ondatra Telemetry and Config Go APIs.
 
 set -e
-
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
+
+cd models-yang
+git checkout 59ba428
+cd ..
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
