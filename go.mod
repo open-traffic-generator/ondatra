@@ -7,7 +7,7 @@ require (
 	github.com/golang/glog v1.2.0
 	github.com/google/go-cmp v0.6.0
 	github.com/jstemmer/go-junit-report/v2 v2.1.0
-	github.com/open-traffic-generator/snappi/gosnappi v0.13.7
+	github.com/open-traffic-generator/snappi/gosnappi v01.8.0
 	github.com/openconfig/attestz v0.2.0
 	github.com/openconfig/entity-naming v0.0.0-20230912181021-7ac806551a31
 	github.com/openconfig/gnmi v0.10.0
