@@ -34,6 +34,18 @@ import (
 // in the YANG schema. The map is named ΛEnum in order to avoid clash with any
 // valid YANG identifier.
 var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
+	"E_AdjacencySid_AdjacencyType": {
+		1: {Name: "ADJ-SID"},
+		2: {Name: "LAN-ADJ-SID"},
+	},
+	"E_AdjacencySid_Flags": {
+		1: {Name: "ADDRESS_FAMILY"},
+		2: {Name: "BACKUP"},
+		3: {Name: "VALUE"},
+		4: {Name: "LOCAL"},
+		5: {Name: "SET"},
+		6: {Name: "PERSISTENT"},
+	},
 	"E_BgpPeer_SessionState": {
 		1: {Name: "IDLE"},
 		2: {Name: "CONNECT"},
@@ -54,6 +66,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9:  {Name: "C_VLAN"},
 		10: {Name: "STATION_ONLY"},
 		11: {Name: "WLAN_ACCESS_POINT"},
+	},
+	"E_Capability_Flags": {
+		1: {Name: "FLOOD"},
+		2: {Name: "DOWN"},
 	},
 	"E_Ero_Type": {
 		1: {Name: "IPV4"},
@@ -133,6 +149,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		6: {Name: "LOCAL"},
 		7: {Name: "INTERFACE_ALIAS"},
 	},
+	"E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType": {
+		1: {Name: "SUCCEEDED"},
+		2: {Name: "FAILED"},
+		3: {Name: "INPROGRESS"},
+		4: {Name: "UNAVAILABLE"},
+	},
+	"E_LocalRestartingStatus_CurrentState": {
+		1: {Name: "RUNNING"},
+		2: {Name: "RESTARTING"},
+		3: {Name: "STARTING"},
+	},
+	"E_LocalState_LevelType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+		3: {Name: "LEVEL_1_2"},
+	},
 	"E_Lsps_Flags": {
 		1: {Name: "PARTITION_REPAIR"},
 		2: {Name: "ATTACHED_ERROR"},
@@ -145,9 +177,44 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "LEVEL_1"},
 		2: {Name: "LEVEL_2"},
 	},
+	"E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType": {
+		1: {Name: "SUCCEEDED"},
+		2: {Name: "FAILED"},
+		3: {Name: "INPROGRESS"},
+		4: {Name: "UNAVAILABLE"},
+	},
+	"E_NeighRestartingStatus_CurrentState": {
+		1: {Name: "RUNNING"},
+		2: {Name: "RESTARTING"},
+		3: {Name: "STARTING"},
+	},
+	"E_NeighborState_LevelType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+		3: {Name: "LEVEL_1_2"},
+	},
 	"E_Port_Link": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
+	},
+	"E_PrefixSid_Flags": {
+		1: {Name: "READVERTISEMENT"},
+		2: {Name: "NODE"},
+		3: {Name: "NO_PHP"},
+		4: {Name: "EXPLICIT_NULL"},
+		5: {Name: "VALUE"},
+		6: {Name: "LOCAL"},
+	},
+	"E_RestartTlv_Flags": {
+		1: {Name: "RR_BIT"},
+		2: {Name: "RA_BIT"},
+		3: {Name: "SA_BIT"},
+		4: {Name: "PR_BIT"},
+		5: {Name: "PA_BIT"},
+	},
+	"E_SegmentRoutingCapability_Flags": {
+		1: {Name: "IPV4_MPLS"},
+		2: {Name: "IPV6_MPLS"},
 	},
 	"E_State_CommunityType": {
 		1: {Name: "MANUAL_AS_NUMBER"},
@@ -282,6 +349,27 @@ func initΛEnumTypes() {
 		"/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type": {
 			reflect.TypeOf((E_Tags_ValueType)(0)),
 		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/level-type": {
+			reflect.TypeOf((E_LocalState_LevelType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status/state/current-state": {
+			reflect.TypeOf((E_LocalRestartingStatus_CurrentState)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type": {
+			reflect.TypeOf((E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/level-type": {
+			reflect.TypeOf((E_NeighborState_LevelType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status/state/current-state": {
+			reflect.TypeOf((E_NeighRestartingStatus_CurrentState)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type": {
+			reflect.TypeOf((E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/tlvs/restart_tlv/state/flags": {
+			reflect.TypeOf((E_RestartTlv_Flags)(0)),
+		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags": {
 			reflect.TypeOf((E_Lsps_Flags)(0)),
 		},
@@ -291,8 +379,17 @@ func initΛEnumTypes() {
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags": {
 			reflect.TypeOf((E_State_Flags)(0)),
 		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-sid/state/flags": {
+			reflect.TypeOf((E_PrefixSid_Flags)(0)),
+		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type": {
 			reflect.TypeOf((E_ExtendedIpv4Reachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/adjacency-sid/state/adjacency-type": {
+			reflect.TypeOf((E_AdjacencySid_AdjacencyType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/adjacency-sid/state/flags": {
+			reflect.TypeOf((E_AdjacencySid_Flags)(0)),
 		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type": {
 			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_OriginType)(0)),
@@ -312,8 +409,17 @@ func initΛEnumTypes() {
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags": {
 			reflect.TypeOf((E_State_Flags)(0)),
 		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-sid/state/flags": {
+			reflect.TypeOf((E_PrefixSid_Flags)(0)),
+		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type": {
 			reflect.TypeOf((E_Ipv6Reachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/flags": {
+			reflect.TypeOf((E_Capability_Flags)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/segment-routing-capability/state/flags": {
+			reflect.TypeOf((E_SegmentRoutingCapability_Flags)(0)),
 		},
 		"/lacp/lag-members/lag-member/state/activity": {
 			reflect.TypeOf((E_Lacp_LacpActivityType)(0)),

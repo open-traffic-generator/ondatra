@@ -5176,6 +5176,7 @@ type Flow struct {
 	Counters       *Flow_Counters                `path:"state/counters" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	FirstTimestamp *float64                      `path:"state/first-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InFrameRate    Binary                        `path:"state/in-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	InL1Rate       Binary                        `path:"state/in-l1-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InRate         Binary                        `path:"state/in-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	LastTimestamp  *float64                      `path:"state/last-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	LossPct        Binary                        `path:"state/loss-pct" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
@@ -5183,6 +5184,7 @@ type Flow struct {
 	MinimumLatency *uint64                       `path:"state/minimum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	Name           *string                       `path:"state/name|name" module:"open-traffic-generator-flow/open-traffic-generator-flow|open-traffic-generator-flow" shadow-path:"name" shadow-module:"open-traffic-generator-flow"`
 	OutFrameRate   Binary                        `path:"state/out-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	OutL1Rate      Binary                        `path:"state/out-l1-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	OutRate        Binary                        `path:"state/out-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	TaggedMetric   map[string]*Flow_TaggedMetric `path:"tagged-metrics/tagged-metric" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	Transmit       *bool                         `path:"state/transmit" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
@@ -5378,6 +5380,22 @@ func (t *Flow) GetInFrameRate() Binary {
 	return t.InFrameRate
 }
 
+// GetInL1Rate retrieves the value of the leaf InL1Rate from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InL1Rate is set, it can
+// safely use t.GetInL1Rate() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InL1Rate == nil' before retrieving the leaf's value.
+func (t *Flow) GetInL1Rate() Binary {
+	if t == nil || t.InL1Rate == nil {
+		return nil
+	}
+	return t.InL1Rate
+}
+
 // GetInRate retrieves the value of the leaf InRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -5490,6 +5508,22 @@ func (t *Flow) GetOutFrameRate() Binary {
 	return t.OutFrameRate
 }
 
+// GetOutL1Rate retrieves the value of the leaf OutL1Rate from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutL1Rate is set, it can
+// safely use t.GetOutL1Rate() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutL1Rate == nil' before retrieving the leaf's value.
+func (t *Flow) GetOutL1Rate() Binary {
+	if t == nil || t.OutL1Rate == nil {
+		return nil
+	}
+	return t.OutL1Rate
+}
+
 // GetOutRate retrieves the value of the leaf OutRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -5540,6 +5574,12 @@ func (t *Flow) SetInFrameRate(v Binary) {
 	t.InFrameRate = v
 }
 
+// SetInL1Rate sets the value of the leaf InL1Rate in the Flow
+// struct.
+func (t *Flow) SetInL1Rate(v Binary) {
+	t.InL1Rate = v
+}
+
 // SetInRate sets the value of the leaf InRate in the Flow
 // struct.
 func (t *Flow) SetInRate(v Binary) {
@@ -5580,6 +5620,12 @@ func (t *Flow) SetName(v string) {
 // struct.
 func (t *Flow) SetOutFrameRate(v Binary) {
 	t.OutFrameRate = v
+}
+
+// SetOutL1Rate sets the value of the leaf OutL1Rate in the Flow
+// struct.
+func (t *Flow) SetOutL1Rate(v Binary) {
+	t.OutL1Rate = v
 }
 
 // SetOutRate sets the value of the leaf OutRate in the Flow
@@ -6868,6 +6914,7 @@ func (*Interface_Ipv6Neighbor) ΛBelongingModule() string {
 
 // IsisRouter represents the /open-traffic-generator-isis/isis-routers/isis-router YANG schema element.
 type IsisRouter struct {
+	Adjacencies       *IsisRouter_Adjacencies       `path:"state/adjacencies" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 	Counters          *IsisRouter_Counters          `path:"state/counters" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 	LinkStateDatabase *IsisRouter_LinkStateDatabase `path:"state/link-state-database" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 	Name              *string                       `path:"state/name|name" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"name" shadow-module:"open-traffic-generator-isis"`
@@ -6877,6 +6924,16 @@ type IsisRouter struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*IsisRouter) IsYANGGoStruct() {}
+
+// GetOrCreateAdjacencies retrieves the value of the Adjacencies field
+// or returns the existing field if it already exists.
+func (t *IsisRouter) GetOrCreateAdjacencies() *IsisRouter_Adjacencies {
+	if t.Adjacencies != nil {
+		return t.Adjacencies
+	}
+	t.Adjacencies = &IsisRouter_Adjacencies{}
+	return t.Adjacencies
+}
 
 // GetOrCreateCounters retrieves the value of the Counters field
 // or returns the existing field if it already exists.
@@ -6896,6 +6953,16 @@ func (t *IsisRouter) GetOrCreateLinkStateDatabase() *IsisRouter_LinkStateDatabas
 	}
 	t.LinkStateDatabase = &IsisRouter_LinkStateDatabase{}
 	return t.LinkStateDatabase
+}
+
+// GetAdjacencies returns the value of the Adjacencies struct pointer
+// from IsisRouter. If the receiver or the field Adjacencies is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter) GetAdjacencies() *IsisRouter_Adjacencies {
+	if t != nil && t.Adjacencies != nil {
+		return t.Adjacencies
+	}
+	return nil
 }
 
 // GetCounters returns the value of the Counters struct pointer
@@ -6948,6 +7015,7 @@ func (t *IsisRouter) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.Adjacencies.PopulateDefaults()
 	t.Counters.PopulateDefaults()
 	t.LinkStateDatabase.PopulateDefaults()
 }
@@ -6986,10 +7054,1489 @@ func (*IsisRouter) ΛBelongingModule() string {
 	return "open-traffic-generator-isis"
 }
 
+// IsisRouter_Adjacencies represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies YANG schema element.
+type IsisRouter_Adjacencies struct {
+	Adjacencies map[IsisRouter_Adjacencies_Adjacencies_Key]*IsisRouter_Adjacencies_Adjacencies `path:"state/adjacencies" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies) IsYANGGoStruct() {}
+
+// IsisRouter_Adjacencies_Adjacencies_Key represents the key for list Adjacencies of element /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies.
+type IsisRouter_Adjacencies_Adjacencies_Key struct {
+	NeighborSystemId string `path:"neighbor-system-id"`
+	InterfaceName    string `path:"interface-name"`
+}
+
+// IsYANGGoKeyStruct ensures that IsisRouter_Adjacencies_Adjacencies_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (IsisRouter_Adjacencies_Adjacencies_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the IsisRouter_Adjacencies_Adjacencies_Key key struct.
+func (t IsisRouter_Adjacencies_Adjacencies_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"neighbor-system-id": t.NeighborSystemId,
+		"interface-name":     t.InterfaceName,
+	}, nil
+}
+
+// NewAdjacencies creates a new entry in the Adjacencies list of the
+// IsisRouter_Adjacencies struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_Adjacencies) NewAdjacencies(NeighborSystemId string, InterfaceName string) (*IsisRouter_Adjacencies_Adjacencies, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Adjacencies == nil {
+		t.Adjacencies = make(map[IsisRouter_Adjacencies_Adjacencies_Key]*IsisRouter_Adjacencies_Adjacencies)
+	}
+
+	key := IsisRouter_Adjacencies_Adjacencies_Key{
+		NeighborSystemId: NeighborSystemId,
+		InterfaceName:    InterfaceName,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Adjacencies[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Adjacencies", key)
+	}
+
+	t.Adjacencies[key] = &IsisRouter_Adjacencies_Adjacencies{
+		NeighborSystemId: &NeighborSystemId,
+		InterfaceName:    &InterfaceName,
+	}
+
+	return t.Adjacencies[key], nil
+}
+
+// RenameAdjacencies renames an entry in the list Adjacencies within
+// the IsisRouter_Adjacencies struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_Adjacencies) RenameAdjacencies(oldK, newK IsisRouter_Adjacencies_Adjacencies_Key) error {
+	if _, ok := t.Adjacencies[newK]; ok {
+		return fmt.Errorf("key %v already exists in Adjacencies", newK)
+	}
+
+	e, ok := t.Adjacencies[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Adjacencies", oldK)
+	}
+	e.NeighborSystemId = &newK.NeighborSystemId
+	e.InterfaceName = &newK.InterfaceName
+
+	t.Adjacencies[newK] = e
+	delete(t.Adjacencies, oldK)
+	return nil
+}
+
+// GetOrCreateAdjacencies retrieves the value with the specified keys from
+// the receiver IsisRouter_Adjacencies. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_Adjacencies) GetOrCreateAdjacencies(NeighborSystemId string, InterfaceName string) *IsisRouter_Adjacencies_Adjacencies {
+
+	key := IsisRouter_Adjacencies_Adjacencies_Key{
+		NeighborSystemId: NeighborSystemId,
+		InterfaceName:    InterfaceName,
+	}
+
+	if v, ok := t.Adjacencies[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAdjacencies(NeighborSystemId, InterfaceName)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAdjacencies got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAdjacencies retrieves the value with the specified key from
+// the Adjacencies map field of IsisRouter_Adjacencies. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_Adjacencies) GetAdjacencies(NeighborSystemId string, InterfaceName string) *IsisRouter_Adjacencies_Adjacencies {
+
+	if t == nil {
+		return nil
+	}
+
+	key := IsisRouter_Adjacencies_Adjacencies_Key{
+		NeighborSystemId: NeighborSystemId,
+		InterfaceName:    InterfaceName,
+	}
+
+	if lm, ok := t.Adjacencies[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAdjacencies deletes the value with the specified keys from
+// the receiver IsisRouter_Adjacencies. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_Adjacencies) DeleteAdjacencies(NeighborSystemId string, InterfaceName string) {
+	key := IsisRouter_Adjacencies_Adjacencies_Key{
+		NeighborSystemId: NeighborSystemId,
+		InterfaceName:    InterfaceName,
+	}
+
+	delete(t.Adjacencies, key)
+}
+
+// AppendAdjacencies appends the supplied IsisRouter_Adjacencies_Adjacencies struct to the
+// list Adjacencies of IsisRouter_Adjacencies. If the key value(s) specified in
+// the supplied IsisRouter_Adjacencies_Adjacencies already exist in the list, an error is
+// returned.
+func (t *IsisRouter_Adjacencies) AppendAdjacencies(v *IsisRouter_Adjacencies_Adjacencies) error {
+	if v.NeighborSystemId == nil {
+		return fmt.Errorf("invalid nil key for NeighborSystemId")
+	}
+
+	if v.InterfaceName == nil {
+		return fmt.Errorf("invalid nil key for InterfaceName")
+	}
+
+	key := IsisRouter_Adjacencies_Adjacencies_Key{
+		NeighborSystemId: *v.NeighborSystemId,
+		InterfaceName:    *v.InterfaceName,
+	}
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Adjacencies == nil {
+		t.Adjacencies = make(map[IsisRouter_Adjacencies_Adjacencies_Key]*IsisRouter_Adjacencies_Adjacencies)
+	}
+
+	if _, ok := t.Adjacencies[key]; ok {
+		return fmt.Errorf("duplicate key for list Adjacencies %v", key)
+	}
+
+	t.Adjacencies[key] = v
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.Adjacencies {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies.
+func (*IsisRouter_Adjacencies) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies struct {
+	InterfaceName    *string                                           `path:"state/interface-name|interface-name" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"interface-name" shadow-module:"open-traffic-generator-isis"`
+	LocalState       *IsisRouter_Adjacencies_Adjacencies_LocalState    `path:"state/local-state" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighborState    *IsisRouter_Adjacencies_Adjacencies_NeighborState `path:"state/neighbor-state" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighborSystemId *string                                           `path:"state/neighbor-system-id|neighbor-system-id" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"neighbor-system-id" shadow-module:"open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies) IsYANGGoStruct() {}
+
+// GetOrCreateLocalState retrieves the value of the LocalState field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetOrCreateLocalState() *IsisRouter_Adjacencies_Adjacencies_LocalState {
+	if t.LocalState != nil {
+		return t.LocalState
+	}
+	t.LocalState = &IsisRouter_Adjacencies_Adjacencies_LocalState{}
+	return t.LocalState
+}
+
+// GetOrCreateNeighborState retrieves the value of the NeighborState field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetOrCreateNeighborState() *IsisRouter_Adjacencies_Adjacencies_NeighborState {
+	if t.NeighborState != nil {
+		return t.NeighborState
+	}
+	t.NeighborState = &IsisRouter_Adjacencies_Adjacencies_NeighborState{}
+	return t.NeighborState
+}
+
+// GetLocalState returns the value of the LocalState struct pointer
+// from IsisRouter_Adjacencies_Adjacencies. If the receiver or the field LocalState is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetLocalState() *IsisRouter_Adjacencies_Adjacencies_LocalState {
+	if t != nil && t.LocalState != nil {
+		return t.LocalState
+	}
+	return nil
+}
+
+// GetNeighborState returns the value of the NeighborState struct pointer
+// from IsisRouter_Adjacencies_Adjacencies. If the receiver or the field NeighborState is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetNeighborState() *IsisRouter_Adjacencies_Adjacencies_NeighborState {
+	if t != nil && t.NeighborState != nil {
+		return t.NeighborState
+	}
+	return nil
+}
+
+// GetInterfaceName retrieves the value of the leaf InterfaceName from the IsisRouter_Adjacencies_Adjacencies
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InterfaceName is set, it can
+// safely use t.GetInterfaceName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InterfaceName == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetInterfaceName() string {
+	if t == nil || t.InterfaceName == nil {
+		return ""
+	}
+	return *t.InterfaceName
+}
+
+// GetNeighborSystemId retrieves the value of the leaf NeighborSystemId from the IsisRouter_Adjacencies_Adjacencies
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighborSystemId is set, it can
+// safely use t.GetNeighborSystemId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighborSystemId == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies) GetNeighborSystemId() string {
+	if t == nil || t.NeighborSystemId == nil {
+		return ""
+	}
+	return *t.NeighborSystemId
+}
+
+// SetInterfaceName sets the value of the leaf InterfaceName in the IsisRouter_Adjacencies_Adjacencies
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies) SetInterfaceName(v string) {
+	t.InterfaceName = &v
+}
+
+// SetNeighborSystemId sets the value of the leaf NeighborSystemId in the IsisRouter_Adjacencies_Adjacencies
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies) SetNeighborSystemId(v string) {
+	t.NeighborSystemId = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LocalState.PopulateDefaults()
+	t.NeighborState.PopulateDefaults()
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_Adjacencies_Adjacencies struct, which is a YANG list entry.
+func (t *IsisRouter_Adjacencies_Adjacencies) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.InterfaceName == nil {
+		return nil, fmt.Errorf("nil value for key InterfaceName")
+	}
+
+	if t.NeighborSystemId == nil {
+		return nil, fmt.Errorf("nil value for key NeighborSystemId")
+	}
+
+	return map[string]interface{}{
+		"interface-name":     *t.InterfaceName,
+		"neighbor-system-id": *t.NeighborSystemId,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies.
+func (*IsisRouter_Adjacencies_Adjacencies) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_LocalState represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_LocalState struct {
+	HoldTimer             *uint32                                                              `path:"state/hold-timer" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LevelType             E_LocalState_LevelType                                               `path:"state/level-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LocalRestartingStatus *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus `path:"state/local-restarting-status" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_LocalState implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState) IsYANGGoStruct() {}
+
+// GetOrCreateLocalRestartingStatus retrieves the value of the LocalRestartingStatus field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) GetOrCreateLocalRestartingStatus() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus {
+	if t.LocalRestartingStatus != nil {
+		return t.LocalRestartingStatus
+	}
+	t.LocalRestartingStatus = &IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus{}
+	return t.LocalRestartingStatus
+}
+
+// GetLocalRestartingStatus returns the value of the LocalRestartingStatus struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_LocalState. If the receiver or the field LocalRestartingStatus is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) GetLocalRestartingStatus() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus {
+	if t != nil && t.LocalRestartingStatus != nil {
+		return t.LocalRestartingStatus
+	}
+	return nil
+}
+
+// GetHoldTimer retrieves the value of the leaf HoldTimer from the IsisRouter_Adjacencies_Adjacencies_LocalState
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if HoldTimer is set, it can
+// safely use t.GetHoldTimer() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.HoldTimer == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) GetHoldTimer() uint32 {
+	if t == nil || t.HoldTimer == nil {
+		return 0
+	}
+	return *t.HoldTimer
+}
+
+// GetLevelType retrieves the value of the leaf LevelType from the IsisRouter_Adjacencies_Adjacencies_LocalState
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LevelType is set, it can
+// safely use t.GetLevelType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LevelType == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) GetLevelType() E_LocalState_LevelType {
+	if t == nil || t.LevelType == 0 {
+		return 0
+	}
+	return t.LevelType
+}
+
+// SetHoldTimer sets the value of the leaf HoldTimer in the IsisRouter_Adjacencies_Adjacencies_LocalState
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) SetHoldTimer(v uint32) {
+	t.HoldTimer = &v
+}
+
+// SetLevelType sets the value of the leaf LevelType in the IsisRouter_Adjacencies_Adjacencies_LocalState
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) SetLevelType(v E_LocalState_LevelType) {
+	t.LevelType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_LocalState
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LocalRestartingStatus.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_LocalState"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_LocalState.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus struct {
+	CurrentState                     E_LocalRestartingStatus_CurrentState                                                                  `path:"state/current-state" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LocalLastRestartingAttemptStatus *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus `path:"state/local-last-restarting-attempt-status" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) IsYANGGoStruct() {}
+
+// GetOrCreateLocalLastRestartingAttemptStatus retrieves the value of the LocalLastRestartingAttemptStatus field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) GetOrCreateLocalLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus {
+	if t.LocalLastRestartingAttemptStatus != nil {
+		return t.LocalLastRestartingAttemptStatus
+	}
+	t.LocalLastRestartingAttemptStatus = &IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus{}
+	return t.LocalLastRestartingAttemptStatus
+}
+
+// GetLocalLastRestartingAttemptStatus returns the value of the LocalLastRestartingAttemptStatus struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus. If the receiver or the field LocalLastRestartingAttemptStatus is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) GetLocalLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus {
+	if t != nil && t.LocalLastRestartingAttemptStatus != nil {
+		return t.LocalLastRestartingAttemptStatus
+	}
+	return nil
+}
+
+// GetCurrentState retrieves the value of the leaf CurrentState from the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CurrentState is set, it can
+// safely use t.GetCurrentState() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CurrentState == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) GetCurrentState() E_LocalRestartingStatus_CurrentState {
+	if t == nil || t.CurrentState == 0 {
+		return 0
+	}
+	return t.CurrentState
+}
+
+// SetCurrentState sets the value of the leaf CurrentState in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) SetCurrentState(v E_LocalRestartingStatus_CurrentState) {
+	t.CurrentState = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LocalLastRestartingAttemptStatus.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus struct {
+	LocalLastRestartingAttemptFailed     *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed    `path:"state/local-last-restarting-attempt-failed" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LocalLastRestartingAttemptStatusType E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType                                                                   `path:"state/local-last-restarting-attempt-status-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LocalLastRestartingAttemptSucceeded  *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded `path:"state/local-last-restarting-attempt-succeeded" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) IsYANGGoStruct() {
+}
+
+// GetOrCreateLocalLastRestartingAttemptFailed retrieves the value of the LocalLastRestartingAttemptFailed field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) GetOrCreateLocalLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed {
+	if t.LocalLastRestartingAttemptFailed != nil {
+		return t.LocalLastRestartingAttemptFailed
+	}
+	t.LocalLastRestartingAttemptFailed = &IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed{}
+	return t.LocalLastRestartingAttemptFailed
+}
+
+// GetOrCreateLocalLastRestartingAttemptSucceeded retrieves the value of the LocalLastRestartingAttemptSucceeded field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) GetOrCreateLocalLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded {
+	if t.LocalLastRestartingAttemptSucceeded != nil {
+		return t.LocalLastRestartingAttemptSucceeded
+	}
+	t.LocalLastRestartingAttemptSucceeded = &IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded{}
+	return t.LocalLastRestartingAttemptSucceeded
+}
+
+// GetLocalLastRestartingAttemptFailed returns the value of the LocalLastRestartingAttemptFailed struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus. If the receiver or the field LocalLastRestartingAttemptFailed is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) GetLocalLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed {
+	if t != nil && t.LocalLastRestartingAttemptFailed != nil {
+		return t.LocalLastRestartingAttemptFailed
+	}
+	return nil
+}
+
+// GetLocalLastRestartingAttemptSucceeded returns the value of the LocalLastRestartingAttemptSucceeded struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus. If the receiver or the field LocalLastRestartingAttemptSucceeded is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) GetLocalLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded {
+	if t != nil && t.LocalLastRestartingAttemptSucceeded != nil {
+		return t.LocalLastRestartingAttemptSucceeded
+	}
+	return nil
+}
+
+// GetLocalLastRestartingAttemptStatusType retrieves the value of the leaf LocalLastRestartingAttemptStatusType from the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalLastRestartingAttemptStatusType is set, it can
+// safely use t.GetLocalLastRestartingAttemptStatusType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalLastRestartingAttemptStatusType == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) GetLocalLastRestartingAttemptStatusType() E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType {
+	if t == nil || t.LocalLastRestartingAttemptStatusType == 0 {
+		return 0
+	}
+	return t.LocalLastRestartingAttemptStatusType
+}
+
+// SetLocalLastRestartingAttemptStatusType sets the value of the leaf LocalLastRestartingAttemptStatusType in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) SetLocalLastRestartingAttemptStatusType(v E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType) {
+	t.LocalLastRestartingAttemptStatusType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LocalLastRestartingAttemptFailed.PopulateDefaults()
+	t.LocalLastRestartingAttemptSucceeded.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed struct {
+	Reason *string `path:"state/reason" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) IsYANGGoStruct() {
+}
+
+// GetReason retrieves the value of the leaf Reason from the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Reason is set, it can
+// safely use t.GetReason() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Reason == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) GetReason() string {
+	if t == nil || t.Reason == nil {
+		return ""
+	}
+	return *t.Reason
+}
+
+// SetReason sets the value of the leaf Reason in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) SetReason(v string) {
+	t.Reason = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded struct {
+	LocalAdjacencyBringUpTime *uint32 `path:"state/local-adjacency-bring-up-time" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LocalLsdbSyncupTime       *uint32 `path:"state/local-lsdb-syncup-time" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) IsYANGGoStruct() {
+}
+
+// GetLocalAdjacencyBringUpTime retrieves the value of the leaf LocalAdjacencyBringUpTime from the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalAdjacencyBringUpTime is set, it can
+// safely use t.GetLocalAdjacencyBringUpTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalAdjacencyBringUpTime == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) GetLocalAdjacencyBringUpTime() uint32 {
+	if t == nil || t.LocalAdjacencyBringUpTime == nil {
+		return 0
+	}
+	return *t.LocalAdjacencyBringUpTime
+}
+
+// GetLocalLsdbSyncupTime retrieves the value of the leaf LocalLsdbSyncupTime from the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalLsdbSyncupTime is set, it can
+// safely use t.GetLocalLsdbSyncupTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalLsdbSyncupTime == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) GetLocalLsdbSyncupTime() uint32 {
+	if t == nil || t.LocalLsdbSyncupTime == nil {
+		return 0
+	}
+	return *t.LocalLsdbSyncupTime
+}
+
+// SetLocalAdjacencyBringUpTime sets the value of the leaf LocalAdjacencyBringUpTime in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) SetLocalAdjacencyBringUpTime(v uint32) {
+	t.LocalAdjacencyBringUpTime = &v
+}
+
+// SetLocalLsdbSyncupTime sets the value of the leaf LocalLsdbSyncupTime in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) SetLocalLsdbSyncupTime(v uint32) {
+	t.LocalLsdbSyncupTime = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded.
+func (*IsisRouter_Adjacencies_Adjacencies_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState struct {
+	HoldTimer             *uint32                                                                 `path:"state/hold-timer" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	LevelType             E_NeighborState_LevelType                                               `path:"state/level-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighRestartingStatus *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus `path:"state/neigh-restarting-status" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Tlvs                  *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs                  `path:"state/tlvs" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState) IsYANGGoStruct() {}
+
+// GetOrCreateNeighRestartingStatus retrieves the value of the NeighRestartingStatus field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetOrCreateNeighRestartingStatus() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus {
+	if t.NeighRestartingStatus != nil {
+		return t.NeighRestartingStatus
+	}
+	t.NeighRestartingStatus = &IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus{}
+	return t.NeighRestartingStatus
+}
+
+// GetOrCreateTlvs retrieves the value of the Tlvs field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetOrCreateTlvs() *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs {
+	if t.Tlvs != nil {
+		return t.Tlvs
+	}
+	t.Tlvs = &IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs{}
+	return t.Tlvs
+}
+
+// GetNeighRestartingStatus returns the value of the NeighRestartingStatus struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState. If the receiver or the field NeighRestartingStatus is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetNeighRestartingStatus() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus {
+	if t != nil && t.NeighRestartingStatus != nil {
+		return t.NeighRestartingStatus
+	}
+	return nil
+}
+
+// GetTlvs returns the value of the Tlvs struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState. If the receiver or the field Tlvs is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetTlvs() *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs {
+	if t != nil && t.Tlvs != nil {
+		return t.Tlvs
+	}
+	return nil
+}
+
+// GetHoldTimer retrieves the value of the leaf HoldTimer from the IsisRouter_Adjacencies_Adjacencies_NeighborState
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if HoldTimer is set, it can
+// safely use t.GetHoldTimer() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.HoldTimer == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetHoldTimer() uint32 {
+	if t == nil || t.HoldTimer == nil {
+		return 0
+	}
+	return *t.HoldTimer
+}
+
+// GetLevelType retrieves the value of the leaf LevelType from the IsisRouter_Adjacencies_Adjacencies_NeighborState
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LevelType is set, it can
+// safely use t.GetLevelType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LevelType == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) GetLevelType() E_NeighborState_LevelType {
+	if t == nil || t.LevelType == 0 {
+		return 0
+	}
+	return t.LevelType
+}
+
+// SetHoldTimer sets the value of the leaf HoldTimer in the IsisRouter_Adjacencies_Adjacencies_NeighborState
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) SetHoldTimer(v uint32) {
+	t.HoldTimer = &v
+}
+
+// SetLevelType sets the value of the leaf LevelType in the IsisRouter_Adjacencies_Adjacencies_NeighborState
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) SetLevelType(v E_NeighborState_LevelType) {
+	t.LevelType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.NeighRestartingStatus.PopulateDefaults()
+	t.Tlvs.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus struct {
+	CurrentState                     E_NeighRestartingStatus_CurrentState                                                                     `path:"state/current-state" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighLastRestartingAttemptStatus *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus `path:"state/neigh-last-restarting-attempt-status" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) IsYANGGoStruct() {}
+
+// GetOrCreateNeighLastRestartingAttemptStatus retrieves the value of the NeighLastRestartingAttemptStatus field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) GetOrCreateNeighLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus {
+	if t.NeighLastRestartingAttemptStatus != nil {
+		return t.NeighLastRestartingAttemptStatus
+	}
+	t.NeighLastRestartingAttemptStatus = &IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus{}
+	return t.NeighLastRestartingAttemptStatus
+}
+
+// GetNeighLastRestartingAttemptStatus returns the value of the NeighLastRestartingAttemptStatus struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus. If the receiver or the field NeighLastRestartingAttemptStatus is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) GetNeighLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus {
+	if t != nil && t.NeighLastRestartingAttemptStatus != nil {
+		return t.NeighLastRestartingAttemptStatus
+	}
+	return nil
+}
+
+// GetCurrentState retrieves the value of the leaf CurrentState from the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CurrentState is set, it can
+// safely use t.GetCurrentState() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CurrentState == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) GetCurrentState() E_NeighRestartingStatus_CurrentState {
+	if t == nil || t.CurrentState == 0 {
+		return 0
+	}
+	return t.CurrentState
+}
+
+// SetCurrentState sets the value of the leaf CurrentState in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) SetCurrentState(v E_NeighRestartingStatus_CurrentState) {
+	t.CurrentState = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.NeighLastRestartingAttemptStatus.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus struct {
+	NeighLastRestartingAttemptFailed     *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed    `path:"state/neigh-last-restarting-attempt-failed" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighLastRestartingAttemptStatusType E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType                                                                      `path:"state/neigh-last-restarting-attempt-status-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	NeighLastRestartingAttemptSucceeded  *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded `path:"state/neigh-last-restarting-attempt-succeeded" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) IsYANGGoStruct() {
+}
+
+// GetOrCreateNeighLastRestartingAttemptFailed retrieves the value of the NeighLastRestartingAttemptFailed field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) GetOrCreateNeighLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed {
+	if t.NeighLastRestartingAttemptFailed != nil {
+		return t.NeighLastRestartingAttemptFailed
+	}
+	t.NeighLastRestartingAttemptFailed = &IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed{}
+	return t.NeighLastRestartingAttemptFailed
+}
+
+// GetOrCreateNeighLastRestartingAttemptSucceeded retrieves the value of the NeighLastRestartingAttemptSucceeded field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) GetOrCreateNeighLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded {
+	if t.NeighLastRestartingAttemptSucceeded != nil {
+		return t.NeighLastRestartingAttemptSucceeded
+	}
+	t.NeighLastRestartingAttemptSucceeded = &IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded{}
+	return t.NeighLastRestartingAttemptSucceeded
+}
+
+// GetNeighLastRestartingAttemptFailed returns the value of the NeighLastRestartingAttemptFailed struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus. If the receiver or the field NeighLastRestartingAttemptFailed is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) GetNeighLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed {
+	if t != nil && t.NeighLastRestartingAttemptFailed != nil {
+		return t.NeighLastRestartingAttemptFailed
+	}
+	return nil
+}
+
+// GetNeighLastRestartingAttemptSucceeded returns the value of the NeighLastRestartingAttemptSucceeded struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus. If the receiver or the field NeighLastRestartingAttemptSucceeded is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) GetNeighLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded {
+	if t != nil && t.NeighLastRestartingAttemptSucceeded != nil {
+		return t.NeighLastRestartingAttemptSucceeded
+	}
+	return nil
+}
+
+// GetNeighLastRestartingAttemptStatusType retrieves the value of the leaf NeighLastRestartingAttemptStatusType from the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighLastRestartingAttemptStatusType is set, it can
+// safely use t.GetNeighLastRestartingAttemptStatusType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighLastRestartingAttemptStatusType == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) GetNeighLastRestartingAttemptStatusType() E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType {
+	if t == nil || t.NeighLastRestartingAttemptStatusType == 0 {
+		return 0
+	}
+	return t.NeighLastRestartingAttemptStatusType
+}
+
+// SetNeighLastRestartingAttemptStatusType sets the value of the leaf NeighLastRestartingAttemptStatusType in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) SetNeighLastRestartingAttemptStatusType(v E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType) {
+	t.NeighLastRestartingAttemptStatusType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.NeighLastRestartingAttemptFailed.PopulateDefaults()
+	t.NeighLastRestartingAttemptSucceeded.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed struct {
+	Reason *string `path:"state/reason" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) IsYANGGoStruct() {
+}
+
+// GetReason retrieves the value of the leaf Reason from the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Reason is set, it can
+// safely use t.GetReason() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Reason == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) GetReason() string {
+	if t == nil || t.Reason == nil {
+		return ""
+	}
+	return *t.Reason
+}
+
+// SetReason sets the value of the leaf Reason in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) SetReason(v string) {
+	t.Reason = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded struct {
+	NeighAdjacencyBringUpTime *uint32 `path:"state/neigh-adjacency-bring-up-time" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) IsYANGGoStruct() {
+}
+
+// GetNeighAdjacencyBringUpTime retrieves the value of the leaf NeighAdjacencyBringUpTime from the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighAdjacencyBringUpTime is set, it can
+// safely use t.GetNeighAdjacencyBringUpTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighAdjacencyBringUpTime == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) GetNeighAdjacencyBringUpTime() uint32 {
+	if t == nil || t.NeighAdjacencyBringUpTime == nil {
+		return 0
+	}
+	return *t.NeighAdjacencyBringUpTime
+}
+
+// SetNeighAdjacencyBringUpTime sets the value of the leaf NeighAdjacencyBringUpTime in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) SetNeighAdjacencyBringUpTime(v uint32) {
+	t.NeighAdjacencyBringUpTime = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/tlvs YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs struct {
+	RestartTlv *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv `path:"restart_tlv" module:"open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) IsYANGGoStruct() {}
+
+// GetOrCreateRestartTlv retrieves the value of the RestartTlv field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) GetOrCreateRestartTlv() *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv {
+	if t.RestartTlv != nil {
+		return t.RestartTlv
+	}
+	t.RestartTlv = &IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv{}
+	return t.RestartTlv
+}
+
+// GetRestartTlv returns the value of the RestartTlv struct pointer
+// from IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs. If the receiver or the field RestartTlv is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) GetRestartTlv() *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv {
+	if t != nil && t.RestartTlv != nil {
+		return t.RestartTlv
+	}
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RestartTlv.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacencies/state/neighbor-state/state/tlvs/restart_tlv YANG schema element.
+type IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv struct {
+	Flags                []E_RestartTlv_Flags `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	RemainingTime        *uint32              `path:"state/remaining-time" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	RestartingNeighborId *string              `path:"state/restarting-neighbor-id" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) IsYANGGoStruct() {}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) GetFlags() []E_RestartTlv_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// GetRemainingTime retrieves the value of the leaf RemainingTime from the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RemainingTime is set, it can
+// safely use t.GetRemainingTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RemainingTime == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) GetRemainingTime() uint32 {
+	if t == nil || t.RemainingTime == nil {
+		return 0
+	}
+	return *t.RemainingTime
+}
+
+// GetRestartingNeighborId retrieves the value of the leaf RestartingNeighborId from the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RestartingNeighborId is set, it can
+// safely use t.GetRestartingNeighborId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RestartingNeighborId == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) GetRestartingNeighborId() string {
+	if t == nil || t.RestartingNeighborId == nil {
+		return ""
+	}
+	return *t.RestartingNeighborId
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) SetFlags(v []E_RestartTlv_Flags) {
+	t.Flags = v
+}
+
+// SetRemainingTime sets the value of the leaf RemainingTime in the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) SetRemainingTime(v uint32) {
+	t.RemainingTime = &v
+}
+
+// SetRestartingNeighborId sets the value of the leaf RestartingNeighborId in the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// struct.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) SetRestartingNeighborId(v string) {
+	t.RestartingNeighborId = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv.
+func (*IsisRouter_Adjacencies_Adjacencies_NeighborState_Tlvs_RestartTlv) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
 // IsisRouter_Counters represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters YANG schema element.
 type IsisRouter_Counters struct {
-	Level1 *IsisRouter_Counters_Level1 `path:"level1" module:"open-traffic-generator-isis"`
-	Level2 *IsisRouter_Counters_Level2 `path:"level2" module:"open-traffic-generator-isis"`
+	GrInitiated         *uint64                     `path:"gr-initiated" module:"open-traffic-generator-isis"`
+	GrSucceeded         *uint64                     `path:"gr-succeeded" module:"open-traffic-generator-isis"`
+	Level1              *IsisRouter_Counters_Level1 `path:"level1" module:"open-traffic-generator-isis"`
+	Level2              *IsisRouter_Counters_Level2 `path:"level2" module:"open-traffic-generator-isis"`
+	NeighborGrInitiated *uint64                     `path:"neighbor-gr-initiated" module:"open-traffic-generator-isis"`
+	NeighborGrSucceeded *uint64                     `path:"neighbor-gr-succeeded" module:"open-traffic-generator-isis"`
 }
 
 // IsYANGGoStruct ensures that IsisRouter_Counters implements the yang.GoStruct
@@ -7035,6 +8582,94 @@ func (t *IsisRouter_Counters) GetLevel2() *IsisRouter_Counters_Level2 {
 		return t.Level2
 	}
 	return nil
+}
+
+// GetGrInitiated retrieves the value of the leaf GrInitiated from the IsisRouter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GrInitiated is set, it can
+// safely use t.GetGrInitiated() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GrInitiated == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Counters) GetGrInitiated() uint64 {
+	if t == nil || t.GrInitiated == nil {
+		return 0
+	}
+	return *t.GrInitiated
+}
+
+// GetGrSucceeded retrieves the value of the leaf GrSucceeded from the IsisRouter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GrSucceeded is set, it can
+// safely use t.GetGrSucceeded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GrSucceeded == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Counters) GetGrSucceeded() uint64 {
+	if t == nil || t.GrSucceeded == nil {
+		return 0
+	}
+	return *t.GrSucceeded
+}
+
+// GetNeighborGrInitiated retrieves the value of the leaf NeighborGrInitiated from the IsisRouter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighborGrInitiated is set, it can
+// safely use t.GetNeighborGrInitiated() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighborGrInitiated == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Counters) GetNeighborGrInitiated() uint64 {
+	if t == nil || t.NeighborGrInitiated == nil {
+		return 0
+	}
+	return *t.NeighborGrInitiated
+}
+
+// GetNeighborGrSucceeded retrieves the value of the leaf NeighborGrSucceeded from the IsisRouter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighborGrSucceeded is set, it can
+// safely use t.GetNeighborGrSucceeded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighborGrSucceeded == nil' before retrieving the leaf's value.
+func (t *IsisRouter_Counters) GetNeighborGrSucceeded() uint64 {
+	if t == nil || t.NeighborGrSucceeded == nil {
+		return 0
+	}
+	return *t.NeighborGrSucceeded
+}
+
+// SetGrInitiated sets the value of the leaf GrInitiated in the IsisRouter_Counters
+// struct.
+func (t *IsisRouter_Counters) SetGrInitiated(v uint64) {
+	t.GrInitiated = &v
+}
+
+// SetGrSucceeded sets the value of the leaf GrSucceeded in the IsisRouter_Counters
+// struct.
+func (t *IsisRouter_Counters) SetGrSucceeded(v uint64) {
+	t.GrSucceeded = &v
+}
+
+// SetNeighborGrInitiated sets the value of the leaf NeighborGrInitiated in the IsisRouter_Counters
+// struct.
+func (t *IsisRouter_Counters) SetNeighborGrInitiated(v uint64) {
+	t.NeighborGrInitiated = &v
+}
+
+// SetNeighborGrSucceeded sets the value of the leaf NeighborGrSucceeded in the IsisRouter_Counters
+// struct.
+func (t *IsisRouter_Counters) SetNeighborGrSucceeded(v uint64) {
+	t.NeighborGrSucceeded = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the IsisRouter_Counters
@@ -8194,6 +9829,7 @@ func (*IsisRouter_LinkStateDatabase_Lsps) ΛBelongingModule() string {
 
 // IsisRouter_LinkStateDatabase_Lsps_Tlvs represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs YANG schema element.
 type IsisRouter_LinkStateDatabase_Lsps_Tlvs struct {
+	Capability               map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability    `path:"router-capabilities/capability" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 	ExtendedIpv4Reachability *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability `path:"extended-ipv4-reachability" module:"open-traffic-generator-isis"`
 	ExtendedIsReachability   *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability   `path:"extended-is-reachability" module:"open-traffic-generator-isis"`
 	Hostnames                *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames                `path:"hostnames" module:"open-traffic-generator-isis"`
@@ -8207,6 +9843,123 @@ type IsisRouter_LinkStateDatabase_Lsps_Tlvs struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs) IsYANGGoStruct() {}
+
+// NewCapability creates a new entry in the Capability list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) NewCapability(InstanceNumber uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Capability == nil {
+		t.Capability = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability)
+	}
+
+	key := InstanceNumber
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Capability[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Capability", key)
+	}
+
+	t.Capability[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability{
+		InstanceNumber: &InstanceNumber,
+	}
+
+	return t.Capability[key], nil
+}
+
+// RenameCapability renames an entry in the list Capability within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) RenameCapability(oldK, newK uint32) error {
+	if _, ok := t.Capability[newK]; ok {
+		return fmt.Errorf("key %v already exists in Capability", newK)
+	}
+
+	e, ok := t.Capability[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Capability", oldK)
+	}
+	e.InstanceNumber = &newK
+
+	t.Capability[newK] = e
+	delete(t.Capability, oldK)
+	return nil
+}
+
+// GetOrCreateCapability retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) GetOrCreateCapability(InstanceNumber uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability {
+
+	key := InstanceNumber
+
+	if v, ok := t.Capability[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewCapability(InstanceNumber)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateCapability got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetCapability retrieves the value with the specified key from
+// the Capability map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) GetCapability(InstanceNumber uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability {
+
+	if t == nil {
+		return nil
+	}
+
+	key := InstanceNumber
+
+	if lm, ok := t.Capability[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteCapability deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) DeleteCapability(InstanceNumber uint32) {
+	key := InstanceNumber
+
+	delete(t.Capability, key)
+}
+
+// AppendCapability appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability struct to the
+// list Capability of IsisRouter_LinkStateDatabase_Lsps_Tlvs. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) AppendCapability(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) error {
+	if v.InstanceNumber == nil {
+		return fmt.Errorf("invalid nil key received for InstanceNumber")
+	}
+
+	key := *v.InstanceNumber
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Capability == nil {
+		t.Capability = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability)
+	}
+
+	if _, ok := t.Capability[key]; ok {
+		return fmt.Errorf("duplicate key for list Capability %v", key)
+	}
+
+	t.Capability[key] = v
+	return nil
+}
 
 // GetOrCreateExtendedIpv4Reachability retrieves the value of the ExtendedIpv4Reachability field
 // or returns the existing field if it already exists.
@@ -8363,6 +10116,9 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) PopulateDefaults() {
 	t.Ipv4InternalReachability.PopulateDefaults()
 	t.Ipv6Reachability.PopulateDefaults()
 	t.IsReachability.PopulateDefaults()
+	for _, e := range t.Capability {
+		e.PopulateDefaults()
+	}
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -8387,6 +10143,754 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs) ΛEnumTypeMap() map[string][]re
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of IsisRouter_LinkStateDatabase_Lsps_Tlvs.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability struct {
+	Algorithms               []uint32                                                                    `path:"state/algorithms" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Flags                    []E_Capability_Flags                                                        `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	InstanceNumber           *uint32                                                                     `path:"state/instance-number|instance-number" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"instance-number" shadow-module:"open-traffic-generator-isis"`
+	RouterId                 *string                                                                     `path:"state/router-id" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SegmentRoutingCapability *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability `path:"state/segment-routing-capability" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SrLocalBlockRanges       *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges       `path:"state/sr-local-block-ranges" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) IsYANGGoStruct() {}
+
+// GetOrCreateSegmentRoutingCapability retrieves the value of the SegmentRoutingCapability field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetOrCreateSegmentRoutingCapability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability {
+	if t.SegmentRoutingCapability != nil {
+		return t.SegmentRoutingCapability
+	}
+	t.SegmentRoutingCapability = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability{}
+	return t.SegmentRoutingCapability
+}
+
+// GetOrCreateSrLocalBlockRanges retrieves the value of the SrLocalBlockRanges field
+// or returns the existing field if it already exists.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetOrCreateSrLocalBlockRanges() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges {
+	if t.SrLocalBlockRanges != nil {
+		return t.SrLocalBlockRanges
+	}
+	t.SrLocalBlockRanges = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges{}
+	return t.SrLocalBlockRanges
+}
+
+// GetSegmentRoutingCapability returns the value of the SegmentRoutingCapability struct pointer
+// from IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability. If the receiver or the field SegmentRoutingCapability is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetSegmentRoutingCapability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability {
+	if t != nil && t.SegmentRoutingCapability != nil {
+		return t.SegmentRoutingCapability
+	}
+	return nil
+}
+
+// GetSrLocalBlockRanges returns the value of the SrLocalBlockRanges struct pointer
+// from IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability. If the receiver or the field SrLocalBlockRanges is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetSrLocalBlockRanges() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges {
+	if t != nil && t.SrLocalBlockRanges != nil {
+		return t.SrLocalBlockRanges
+	}
+	return nil
+}
+
+// GetAlgorithms retrieves the value of the leaf Algorithms from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Algorithms is set, it can
+// safely use t.GetAlgorithms() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Algorithms == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetAlgorithms() []uint32 {
+	if t == nil || t.Algorithms == nil {
+		return nil
+	}
+	return t.Algorithms
+}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetFlags() []E_Capability_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// GetInstanceNumber retrieves the value of the leaf InstanceNumber from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InstanceNumber is set, it can
+// safely use t.GetInstanceNumber() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InstanceNumber == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetInstanceNumber() uint32 {
+	if t == nil || t.InstanceNumber == nil {
+		return 0
+	}
+	return *t.InstanceNumber
+}
+
+// GetRouterId retrieves the value of the leaf RouterId from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RouterId is set, it can
+// safely use t.GetRouterId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RouterId == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) GetRouterId() string {
+	if t == nil || t.RouterId == nil {
+		return ""
+	}
+	return *t.RouterId
+}
+
+// SetAlgorithms sets the value of the leaf Algorithms in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) SetAlgorithms(v []uint32) {
+	t.Algorithms = v
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) SetFlags(v []E_Capability_Flags) {
+	t.Flags = v
+}
+
+// SetInstanceNumber sets the value of the leaf InstanceNumber in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) SetInstanceNumber(v uint32) {
+	t.InstanceNumber = &v
+}
+
+// SetRouterId sets the value of the leaf RouterId in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) SetRouterId(v string) {
+	t.RouterId = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.SegmentRoutingCapability.PopulateDefaults()
+	t.SrLocalBlockRanges.PopulateDefaults()
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.InstanceNumber == nil {
+		return nil, fmt.Errorf("nil value for key InstanceNumber")
+	}
+
+	return map[string]interface{}{
+		"instance-number": *t.InstanceNumber,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/segment-routing-capability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability struct {
+	Flags          []E_SegmentRoutingCapability_Flags                                                                    `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SrgbDescriptor map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor `path:"state/srgb-descriptor" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) IsYANGGoStruct() {}
+
+// NewSrgbDescriptor creates a new entry in the SrgbDescriptor list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) NewSrgbDescriptor(Range uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SrgbDescriptor == nil {
+		t.SrgbDescriptor = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor)
+	}
+
+	key := Range
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SrgbDescriptor[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SrgbDescriptor", key)
+	}
+
+	t.SrgbDescriptor[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor{
+		Range: &Range,
+	}
+
+	return t.SrgbDescriptor[key], nil
+}
+
+// RenameSrgbDescriptor renames an entry in the list SrgbDescriptor within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) RenameSrgbDescriptor(oldK, newK uint32) error {
+	if _, ok := t.SrgbDescriptor[newK]; ok {
+		return fmt.Errorf("key %v already exists in SrgbDescriptor", newK)
+	}
+
+	e, ok := t.SrgbDescriptor[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in SrgbDescriptor", oldK)
+	}
+	e.Range = &newK
+
+	t.SrgbDescriptor[newK] = e
+	delete(t.SrgbDescriptor, oldK)
+	return nil
+}
+
+// GetOrCreateSrgbDescriptor retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) GetOrCreateSrgbDescriptor(Range uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor {
+
+	key := Range
+
+	if v, ok := t.SrgbDescriptor[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewSrgbDescriptor(Range)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateSrgbDescriptor got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetSrgbDescriptor retrieves the value with the specified key from
+// the SrgbDescriptor map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) GetSrgbDescriptor(Range uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Range
+
+	if lm, ok := t.SrgbDescriptor[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteSrgbDescriptor deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) DeleteSrgbDescriptor(Range uint32) {
+	key := Range
+
+	delete(t.SrgbDescriptor, key)
+}
+
+// AppendSrgbDescriptor appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor struct to the
+// list SrgbDescriptor of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) AppendSrgbDescriptor(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) error {
+	if v.Range == nil {
+		return fmt.Errorf("invalid nil key received for Range")
+	}
+
+	key := *v.Range
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SrgbDescriptor == nil {
+		t.SrgbDescriptor = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor)
+	}
+
+	if _, ok := t.SrgbDescriptor[key]; ok {
+		return fmt.Errorf("duplicate key for list SrgbDescriptor %v", key)
+	}
+
+	t.SrgbDescriptor[key] = v
+	return nil
+}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) GetFlags() []E_SegmentRoutingCapability_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) SetFlags(v []E_SegmentRoutingCapability_Flags) {
+	t.Flags = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.SrgbDescriptor {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/segment-routing-capability/state/srgb-descriptor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor struct {
+	Range         *uint32 `path:"state/range|range" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"range" shadow-module:"open-traffic-generator-isis"`
+	StartingLevel *uint32 `path:"state/starting-level" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) IsYANGGoStruct() {
+}
+
+// GetRange retrieves the value of the leaf Range from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Range is set, it can
+// safely use t.GetRange() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Range == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) GetRange() uint32 {
+	if t == nil || t.Range == nil {
+		return 0
+	}
+	return *t.Range
+}
+
+// GetStartingLevel retrieves the value of the leaf StartingLevel from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if StartingLevel is set, it can
+// safely use t.GetStartingLevel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.StartingLevel == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) GetStartingLevel() uint32 {
+	if t == nil || t.StartingLevel == nil {
+		return 0
+	}
+	return *t.StartingLevel
+}
+
+// SetRange sets the value of the leaf Range in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) SetRange(v uint32) {
+	t.Range = &v
+}
+
+// SetStartingLevel sets the value of the leaf StartingLevel in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) SetStartingLevel(v uint32) {
+	t.StartingLevel = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Range == nil {
+		return nil, fmt.Errorf("nil value for key Range")
+	}
+
+	return map[string]interface{}{
+		"range": *t.Range,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SegmentRoutingCapability_SrgbDescriptor) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/sr-local-block-ranges YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges struct {
+	SrlbsDescriptor map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor `path:"state/srlbs-descriptor" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) IsYANGGoStruct() {}
+
+// NewSrlbsDescriptor creates a new entry in the SrlbsDescriptor list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) NewSrlbsDescriptor(Range uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SrlbsDescriptor == nil {
+		t.SrlbsDescriptor = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor)
+	}
+
+	key := Range
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SrlbsDescriptor[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SrlbsDescriptor", key)
+	}
+
+	t.SrlbsDescriptor[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor{
+		Range: &Range,
+	}
+
+	return t.SrlbsDescriptor[key], nil
+}
+
+// RenameSrlbsDescriptor renames an entry in the list SrlbsDescriptor within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) RenameSrlbsDescriptor(oldK, newK uint32) error {
+	if _, ok := t.SrlbsDescriptor[newK]; ok {
+		return fmt.Errorf("key %v already exists in SrlbsDescriptor", newK)
+	}
+
+	e, ok := t.SrlbsDescriptor[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in SrlbsDescriptor", oldK)
+	}
+	e.Range = &newK
+
+	t.SrlbsDescriptor[newK] = e
+	delete(t.SrlbsDescriptor, oldK)
+	return nil
+}
+
+// GetOrCreateSrlbsDescriptor retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) GetOrCreateSrlbsDescriptor(Range uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor {
+
+	key := Range
+
+	if v, ok := t.SrlbsDescriptor[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewSrlbsDescriptor(Range)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateSrlbsDescriptor got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetSrlbsDescriptor retrieves the value with the specified key from
+// the SrlbsDescriptor map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) GetSrlbsDescriptor(Range uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Range
+
+	if lm, ok := t.SrlbsDescriptor[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteSrlbsDescriptor deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) DeleteSrlbsDescriptor(Range uint32) {
+	key := Range
+
+	delete(t.SrlbsDescriptor, key)
+}
+
+// AppendSrlbsDescriptor appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor struct to the
+// list SrlbsDescriptor of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) AppendSrlbsDescriptor(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) error {
+	if v.Range == nil {
+		return fmt.Errorf("invalid nil key received for Range")
+	}
+
+	key := *v.Range
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SrlbsDescriptor == nil {
+		t.SrlbsDescriptor = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor)
+	}
+
+	if _, ok := t.SrlbsDescriptor[key]; ok {
+		return fmt.Errorf("duplicate key for list SrlbsDescriptor %v", key)
+	}
+
+	t.SrlbsDescriptor[key] = v
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.SrlbsDescriptor {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/sr-local-block-ranges/state/srlbs-descriptor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor struct {
+	Range         *uint32 `path:"state/range|range" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"range" shadow-module:"open-traffic-generator-isis"`
+	StartingLevel *uint32 `path:"state/starting-level" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) IsYANGGoStruct() {
+}
+
+// GetRange retrieves the value of the leaf Range from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Range is set, it can
+// safely use t.GetRange() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Range == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) GetRange() uint32 {
+	if t == nil || t.Range == nil {
+		return 0
+	}
+	return *t.Range
+}
+
+// GetStartingLevel retrieves the value of the leaf StartingLevel from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if StartingLevel is set, it can
+// safely use t.GetStartingLevel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.StartingLevel == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) GetStartingLevel() uint32 {
+	if t == nil || t.StartingLevel == nil {
+		return 0
+	}
+	return *t.StartingLevel
+}
+
+// SetRange sets the value of the leaf Range in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) SetRange(v uint32) {
+	t.Range = &v
+}
+
+// SetStartingLevel sets the value of the leaf StartingLevel in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) SetStartingLevel(v uint32) {
+	t.StartingLevel = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Range == nil {
+		return nil, fmt.Errorf("nil value for key Range")
+	}
+
+	return map[string]interface{}{
+		"range": *t.Range,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Capability_SrLocalBlockRanges_SrlbsDescriptor) ΛBelongingModule() string {
 	return "open-traffic-generator-isis"
 }
 
@@ -8557,17 +11061,135 @@ func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) ΛBelong
 
 // IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix YANG schema element.
 type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct {
-	Metric             *uint32                                                                                  `path:"state/metric" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	Prefix             *string                                                                                  `path:"state/prefix|prefix" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"prefix" shadow-module:"open-traffic-generator-isis"`
-	PrefixAttributes   *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes `path:"state/prefix-attributes" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	PrefixLength       *uint32                                                                                  `path:"state/prefix-length" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	RedistributionType E_ExtendedIpv4Reachability_Prefix_RedistributionType                                     `path:"state/redistribution-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Metric             *uint32                                                                                      `path:"state/metric" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Prefix             *string                                                                                      `path:"state/prefix|prefix" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"prefix" shadow-module:"open-traffic-generator-isis"`
+	PrefixAttributes   *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes     `path:"state/prefix-attributes" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	PrefixLength       *uint32                                                                                      `path:"state/prefix-length" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	PrefixSid          map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid `path:"state/prefix-sid" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	RedistributionType E_ExtendedIpv4Reachability_Prefix_RedistributionType                                         `path:"state/redistribution-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 }
 
 // IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) IsYANGGoStruct() {}
+
+// NewPrefixSid creates a new entry in the PrefixSid list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) NewPrefixSid(SidInstance uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PrefixSid == nil {
+		t.PrefixSid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid)
+	}
+
+	key := SidInstance
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PrefixSid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PrefixSid", key)
+	}
+
+	t.PrefixSid[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid{
+		SidInstance: &SidInstance,
+	}
+
+	return t.PrefixSid[key], nil
+}
+
+// RenamePrefixSid renames an entry in the list PrefixSid within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) RenamePrefixSid(oldK, newK uint32) error {
+	if _, ok := t.PrefixSid[newK]; ok {
+		return fmt.Errorf("key %v already exists in PrefixSid", newK)
+	}
+
+	e, ok := t.PrefixSid[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in PrefixSid", oldK)
+	}
+	e.SidInstance = &newK
+
+	t.PrefixSid[newK] = e
+	delete(t.PrefixSid, oldK)
+	return nil
+}
+
+// GetOrCreatePrefixSid retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) GetOrCreatePrefixSid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid {
+
+	key := SidInstance
+
+	if v, ok := t.PrefixSid[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewPrefixSid(SidInstance)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreatePrefixSid got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetPrefixSid retrieves the value with the specified key from
+// the PrefixSid map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) GetPrefixSid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid {
+
+	if t == nil {
+		return nil
+	}
+
+	key := SidInstance
+
+	if lm, ok := t.PrefixSid[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeletePrefixSid deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) DeletePrefixSid(SidInstance uint32) {
+	key := SidInstance
+
+	delete(t.PrefixSid, key)
+}
+
+// AppendPrefixSid appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid struct to the
+// list PrefixSid of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) AppendPrefixSid(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) error {
+	if v.SidInstance == nil {
+		return fmt.Errorf("invalid nil key received for SidInstance")
+	}
+
+	key := *v.SidInstance
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PrefixSid == nil {
+		t.PrefixSid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid)
+	}
+
+	if _, ok := t.PrefixSid[key]; ok {
+		return fmt.Errorf("duplicate key for list PrefixSid %v", key)
+	}
+
+	t.PrefixSid[key] = v
+	return nil
+}
 
 // GetOrCreatePrefixAttributes retrieves the value of the PrefixAttributes field
 // or returns the existing field if it already exists.
@@ -8686,6 +11308,9 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
 	}
 	ygot.BuildEmptyTree(t)
 	t.PrefixAttributes.PopulateDefaults()
+	for _, e := range t.PrefixSid {
+		e.PopulateDefaults()
+	}
 }
 
 // ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct, which is a YANG list entry.
@@ -8789,6 +11414,154 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-sid YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid struct {
+	Algorithm   *uint8              `path:"state/algorithm" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Flags       []E_PrefixSid_Flags `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SidInstance *uint32             `path:"state/sid-instance|sid-instance" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"sid-instance" shadow-module:"open-traffic-generator-isis"`
+	Sids        []uint32            `path:"state/sids" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) IsYANGGoStruct() {
+}
+
+// GetAlgorithm retrieves the value of the leaf Algorithm from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Algorithm is set, it can
+// safely use t.GetAlgorithm() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Algorithm == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) GetAlgorithm() uint8 {
+	if t == nil || t.Algorithm == nil {
+		return 0
+	}
+	return *t.Algorithm
+}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) GetFlags() []E_PrefixSid_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// GetSidInstance retrieves the value of the leaf SidInstance from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SidInstance is set, it can
+// safely use t.GetSidInstance() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SidInstance == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) GetSidInstance() uint32 {
+	if t == nil || t.SidInstance == nil {
+		return 0
+	}
+	return *t.SidInstance
+}
+
+// GetSids retrieves the value of the leaf Sids from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Sids is set, it can
+// safely use t.GetSids() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Sids == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) GetSids() []uint32 {
+	if t == nil || t.Sids == nil {
+		return nil
+	}
+	return t.Sids
+}
+
+// SetAlgorithm sets the value of the leaf Algorithm in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) SetAlgorithm(v uint8) {
+	t.Algorithm = &v
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) SetFlags(v []E_PrefixSid_Flags) {
+	t.Flags = v
+}
+
+// SetSidInstance sets the value of the leaf SidInstance in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) SetSidInstance(v uint32) {
+	t.SidInstance = &v
+}
+
+// SetSids sets the value of the leaf Sids in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) SetSids(v []uint32) {
+	t.Sids = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SidInstance == nil {
+		return nil, fmt.Errorf("nil value for key SidInstance")
+	}
+
+	return map[string]interface{}{
+		"sid-instance": *t.SidInstance,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixSid) ΛBelongingModule() string {
 	return "open-traffic-generator-isis"
 }
 
@@ -8959,13 +11732,131 @@ func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability) ΛBelongin
 
 // IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor YANG schema element.
 type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor struct {
-	SystemId *string `path:"state/system-id|system-id" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"system-id" shadow-module:"open-traffic-generator-isis"`
+	AdjacencySid map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid `path:"state/adjacency-sid" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SystemId     *string                                                                                         `path:"state/system-id|system-id" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"system-id" shadow-module:"open-traffic-generator-isis"`
 }
 
 // IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) IsYANGGoStruct() {}
+
+// NewAdjacencySid creates a new entry in the AdjacencySid list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) NewAdjacencySid(SidInstance uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AdjacencySid == nil {
+		t.AdjacencySid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid)
+	}
+
+	key := SidInstance
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.AdjacencySid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AdjacencySid", key)
+	}
+
+	t.AdjacencySid[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid{
+		SidInstance: &SidInstance,
+	}
+
+	return t.AdjacencySid[key], nil
+}
+
+// RenameAdjacencySid renames an entry in the list AdjacencySid within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) RenameAdjacencySid(oldK, newK uint32) error {
+	if _, ok := t.AdjacencySid[newK]; ok {
+		return fmt.Errorf("key %v already exists in AdjacencySid", newK)
+	}
+
+	e, ok := t.AdjacencySid[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in AdjacencySid", oldK)
+	}
+	e.SidInstance = &newK
+
+	t.AdjacencySid[newK] = e
+	delete(t.AdjacencySid, oldK)
+	return nil
+}
+
+// GetOrCreateAdjacencySid retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) GetOrCreateAdjacencySid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid {
+
+	key := SidInstance
+
+	if v, ok := t.AdjacencySid[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAdjacencySid(SidInstance)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAdjacencySid got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAdjacencySid retrieves the value with the specified key from
+// the AdjacencySid map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) GetAdjacencySid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid {
+
+	if t == nil {
+		return nil
+	}
+
+	key := SidInstance
+
+	if lm, ok := t.AdjacencySid[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAdjacencySid deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) DeleteAdjacencySid(SidInstance uint32) {
+	key := SidInstance
+
+	delete(t.AdjacencySid, key)
+}
+
+// AppendAdjacencySid appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid struct to the
+// list AdjacencySid of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) AppendAdjacencySid(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) error {
+	if v.SidInstance == nil {
+		return fmt.Errorf("invalid nil key received for SidInstance")
+	}
+
+	key := *v.SidInstance
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AdjacencySid == nil {
+		t.AdjacencySid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid)
+	}
+
+	if _, ok := t.AdjacencySid[key]; ok {
+		return fmt.Errorf("duplicate key for list AdjacencySid %v", key)
+	}
+
+	t.AdjacencySid[key] = v
+	return nil
+}
 
 // GetSystemId retrieves the value of the leaf SystemId from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -8997,6 +11888,9 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	for _, e := range t.AdjacencySid {
+		e.PopulateDefaults()
+	}
 }
 
 // ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor struct, which is a YANG list entry.
@@ -9032,6 +11926,177 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/adjacency-sid YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid struct {
+	AdjacencyType E_AdjacencySid_AdjacencyType `path:"state/adjacency-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Flags         []E_AdjacencySid_Flags       `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SidInstance   *uint32                      `path:"state/sid-instance|sid-instance" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"sid-instance" shadow-module:"open-traffic-generator-isis"`
+	Sids          []uint32                     `path:"state/sids" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Weight        *uint8                       `path:"state/weight" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) IsYANGGoStruct() {
+}
+
+// GetAdjacencyType retrieves the value of the leaf AdjacencyType from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AdjacencyType is set, it can
+// safely use t.GetAdjacencyType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AdjacencyType == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) GetAdjacencyType() E_AdjacencySid_AdjacencyType {
+	if t == nil || t.AdjacencyType == 0 {
+		return 0
+	}
+	return t.AdjacencyType
+}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) GetFlags() []E_AdjacencySid_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// GetSidInstance retrieves the value of the leaf SidInstance from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SidInstance is set, it can
+// safely use t.GetSidInstance() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SidInstance == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) GetSidInstance() uint32 {
+	if t == nil || t.SidInstance == nil {
+		return 0
+	}
+	return *t.SidInstance
+}
+
+// GetSids retrieves the value of the leaf Sids from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Sids is set, it can
+// safely use t.GetSids() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Sids == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) GetSids() []uint32 {
+	if t == nil || t.Sids == nil {
+		return nil
+	}
+	return t.Sids
+}
+
+// GetWeight retrieves the value of the leaf Weight from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Weight is set, it can
+// safely use t.GetWeight() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Weight == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) GetWeight() uint8 {
+	if t == nil || t.Weight == nil {
+		return 0
+	}
+	return *t.Weight
+}
+
+// SetAdjacencyType sets the value of the leaf AdjacencyType in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) SetAdjacencyType(v E_AdjacencySid_AdjacencyType) {
+	t.AdjacencyType = v
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) SetFlags(v []E_AdjacencySid_Flags) {
+	t.Flags = v
+}
+
+// SetSidInstance sets the value of the leaf SidInstance in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) SetSidInstance(v uint32) {
+	t.SidInstance = &v
+}
+
+// SetSids sets the value of the leaf Sids in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) SetSids(v []uint32) {
+	t.Sids = v
+}
+
+// SetWeight sets the value of the leaf Weight in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) SetWeight(v uint8) {
+	t.Weight = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SidInstance == nil {
+		return nil, fmt.Errorf("nil value for key SidInstance")
+	}
+
+	return map[string]interface{}{
+		"sid-instance": *t.SidInstance,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_AdjacencySid) ΛBelongingModule() string {
 	return "open-traffic-generator-isis"
 }
 
@@ -9939,18 +13004,136 @@ func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability) ΛBelongingModul
 
 // IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix YANG schema element.
 type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix struct {
-	Metric             *uint32                                                                          `path:"state/metric" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	OriginType         E_Ipv6Reachability_Prefix_OriginType                                             `path:"state/origin-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	Prefix             *string                                                                          `path:"state/prefix|prefix" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"prefix" shadow-module:"open-traffic-generator-isis"`
-	PrefixAttributes   *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes `path:"state/prefix-attributes" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	PrefixLength       *uint32                                                                          `path:"state/prefix-length" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
-	RedistributionType E_Ipv6Reachability_Prefix_RedistributionType                                     `path:"state/redistribution-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Metric             *uint32                                                                              `path:"state/metric" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	OriginType         E_Ipv6Reachability_Prefix_OriginType                                                 `path:"state/origin-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Prefix             *string                                                                              `path:"state/prefix|prefix" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"prefix" shadow-module:"open-traffic-generator-isis"`
+	PrefixAttributes   *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes     `path:"state/prefix-attributes" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	PrefixLength       *uint32                                                                              `path:"state/prefix-length" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	PrefixSid          map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid `path:"state/prefix-sid" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	RedistributionType E_Ipv6Reachability_Prefix_RedistributionType                                         `path:"state/redistribution-type" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
 }
 
 // IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) IsYANGGoStruct() {}
+
+// NewPrefixSid creates a new entry in the PrefixSid list of the
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix struct. The keys of the list are populated from the input
+// arguments.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) NewPrefixSid(SidInstance uint32) (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PrefixSid == nil {
+		t.PrefixSid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid)
+	}
+
+	key := SidInstance
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PrefixSid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PrefixSid", key)
+	}
+
+	t.PrefixSid[key] = &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid{
+		SidInstance: &SidInstance,
+	}
+
+	return t.PrefixSid[key], nil
+}
+
+// RenamePrefixSid renames an entry in the list PrefixSid within
+// the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) RenamePrefixSid(oldK, newK uint32) error {
+	if _, ok := t.PrefixSid[newK]; ok {
+		return fmt.Errorf("key %v already exists in PrefixSid", newK)
+	}
+
+	e, ok := t.PrefixSid[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in PrefixSid", oldK)
+	}
+	e.SidInstance = &newK
+
+	t.PrefixSid[newK] = e
+	delete(t.PrefixSid, oldK)
+	return nil
+}
+
+// GetOrCreatePrefixSid retrieves the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) GetOrCreatePrefixSid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid {
+
+	key := SidInstance
+
+	if v, ok := t.PrefixSid[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewPrefixSid(SidInstance)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreatePrefixSid got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetPrefixSid retrieves the value with the specified key from
+// the PrefixSid map field of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) GetPrefixSid(SidInstance uint32) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid {
+
+	if t == nil {
+		return nil
+	}
+
+	key := SidInstance
+
+	if lm, ok := t.PrefixSid[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeletePrefixSid deletes the value with the specified keys from
+// the receiver IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix. If there is no such element, the function
+// is a no-op.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) DeletePrefixSid(SidInstance uint32) {
+	key := SidInstance
+
+	delete(t.PrefixSid, key)
+}
+
+// AppendPrefixSid appends the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid struct to the
+// list PrefixSid of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix. If the key value(s) specified in
+// the supplied IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid already exist in the list, an error is
+// returned.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) AppendPrefixSid(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) error {
+	if v.SidInstance == nil {
+		return fmt.Errorf("invalid nil key received for SidInstance")
+	}
+
+	key := *v.SidInstance
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PrefixSid == nil {
+		t.PrefixSid = make(map[uint32]*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid)
+	}
+
+	if _, ok := t.PrefixSid[key]; ok {
+		return fmt.Errorf("duplicate key for list PrefixSid %v", key)
+	}
+
+	t.PrefixSid[key] = v
+	return nil
+}
 
 // GetOrCreatePrefixAttributes retrieves the value of the PrefixAttributes field
 // or returns the existing field if it already exists.
@@ -10091,6 +13274,9 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix) Populat
 	}
 	ygot.BuildEmptyTree(t)
 	t.PrefixAttributes.PopulateDefaults()
+	for _, e := range t.PrefixSid {
+		e.PopulateDefaults()
+	}
 }
 
 // ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix struct, which is a YANG list entry.
@@ -10194,6 +13380,153 @@ func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAt
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes.
 func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes) ΛBelongingModule() string {
+	return "open-traffic-generator-isis"
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-sid YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid struct {
+	Algorithm   *uint8              `path:"state/algorithm" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	Flags       []E_PrefixSid_Flags `path:"state/flags" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+	SidInstance *uint32             `path:"state/sid-instance|sid-instance" module:"open-traffic-generator-isis/open-traffic-generator-isis|open-traffic-generator-isis" shadow-path:"sid-instance" shadow-module:"open-traffic-generator-isis"`
+	Sids        []uint32            `path:"state/sids" module:"open-traffic-generator-isis/open-traffic-generator-isis"`
+}
+
+// IsYANGGoStruct ensures that IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) IsYANGGoStruct() {}
+
+// GetAlgorithm retrieves the value of the leaf Algorithm from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Algorithm is set, it can
+// safely use t.GetAlgorithm() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Algorithm == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) GetAlgorithm() uint8 {
+	if t == nil || t.Algorithm == nil {
+		return 0
+	}
+	return *t.Algorithm
+}
+
+// GetFlags retrieves the value of the leaf Flags from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) GetFlags() []E_PrefixSid_Flags {
+	if t == nil || t.Flags == nil {
+		return nil
+	}
+	return t.Flags
+}
+
+// GetSidInstance retrieves the value of the leaf SidInstance from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SidInstance is set, it can
+// safely use t.GetSidInstance() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SidInstance == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) GetSidInstance() uint32 {
+	if t == nil || t.SidInstance == nil {
+		return 0
+	}
+	return *t.SidInstance
+}
+
+// GetSids retrieves the value of the leaf Sids from the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Sids is set, it can
+// safely use t.GetSids() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Sids == nil' before retrieving the leaf's value.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) GetSids() []uint32 {
+	if t == nil || t.Sids == nil {
+		return nil
+	}
+	return t.Sids
+}
+
+// SetAlgorithm sets the value of the leaf Algorithm in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) SetAlgorithm(v uint8) {
+	t.Algorithm = &v
+}
+
+// SetFlags sets the value of the leaf Flags in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) SetFlags(v []E_PrefixSid_Flags) {
+	t.Flags = v
+}
+
+// SetSidInstance sets the value of the leaf SidInstance in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) SetSidInstance(v uint32) {
+	t.SidInstance = &v
+}
+
+// SetSids sets the value of the leaf Sids in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// struct.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) SetSids(v []uint32) {
+	t.Sids = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid struct, which is a YANG list entry.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.SidInstance == nil {
+		return nil, fmt.Errorf("nil value for key SidInstance")
+	}
+
+	return map[string]interface{}{
+		"sid-instance": *t.SidInstance,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid.
+func (*IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixSid) ΛBelongingModule() string {
 	return "open-traffic-generator-isis"
 }
 
@@ -11905,7 +15238,7 @@ func (*LldpInterface_LldpNeighborDatabase_LldpNeighbor) IsYANGGoStruct() {}
 type LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key struct {
 	CustomType uint32 `path:"custom-type"`
 	Oui        string `path:"oui"`
-	OuiSubtype string `path:"oui-subtype"`
+	OuiSubtype uint32 `path:"oui-subtype"`
 }
 
 // IsYANGGoKeyStruct ensures that LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key partially implements the
@@ -12038,7 +15371,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) AppendCapabilities(v *
 // NewCustomTlv creates a new entry in the CustomTlv list of the
 // LldpInterface_LldpNeighborDatabase_LldpNeighbor struct. The keys of the list are populated from the input
 // arguments.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) NewCustomTlv(CustomType uint32, Oui string, OuiSubtype string) (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv, error) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) NewCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv, error) {
 
 	// Initialise the list within the receiver struct if it has not already been
 	// created.
@@ -12092,7 +15425,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) RenameCustomTlv(oldK, 
 // GetOrCreateCustomTlv retrieves the value with the specified keys from
 // the receiver LldpInterface_LldpNeighborDatabase_LldpNeighbor. If the entry does not exist, then it is created.
 // It returns the existing or new list member.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
 
 	key := LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key{
 		CustomType: CustomType,
@@ -12116,7 +15449,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(C
 // the CustomTlv map field of LldpInterface_LldpNeighborDatabase_LldpNeighbor. If the receiver is nil, or
 // the specified key is not present in the list, nil is returned such that Get*
 // methods may be safely chained.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
 
 	if t == nil {
 		return nil
@@ -12137,7 +15470,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomTyp
 // DeleteCustomTlv deletes the value with the specified keys from
 // the receiver LldpInterface_LldpNeighborDatabase_LldpNeighbor. If there is no such element, the function
 // is a no-op.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) DeleteCustomTlv(CustomType uint32, Oui string, OuiSubtype string) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) DeleteCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) {
 	key := LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key{
 		CustomType: CustomType,
 		Oui:        Oui,
@@ -12636,7 +15969,7 @@ func (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_Capabilities) ΛBelonging
 type LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv struct {
 	CustomType *uint32 `path:"state/custom-type|custom-type" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"custom-type" shadow-module:"open-traffic-generator-lldp"`
 	Oui        *string `path:"state/oui|oui" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui" shadow-module:"open-traffic-generator-lldp"`
-	OuiSubtype *string `path:"state/oui-subtype|oui-subtype" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui-subtype" shadow-module:"open-traffic-generator-lldp"`
+	OuiSubtype *uint32 `path:"state/oui-subtype|oui-subtype" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui-subtype" shadow-module:"open-traffic-generator-lldp"`
 }
 
 // IsYANGGoStruct ensures that LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv implements the yang.GoStruct
@@ -12685,9 +16018,9 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOui() str
 // safely use t.GetOuiSubtype() to retrieve the value. In the case that the
 // caller has different actions based on whether the leaf is set or unset, it
 // should use 'if t.OuiSubtype == nil' before retrieving the leaf's value.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOuiSubtype() string {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOuiSubtype() uint32 {
 	if t == nil || t.OuiSubtype == nil {
-		return ""
+		return 0
 	}
 	return *t.OuiSubtype
 }
@@ -12706,7 +16039,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOui(v str
 
 // SetOuiSubtype sets the value of the leaf OuiSubtype in the LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv
 // struct.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOuiSubtype(v string) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOuiSubtype(v uint32) {
 	t.OuiSubtype = &v
 }
 
@@ -12768,11 +16101,12 @@ func (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) ΛBelongingMod
 
 // Port represents the /open-traffic-generator-port/ports/port YANG schema element.
 type Port struct {
-	Counters *Port_Counters `path:"state/counters" module:"open-traffic-generator-port/open-traffic-generator-port"`
-	InRate   Binary         `path:"state/in-rate" module:"open-traffic-generator-port/open-traffic-generator-port"`
-	Link     E_Port_Link    `path:"state/link" module:"open-traffic-generator-port/open-traffic-generator-port"`
-	Name     *string        `path:"state/name|name" module:"open-traffic-generator-port/open-traffic-generator-port|open-traffic-generator-port" shadow-path:"name" shadow-module:"open-traffic-generator-port"`
-	OutRate  Binary         `path:"state/out-rate" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	Counters   *Port_Counters `path:"state/counters" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	InRate     Binary         `path:"state/in-rate" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	LastChange *uint64        `path:"state/last-change" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	Link       E_Port_Link    `path:"state/link" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	Name       *string        `path:"state/name|name" module:"open-traffic-generator-port/open-traffic-generator-port|open-traffic-generator-port" shadow-path:"name" shadow-module:"open-traffic-generator-port"`
+	OutRate    Binary         `path:"state/out-rate" module:"open-traffic-generator-port/open-traffic-generator-port"`
 }
 
 // IsYANGGoStruct ensures that Port implements the yang.GoStruct
@@ -12814,6 +16148,22 @@ func (t *Port) GetInRate() Binary {
 		return nil
 	}
 	return t.InRate
+}
+
+// GetLastChange retrieves the value of the leaf LastChange from the Port
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastChange is set, it can
+// safely use t.GetLastChange() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastChange == nil' before retrieving the leaf's value.
+func (t *Port) GetLastChange() uint64 {
+	if t == nil || t.LastChange == nil {
+		return 0
+	}
+	return *t.LastChange
 }
 
 // GetLink retrieves the value of the leaf Link from the Port
@@ -12868,6 +16218,12 @@ func (t *Port) GetOutRate() Binary {
 // struct.
 func (t *Port) SetInRate(v Binary) {
 	t.InRate = v
+}
+
+// SetLastChange sets the value of the leaf LastChange in the Port
+// struct.
+func (t *Port) SetLastChange(v uint64) {
+	t.LastChange = &v
 }
 
 // SetLink sets the value of the leaf Link in the Port

@@ -26,6 +26,72 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// E_AdjacencySid_AdjacencyType is a derived int64 type which is used to represent
+// the enumerated node AdjacencySid_AdjacencyType. An additional value named
+// AdjacencySid_AdjacencyType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AdjacencySid_AdjacencyType int64
+
+// IsYANGGoEnum ensures that AdjacencySid_AdjacencyType implements the yang.GoEnum
+// interface. This ensures that AdjacencySid_AdjacencyType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AdjacencySid_AdjacencyType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AdjacencySid_AdjacencyType.
+func (E_AdjacencySid_AdjacencyType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AdjacencySid_AdjacencyType.
+func (e E_AdjacencySid_AdjacencyType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AdjacencySid_AdjacencyType")
+}
+
+const (
+	// AdjacencySid_AdjacencyType_UNSET corresponds to the value UNSET of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_UNSET E_AdjacencySid_AdjacencyType = 0
+	// AdjacencySid_AdjacencyType_ADJ_SID corresponds to the value ADJ_SID of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_ADJ_SID E_AdjacencySid_AdjacencyType = 1
+	// AdjacencySid_AdjacencyType_LAN_ADJ_SID corresponds to the value LAN_ADJ_SID of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_LAN_ADJ_SID E_AdjacencySid_AdjacencyType = 2
+)
+
+// E_AdjacencySid_Flags is a derived int64 type which is used to represent
+// the enumerated node AdjacencySid_Flags. An additional value named
+// AdjacencySid_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AdjacencySid_Flags int64
+
+// IsYANGGoEnum ensures that AdjacencySid_Flags implements the yang.GoEnum
+// interface. This ensures that AdjacencySid_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AdjacencySid_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AdjacencySid_Flags.
+func (E_AdjacencySid_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AdjacencySid_Flags.
+func (e E_AdjacencySid_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AdjacencySid_Flags")
+}
+
+const (
+	// AdjacencySid_Flags_UNSET corresponds to the value UNSET of AdjacencySid_Flags
+	AdjacencySid_Flags_UNSET E_AdjacencySid_Flags = 0
+	// AdjacencySid_Flags_ADDRESS_FAMILY corresponds to the value ADDRESS_FAMILY of AdjacencySid_Flags
+	AdjacencySid_Flags_ADDRESS_FAMILY E_AdjacencySid_Flags = 1
+	// AdjacencySid_Flags_BACKUP corresponds to the value BACKUP of AdjacencySid_Flags
+	AdjacencySid_Flags_BACKUP E_AdjacencySid_Flags = 2
+	// AdjacencySid_Flags_VALUE corresponds to the value VALUE of AdjacencySid_Flags
+	AdjacencySid_Flags_VALUE E_AdjacencySid_Flags = 3
+	// AdjacencySid_Flags_LOCAL corresponds to the value LOCAL of AdjacencySid_Flags
+	AdjacencySid_Flags_LOCAL E_AdjacencySid_Flags = 4
+	// AdjacencySid_Flags_SET corresponds to the value SET of AdjacencySid_Flags
+	AdjacencySid_Flags_SET E_AdjacencySid_Flags = 5
+	// AdjacencySid_Flags_PERSISTENT corresponds to the value PERSISTENT of AdjacencySid_Flags
+	AdjacencySid_Flags_PERSISTENT E_AdjacencySid_Flags = 6
+)
+
 // E_BgpPeer_SessionState is a derived int64 type which is used to represent
 // the enumerated node BgpPeer_SessionState. An additional value named
 // BgpPeer_SessionState_UNSET is added to the enumeration which is used as
@@ -108,6 +174,35 @@ const (
 	Capabilities_Name_STATION_ONLY E_Capabilities_Name = 10
 	// Capabilities_Name_WLAN_ACCESS_POINT corresponds to the value WLAN_ACCESS_POINT of Capabilities_Name
 	Capabilities_Name_WLAN_ACCESS_POINT E_Capabilities_Name = 11
+)
+
+// E_Capability_Flags is a derived int64 type which is used to represent
+// the enumerated node Capability_Flags. An additional value named
+// Capability_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Capability_Flags int64
+
+// IsYANGGoEnum ensures that Capability_Flags implements the yang.GoEnum
+// interface. This ensures that Capability_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Capability_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Capability_Flags.
+func (E_Capability_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Capability_Flags.
+func (e E_Capability_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Capability_Flags")
+}
+
+const (
+	// Capability_Flags_UNSET corresponds to the value UNSET of Capability_Flags
+	Capability_Flags_UNSET E_Capability_Flags = 0
+	// Capability_Flags_FLOOD corresponds to the value FLOOD of Capability_Flags
+	Capability_Flags_FLOOD E_Capability_Flags = 1
+	// Capability_Flags_DOWN corresponds to the value DOWN of Capability_Flags
+	Capability_Flags_DOWN E_Capability_Flags = 2
 )
 
 // E_Ero_Type is a derived int64 type which is used to represent
@@ -593,6 +688,105 @@ const (
 	LldpNeighbor_PortIdType_INTERFACE_ALIAS E_LldpNeighbor_PortIdType = 7
 )
 
+// E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType is a derived int64 type which is used to represent
+// the enumerated node LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType. An additional value named
+// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType int64
+
+// IsYANGGoEnum ensures that LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType implements the yang.GoEnum
+// interface. This ensures that LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType.
+func (E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType.
+func (e E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType")
+}
+
+const (
+	// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_UNSET corresponds to the value UNSET of LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType
+	LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_UNSET E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType = 0
+	// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_SUCCEEDED corresponds to the value SUCCEEDED of LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType
+	LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_SUCCEEDED E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType = 1
+	// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_FAILED corresponds to the value FAILED of LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType
+	LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_FAILED E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType = 2
+	// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_INPROGRESS corresponds to the value INPROGRESS of LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType
+	LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_INPROGRESS E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType = 3
+	// LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_UNAVAILABLE corresponds to the value UNAVAILABLE of LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType
+	LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType_UNAVAILABLE E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType = 4
+)
+
+// E_LocalRestartingStatus_CurrentState is a derived int64 type which is used to represent
+// the enumerated node LocalRestartingStatus_CurrentState. An additional value named
+// LocalRestartingStatus_CurrentState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_LocalRestartingStatus_CurrentState int64
+
+// IsYANGGoEnum ensures that LocalRestartingStatus_CurrentState implements the yang.GoEnum
+// interface. This ensures that LocalRestartingStatus_CurrentState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_LocalRestartingStatus_CurrentState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  LocalRestartingStatus_CurrentState.
+func (E_LocalRestartingStatus_CurrentState) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_LocalRestartingStatus_CurrentState.
+func (e E_LocalRestartingStatus_CurrentState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_LocalRestartingStatus_CurrentState")
+}
+
+const (
+	// LocalRestartingStatus_CurrentState_UNSET corresponds to the value UNSET of LocalRestartingStatus_CurrentState
+	LocalRestartingStatus_CurrentState_UNSET E_LocalRestartingStatus_CurrentState = 0
+	// LocalRestartingStatus_CurrentState_RUNNING corresponds to the value RUNNING of LocalRestartingStatus_CurrentState
+	LocalRestartingStatus_CurrentState_RUNNING E_LocalRestartingStatus_CurrentState = 1
+	// LocalRestartingStatus_CurrentState_RESTARTING corresponds to the value RESTARTING of LocalRestartingStatus_CurrentState
+	LocalRestartingStatus_CurrentState_RESTARTING E_LocalRestartingStatus_CurrentState = 2
+	// LocalRestartingStatus_CurrentState_STARTING corresponds to the value STARTING of LocalRestartingStatus_CurrentState
+	LocalRestartingStatus_CurrentState_STARTING E_LocalRestartingStatus_CurrentState = 3
+)
+
+// E_LocalState_LevelType is a derived int64 type which is used to represent
+// the enumerated node LocalState_LevelType. An additional value named
+// LocalState_LevelType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_LocalState_LevelType int64
+
+// IsYANGGoEnum ensures that LocalState_LevelType implements the yang.GoEnum
+// interface. This ensures that LocalState_LevelType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_LocalState_LevelType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  LocalState_LevelType.
+func (E_LocalState_LevelType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_LocalState_LevelType.
+func (e E_LocalState_LevelType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_LocalState_LevelType")
+}
+
+const (
+	// LocalState_LevelType_UNSET corresponds to the value UNSET of LocalState_LevelType
+	LocalState_LevelType_UNSET E_LocalState_LevelType = 0
+	// LocalState_LevelType_LEVEL_1 corresponds to the value LEVEL_1 of LocalState_LevelType
+	LocalState_LevelType_LEVEL_1 E_LocalState_LevelType = 1
+	// LocalState_LevelType_LEVEL_2 corresponds to the value LEVEL_2 of LocalState_LevelType
+	LocalState_LevelType_LEVEL_2 E_LocalState_LevelType = 2
+	// LocalState_LevelType_LEVEL_1_2 corresponds to the value LEVEL_1_2 of LocalState_LevelType
+	LocalState_LevelType_LEVEL_1_2 E_LocalState_LevelType = 3
+)
+
 // E_Lsps_Flags is a derived int64 type which is used to represent
 // the enumerated node Lsps_Flags. An additional value named
 // Lsps_Flags_UNSET is added to the enumeration which is used as
@@ -659,6 +853,105 @@ const (
 	Lsps_PduType_LEVEL_2 E_Lsps_PduType = 2
 )
 
+// E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType is a derived int64 type which is used to represent
+// the enumerated node NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType. An additional value named
+// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType int64
+
+// IsYANGGoEnum ensures that NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType implements the yang.GoEnum
+// interface. This ensures that NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType.
+func (E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType.
+func (e E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType")
+}
+
+const (
+	// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_UNSET corresponds to the value UNSET of NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType
+	NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_UNSET E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType = 0
+	// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_SUCCEEDED corresponds to the value SUCCEEDED of NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType
+	NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_SUCCEEDED E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType = 1
+	// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_FAILED corresponds to the value FAILED of NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType
+	NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_FAILED E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType = 2
+	// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_INPROGRESS corresponds to the value INPROGRESS of NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType
+	NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_INPROGRESS E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType = 3
+	// NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_UNAVAILABLE corresponds to the value UNAVAILABLE of NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType
+	NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType_UNAVAILABLE E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType = 4
+)
+
+// E_NeighRestartingStatus_CurrentState is a derived int64 type which is used to represent
+// the enumerated node NeighRestartingStatus_CurrentState. An additional value named
+// NeighRestartingStatus_CurrentState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_NeighRestartingStatus_CurrentState int64
+
+// IsYANGGoEnum ensures that NeighRestartingStatus_CurrentState implements the yang.GoEnum
+// interface. This ensures that NeighRestartingStatus_CurrentState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_NeighRestartingStatus_CurrentState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  NeighRestartingStatus_CurrentState.
+func (E_NeighRestartingStatus_CurrentState) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_NeighRestartingStatus_CurrentState.
+func (e E_NeighRestartingStatus_CurrentState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_NeighRestartingStatus_CurrentState")
+}
+
+const (
+	// NeighRestartingStatus_CurrentState_UNSET corresponds to the value UNSET of NeighRestartingStatus_CurrentState
+	NeighRestartingStatus_CurrentState_UNSET E_NeighRestartingStatus_CurrentState = 0
+	// NeighRestartingStatus_CurrentState_RUNNING corresponds to the value RUNNING of NeighRestartingStatus_CurrentState
+	NeighRestartingStatus_CurrentState_RUNNING E_NeighRestartingStatus_CurrentState = 1
+	// NeighRestartingStatus_CurrentState_RESTARTING corresponds to the value RESTARTING of NeighRestartingStatus_CurrentState
+	NeighRestartingStatus_CurrentState_RESTARTING E_NeighRestartingStatus_CurrentState = 2
+	// NeighRestartingStatus_CurrentState_STARTING corresponds to the value STARTING of NeighRestartingStatus_CurrentState
+	NeighRestartingStatus_CurrentState_STARTING E_NeighRestartingStatus_CurrentState = 3
+)
+
+// E_NeighborState_LevelType is a derived int64 type which is used to represent
+// the enumerated node NeighborState_LevelType. An additional value named
+// NeighborState_LevelType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_NeighborState_LevelType int64
+
+// IsYANGGoEnum ensures that NeighborState_LevelType implements the yang.GoEnum
+// interface. This ensures that NeighborState_LevelType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_NeighborState_LevelType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  NeighborState_LevelType.
+func (E_NeighborState_LevelType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_NeighborState_LevelType.
+func (e E_NeighborState_LevelType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_NeighborState_LevelType")
+}
+
+const (
+	// NeighborState_LevelType_UNSET corresponds to the value UNSET of NeighborState_LevelType
+	NeighborState_LevelType_UNSET E_NeighborState_LevelType = 0
+	// NeighborState_LevelType_LEVEL_1 corresponds to the value LEVEL_1 of NeighborState_LevelType
+	NeighborState_LevelType_LEVEL_1 E_NeighborState_LevelType = 1
+	// NeighborState_LevelType_LEVEL_2 corresponds to the value LEVEL_2 of NeighborState_LevelType
+	NeighborState_LevelType_LEVEL_2 E_NeighborState_LevelType = 2
+	// NeighborState_LevelType_LEVEL_1_2 corresponds to the value LEVEL_1_2 of NeighborState_LevelType
+	NeighborState_LevelType_LEVEL_1_2 E_NeighborState_LevelType = 3
+)
+
 // E_Port_Link is a derived int64 type which is used to represent
 // the enumerated node Port_Link. An additional value named
 // Port_Link_UNSET is added to the enumeration which is used as
@@ -686,6 +979,109 @@ const (
 	Port_Link_UP E_Port_Link = 1
 	// Port_Link_DOWN corresponds to the value DOWN of Port_Link
 	Port_Link_DOWN E_Port_Link = 2
+)
+
+// E_PrefixSid_Flags is a derived int64 type which is used to represent
+// the enumerated node PrefixSid_Flags. An additional value named
+// PrefixSid_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PrefixSid_Flags int64
+
+// IsYANGGoEnum ensures that PrefixSid_Flags implements the yang.GoEnum
+// interface. This ensures that PrefixSid_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PrefixSid_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PrefixSid_Flags.
+func (E_PrefixSid_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_PrefixSid_Flags.
+func (e E_PrefixSid_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PrefixSid_Flags")
+}
+
+const (
+	// PrefixSid_Flags_UNSET corresponds to the value UNSET of PrefixSid_Flags
+	PrefixSid_Flags_UNSET E_PrefixSid_Flags = 0
+	// PrefixSid_Flags_READVERTISEMENT corresponds to the value READVERTISEMENT of PrefixSid_Flags
+	PrefixSid_Flags_READVERTISEMENT E_PrefixSid_Flags = 1
+	// PrefixSid_Flags_NODE corresponds to the value NODE of PrefixSid_Flags
+	PrefixSid_Flags_NODE E_PrefixSid_Flags = 2
+	// PrefixSid_Flags_NO_PHP corresponds to the value NO_PHP of PrefixSid_Flags
+	PrefixSid_Flags_NO_PHP E_PrefixSid_Flags = 3
+	// PrefixSid_Flags_EXPLICIT_NULL corresponds to the value EXPLICIT_NULL of PrefixSid_Flags
+	PrefixSid_Flags_EXPLICIT_NULL E_PrefixSid_Flags = 4
+	// PrefixSid_Flags_VALUE corresponds to the value VALUE of PrefixSid_Flags
+	PrefixSid_Flags_VALUE E_PrefixSid_Flags = 5
+	// PrefixSid_Flags_LOCAL corresponds to the value LOCAL of PrefixSid_Flags
+	PrefixSid_Flags_LOCAL E_PrefixSid_Flags = 6
+)
+
+// E_RestartTlv_Flags is a derived int64 type which is used to represent
+// the enumerated node RestartTlv_Flags. An additional value named
+// RestartTlv_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_RestartTlv_Flags int64
+
+// IsYANGGoEnum ensures that RestartTlv_Flags implements the yang.GoEnum
+// interface. This ensures that RestartTlv_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_RestartTlv_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  RestartTlv_Flags.
+func (E_RestartTlv_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_RestartTlv_Flags.
+func (e E_RestartTlv_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_RestartTlv_Flags")
+}
+
+const (
+	// RestartTlv_Flags_UNSET corresponds to the value UNSET of RestartTlv_Flags
+	RestartTlv_Flags_UNSET E_RestartTlv_Flags = 0
+	// RestartTlv_Flags_RR_BIT corresponds to the value RR_BIT of RestartTlv_Flags
+	RestartTlv_Flags_RR_BIT E_RestartTlv_Flags = 1
+	// RestartTlv_Flags_RA_BIT corresponds to the value RA_BIT of RestartTlv_Flags
+	RestartTlv_Flags_RA_BIT E_RestartTlv_Flags = 2
+	// RestartTlv_Flags_SA_BIT corresponds to the value SA_BIT of RestartTlv_Flags
+	RestartTlv_Flags_SA_BIT E_RestartTlv_Flags = 3
+	// RestartTlv_Flags_PR_BIT corresponds to the value PR_BIT of RestartTlv_Flags
+	RestartTlv_Flags_PR_BIT E_RestartTlv_Flags = 4
+	// RestartTlv_Flags_PA_BIT corresponds to the value PA_BIT of RestartTlv_Flags
+	RestartTlv_Flags_PA_BIT E_RestartTlv_Flags = 5
+)
+
+// E_SegmentRoutingCapability_Flags is a derived int64 type which is used to represent
+// the enumerated node SegmentRoutingCapability_Flags. An additional value named
+// SegmentRoutingCapability_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_SegmentRoutingCapability_Flags int64
+
+// IsYANGGoEnum ensures that SegmentRoutingCapability_Flags implements the yang.GoEnum
+// interface. This ensures that SegmentRoutingCapability_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_SegmentRoutingCapability_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  SegmentRoutingCapability_Flags.
+func (E_SegmentRoutingCapability_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_SegmentRoutingCapability_Flags.
+func (e E_SegmentRoutingCapability_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_SegmentRoutingCapability_Flags")
+}
+
+const (
+	// SegmentRoutingCapability_Flags_UNSET corresponds to the value UNSET of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_UNSET E_SegmentRoutingCapability_Flags = 0
+	// SegmentRoutingCapability_Flags_IPV4_MPLS corresponds to the value IPV4_MPLS of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_IPV4_MPLS E_SegmentRoutingCapability_Flags = 1
+	// SegmentRoutingCapability_Flags_IPV6_MPLS corresponds to the value IPV6_MPLS of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_IPV6_MPLS E_SegmentRoutingCapability_Flags = 2
 )
 
 // E_State_CommunityType is a derived int64 type which is used to represent
