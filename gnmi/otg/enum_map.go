@@ -24,6 +24,7 @@ using the following YANG input files:
   - models-yang/models/platform/open-traffic-generator-platform.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/bmp-server/open-traffic-generator-bmp-server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -61,6 +62,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "OPEN_SENT"},
 		5: {Name: "OPEN_CONFIRM"},
 		6: {Name: "ESTABLISHED"},
+	},
+	"E_BmpServer_SessionState": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
 	},
 	"E_Capabilities_Name": {
 		1:  {Name: "MAC_BRIDGE"},
@@ -373,6 +378,9 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
+		},
+		"/bmp-servers/bmp-server/state/session-state": {
+			reflect.TypeOf((E_BmpServer_SessionState)(0)),
 		},
 		"/components/component/state/name": {
 			reflect.TypeOf((E_Component_Name)(0)),

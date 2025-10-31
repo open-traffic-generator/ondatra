@@ -22,6 +22,7 @@ using the following YANG input files:
   - models-yang/models/platform/open-traffic-generator-platform.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/bmp-server/open-traffic-generator-bmp-server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -31,6 +32,7 @@ package otgpath
 import (
 	oc "github.com/openconfig/ondatra/gnmi/otg"
 	"github.com/openconfig/ondatra/gnmi/otg/bgp"
+	"github.com/openconfig/ondatra/gnmi/otg/bmpserver"
 	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4client"
 	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4server"
 	"github.com/openconfig/ondatra/gnmi/otg/dhcpv6client"
@@ -92,6 +94,44 @@ func (n *RootPath) BgpPeer(Name string) *bgp.BgpPeerPath {
 	ps := &bgp.BgpPeerPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"bgp-peers", "bgp-peer"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// BmpServerAny (list): Each bmp-server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-bmp-server"
+//	Instantiating module: "open-traffic-generator-bmp-server"
+//	Path from parent:     "bmp-servers/bmp-server"
+//	Path from root:       "/bmp-servers/bmp-server"
+func (n *RootPath) BmpServerAny() *bmpserver.BmpServerPathAny {
+	ps := &bmpserver.BmpServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bmp-servers", "bmp-server"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// BmpServer (list): Each bmp-server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-bmp-server"
+//	Instantiating module: "open-traffic-generator-bmp-server"
+//	Path from parent:     "bmp-servers/bmp-server"
+//	Path from root:       "/bmp-servers/bmp-server"
+//
+//	Name: string
+func (n *RootPath) BmpServer(Name string) *bmpserver.BmpServerPath {
+	ps := &bmpserver.BmpServerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bmp-servers", "bmp-server"},
 			map[string]interface{}{"name": Name},
 			n,
 		),
