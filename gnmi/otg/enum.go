@@ -24,6 +24,7 @@ using the following YANG input files:
   - models-yang/models/platform/open-traffic-generator-platform.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/bmp-server/open-traffic-generator-bmp-server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -135,6 +136,35 @@ const (
 	BgpPeer_SessionState_OPEN_CONFIRM E_BgpPeer_SessionState = 5
 	// BgpPeer_SessionState_ESTABLISHED corresponds to the value ESTABLISHED of BgpPeer_SessionState
 	BgpPeer_SessionState_ESTABLISHED E_BgpPeer_SessionState = 6
+)
+
+// E_BmpServer_SessionState is a derived int64 type which is used to represent
+// the enumerated node BmpServer_SessionState. An additional value named
+// BmpServer_SessionState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_BmpServer_SessionState int64
+
+// IsYANGGoEnum ensures that BmpServer_SessionState implements the yang.GoEnum
+// interface. This ensures that BmpServer_SessionState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_BmpServer_SessionState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  BmpServer_SessionState.
+func (E_BmpServer_SessionState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_BmpServer_SessionState.
+func (e E_BmpServer_SessionState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_BmpServer_SessionState")
+}
+
+const (
+	// BmpServer_SessionState_UNSET corresponds to the value UNSET of BmpServer_SessionState
+	BmpServer_SessionState_UNSET E_BmpServer_SessionState = 0
+	// BmpServer_SessionState_UP corresponds to the value UP of BmpServer_SessionState
+	BmpServer_SessionState_UP E_BmpServer_SessionState = 1
+	// BmpServer_SessionState_DOWN corresponds to the value DOWN of BmpServer_SessionState
+	BmpServer_SessionState_DOWN E_BmpServer_SessionState = 2
 )
 
 // E_Capabilities_Name is a derived int64 type which is used to represent
