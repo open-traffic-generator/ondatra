@@ -25,7 +25,7 @@ wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi
 rm -rf models-yang
 git clone https://github.com/open-traffic-generator/models-yang.git
 cd models-yang
-git checkout dev-bmp
+git checkout dev-bmp-li
 cd ..
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
