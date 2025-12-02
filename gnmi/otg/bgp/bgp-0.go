@@ -477,8 +477,8 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPrefixLength(PrefixLength uint32)
 }
 
 // WithOrigin sets BgpPeer_UnicastIpv4PrefixPathAny's key "origin" to the specified value.
-// Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
-func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_Bgp_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
+// Origin: oc.E_UnicastIpv4Prefix_Origin
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
 	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
 	return n
 }
@@ -499,9 +499,9 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Un
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
+//	Origin: oc.E_UnicastIpv4Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPath {
+func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPath {
 	ps := &BgpPeer_UnicastIpv4PrefixPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
@@ -521,9 +521,9 @@ func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Ori
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
+//	Origin: oc.E_UnicastIpv4Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
 	ps := &BgpPeer_UnicastIpv4PrefixPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
@@ -583,8 +583,8 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPrefixLength(PrefixLength uint32)
 }
 
 // WithOrigin sets BgpPeer_UnicastIpv6PrefixPathAny's key "origin" to the specified value.
-// Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
-func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_Bgp_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
+// Origin: oc.E_UnicastIpv6Prefix_Origin
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
 	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
 	return n
 }
@@ -605,9 +605,9 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Un
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
+//	Origin: oc.E_UnicastIpv6Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPath {
+func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPath {
 	ps := &BgpPeer_UnicastIpv6PrefixPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
@@ -627,9 +627,9 @@ func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Ori
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
+//	Origin: oc.E_UnicastIpv6Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPathAny) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+func (n *BgpPeerPathAny) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
 	ps := &BgpPeer_UnicastIpv6PrefixPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
@@ -3150,8 +3150,8 @@ type BgpPeer_UnicastIpv4Prefix_OriginPathAny struct {
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewSingletonQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		true,
 		false,
@@ -3164,7 +3164,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3187,8 +3187,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		true,
 		false,
@@ -3201,7 +3201,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3224,8 +3224,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewConfigQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		false,
 		true,
@@ -3238,7 +3238,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3261,8 +3261,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		false,
 		true,
@@ -3275,7 +3275,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[o
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9450,8 +9450,8 @@ type BgpPeer_UnicastIpv6Prefix_OriginPathAny struct {
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewSingletonQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		true,
 		false,
@@ -9464,7 +9464,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9487,8 +9487,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		true,
 		false,
@@ -9501,7 +9501,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9524,8 +9524,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewConfigQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		false,
 		true,
@@ -9538,7 +9538,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9561,8 +9561,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		false,
 		true,
@@ -9575,7 +9575,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[o
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
