@@ -477,8 +477,8 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPrefixLength(PrefixLength uint32)
 }
 
 // WithOrigin sets BgpPeer_UnicastIpv4PrefixPathAny's key "origin" to the specified value.
-// Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
-func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_Bgp_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
+// Origin: oc.E_UnicastIpv4Prefix_Origin
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
 	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
 	return n
 }
@@ -499,9 +499,9 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Un
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
+//	Origin: oc.E_UnicastIpv4Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPath {
+func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPath {
 	ps := &BgpPeer_UnicastIpv4PrefixPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
@@ -521,9 +521,9 @@ func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Ori
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv4Prefix_Origin
+//	Origin: oc.E_UnicastIpv4Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
 	ps := &BgpPeer_UnicastIpv4PrefixPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
@@ -583,8 +583,8 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPrefixLength(PrefixLength uint32)
 }
 
 // WithOrigin sets BgpPeer_UnicastIpv6PrefixPathAny's key "origin" to the specified value.
-// Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
-func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_Bgp_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
+// Origin: oc.E_UnicastIpv6Prefix_Origin
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
 	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
 	return n
 }
@@ -605,9 +605,9 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Un
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
+//	Origin: oc.E_UnicastIpv6Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPath {
+func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPath {
 	ps := &BgpPeer_UnicastIpv6PrefixPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
@@ -627,9 +627,9 @@ func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Ori
 //
 //	Address: string
 //	PrefixLength: uint32
-//	Origin: oc.E_Bgp_UnicastIpv6Prefix_Origin
+//	Origin: oc.E_UnicastIpv6Prefix_Origin
 //	PathId: uint32
-func (n *BgpPeerPathAny) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_Bgp_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+func (n *BgpPeerPathAny) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
 	ps := &BgpPeer_UnicastIpv6PrefixPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
@@ -3150,8 +3150,8 @@ type BgpPeer_UnicastIpv4Prefix_OriginPathAny struct {
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewSingletonQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		true,
 		false,
@@ -3164,7 +3164,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3187,8 +3187,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		true,
 		false,
@@ -3201,7 +3201,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3224,8 +3224,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewConfigQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		false,
 		true,
@@ -3238,7 +3238,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3261,8 +3261,8 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv4Prefix_Origin](
+func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_UnicastIpv4Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv4Prefix_Origin](
 		"BgpPeer_UnicastIpv4Prefix",
 		false,
 		true,
@@ -3275,7 +3275,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[o
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv4Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv4Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -4750,7 +4750,7 @@ type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2Octet
 	*ygnmi.NodePath
 }
 
-// LinkBandwidthSubtype (container): TBD: xxx
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
 //
 //	Defining module:      "open-traffic-generator-bgp"
 //	Instantiating module: "open-traffic-generator-bgp"
@@ -4767,7 +4767,7 @@ func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2O
 	return ps
 }
 
-// LinkBandwidthSubtype (container): TBD: xxx
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
 //
 //	Defining module:      "open-traffic-generator-bgp"
 //	Instantiating module: "open-traffic-generator-bgp"
@@ -7136,6 +7136,40 @@ type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsT
 	*ygnmi.NodePath
 }
 
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
 // into BGP. It is sent with sub-type as 0x03.
 //
@@ -7273,6 +7307,328 @@ func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2Octe
 func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
 	return ygnmi.NewWildcardQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
 		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
 		true,
 		false,
 		false,
@@ -9450,8 +9806,8 @@ type BgpPeer_UnicastIpv6Prefix_OriginPathAny struct {
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewSingletonQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		true,
 		false,
@@ -9464,7 +9820,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9487,8 +9843,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) State() ygnmi.SingletonQuery[oc.E
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "state/origin"
 //	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		true,
 		false,
@@ -9501,7 +9857,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9524,8 +9880,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) State() ygnmi.WildcardQuery[oc
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewConfigQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		false,
 		true,
@@ -9538,7 +9894,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -9561,8 +9917,8 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_B
 //	Instantiating module: "open-traffic-generator-bgp"
 //	Path from parent:     "origin"
 //	Path from root:       ""
-func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin] {
-	return ygnmi.NewWildcardQuery[oc.E_Bgp_UnicastIpv6Prefix_Origin](
+func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_UnicastIpv6Prefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_UnicastIpv6Prefix_Origin](
 		"BgpPeer_UnicastIpv6Prefix",
 		false,
 		true,
@@ -9575,7 +9931,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_OriginPathAny) Config() ygnmi.WildcardQuery[o
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_Bgp_UnicastIpv6Prefix_Origin, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_UnicastIpv6Prefix_Origin, bool) {
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Origin
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -11050,7 +11406,7 @@ type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2Octet
 	*ygnmi.NodePath
 }
 
-// LinkBandwidthSubtype (container): TBD: xxx
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
 //
 //	Defining module:      "open-traffic-generator-bgp"
 //	Instantiating module: "open-traffic-generator-bgp"
@@ -11067,7 +11423,7 @@ func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2O
 	return ps
 }
 
-// LinkBandwidthSubtype (container): TBD: xxx
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
 //
 //	Defining module:      "open-traffic-generator-bgp"
 //	Instantiating module: "open-traffic-generator-bgp"
@@ -13436,6 +13792,40 @@ type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsT
 	*ygnmi.NodePath
 }
 
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
 // into BGP. It is sent with sub-type as 0x03.
 //
@@ -13573,6 +13963,328 @@ func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2Octe
 func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
 	return ygnmi.NewWildcardQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
 		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
 		true,
 		false,
 		false,
