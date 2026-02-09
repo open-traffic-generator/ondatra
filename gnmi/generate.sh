@@ -18,11 +18,11 @@
 
 set -e
 
-OC_VERSION="v5.5.0"
+OC_VERSION="v5.6.0"
 
 git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
-git clone https://github.com/open-traffic-generator/models-yang.git
+git clone -b dev-lsp-id https://github.com/open-traffic-generator/models-yang.git
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
