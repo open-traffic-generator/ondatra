@@ -23,6 +23,8 @@ using the following YANG input files:
   - models-yang/models/platform/open-traffic-generator-platform.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/macsec/open-traffic-generator-macsec.yang
+  - models-yang/models/mka/open-traffic-generator-mka.yang
 
 Imported modules were sourced from:
   - models-yang/models/...

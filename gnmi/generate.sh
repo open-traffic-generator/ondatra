@@ -22,7 +22,11 @@ OC_VERSION="v5.6.0"
 
 git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
+rm -rf models-yang
 git clone https://github.com/open-traffic-generator/models-yang.git
+cd models-yang
+git checkout dev-macsec
+cd ..
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
@@ -154,6 +158,8 @@ OTG_YANG_FILES=(
   models-yang/models/platform/open-traffic-generator-platform.yang
   models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   models-yang/models/types/open-traffic-generator-types.yang
+  models-yang/models/macsec/open-traffic-generator-macsec.yang
+  models-yang/models/mka/open-traffic-generator-mka.yang
 )
 
 go run github.com/openconfig/ygnmi/app/ygnmi generator \
