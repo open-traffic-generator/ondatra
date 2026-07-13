@@ -9,6 +9,7 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-counters.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
   - public/release/models/aft/openconfig-aft-global-filter.yang
@@ -610,6 +611,43 @@ const (
 	Adjacency_Nlpid_IPV6 E_Adjacency_Nlpid = 2
 )
 
+// E_AftCounters_LabelEntry_Label is a derived int64 type which is used to represent
+// the enumerated node AftCounters_LabelEntry_Label. An additional value named
+// AftCounters_LabelEntry_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AftCounters_LabelEntry_Label int64
+
+// IsYANGGoEnum ensures that AftCounters_LabelEntry_Label implements the yang.GoEnum
+// interface. This ensures that AftCounters_LabelEntry_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AftCounters_LabelEntry_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AftCounters_LabelEntry_Label.
+func (E_AftCounters_LabelEntry_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AftCounters_LabelEntry_Label.
+func (e E_AftCounters_LabelEntry_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AftCounters_LabelEntry_Label")
+}
+
+const (
+	// AftCounters_LabelEntry_Label_UNSET corresponds to the value UNSET of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_UNSET E_AftCounters_LabelEntry_Label = 0
+	// AftCounters_LabelEntry_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_IPV4_EXPLICIT_NULL E_AftCounters_LabelEntry_Label = 1
+	// AftCounters_LabelEntry_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_ROUTER_ALERT E_AftCounters_LabelEntry_Label = 2
+	// AftCounters_LabelEntry_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_IPV6_EXPLICIT_NULL E_AftCounters_LabelEntry_Label = 3
+	// AftCounters_LabelEntry_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_IMPLICIT_NULL E_AftCounters_LabelEntry_Label = 4
+	// AftCounters_LabelEntry_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_ENTROPY_LABEL_INDICATOR E_AftCounters_LabelEntry_Label = 8
+	// AftCounters_LabelEntry_Label_NO_LABEL corresponds to the value NO_LABEL of AftCounters_LabelEntry_Label
+	AftCounters_LabelEntry_Label_NO_LABEL E_AftCounters_LabelEntry_Label = 9
+)
+
 // E_Aft_EncapsulationHeaderType is a derived int64 type which is used to represent
 // the enumerated node Aft_EncapsulationHeaderType. An additional value named
 // Aft_EncapsulationHeaderType_UNSET is added to the enumeration which is used as
@@ -649,6 +687,43 @@ const (
 	Aft_EncapsulationHeaderType_UDPV4 E_Aft_EncapsulationHeaderType = 7
 	// Aft_EncapsulationHeaderType_UDPV6 corresponds to the value UDPV6 of Aft_EncapsulationHeaderType
 	Aft_EncapsulationHeaderType_UDPV6 E_Aft_EncapsulationHeaderType = 8
+)
+
+// E_Aft_LabelEntry_Label is a derived int64 type which is used to represent
+// the enumerated node Aft_LabelEntry_Label. An additional value named
+// Aft_LabelEntry_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Aft_LabelEntry_Label int64
+
+// IsYANGGoEnum ensures that Aft_LabelEntry_Label implements the yang.GoEnum
+// interface. This ensures that Aft_LabelEntry_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Aft_LabelEntry_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Aft_LabelEntry_Label.
+func (E_Aft_LabelEntry_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Aft_LabelEntry_Label.
+func (e E_Aft_LabelEntry_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Aft_LabelEntry_Label")
+}
+
+const (
+	// Aft_LabelEntry_Label_UNSET corresponds to the value UNSET of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_UNSET E_Aft_LabelEntry_Label = 0
+	// Aft_LabelEntry_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_IPV4_EXPLICIT_NULL E_Aft_LabelEntry_Label = 1
+	// Aft_LabelEntry_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_ROUTER_ALERT E_Aft_LabelEntry_Label = 2
+	// Aft_LabelEntry_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_IPV6_EXPLICIT_NULL E_Aft_LabelEntry_Label = 3
+	// Aft_LabelEntry_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_IMPLICIT_NULL E_Aft_LabelEntry_Label = 4
+	// Aft_LabelEntry_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_ENTROPY_LABEL_INDICATOR E_Aft_LabelEntry_Label = 8
+	// Aft_LabelEntry_Label_NO_LABEL corresponds to the value NO_LABEL of Aft_LabelEntry_Label
+	Aft_LabelEntry_Label_NO_LABEL E_Aft_LabelEntry_Label = 9
 )
 
 // E_AggregateSidCounter_MplsLabel is a derived int64 type which is used to represent
@@ -5662,43 +5737,6 @@ const (
 	Keychain_Tolerance_UNSET E_Keychain_Tolerance = 0
 	// Keychain_Tolerance_FOREVER corresponds to the value FOREVER of Keychain_Tolerance
 	Keychain_Tolerance_FOREVER E_Keychain_Tolerance = 1
-)
-
-// E_LabelEntry_Label is a derived int64 type which is used to represent
-// the enumerated node LabelEntry_Label. An additional value named
-// LabelEntry_Label_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_LabelEntry_Label int64
-
-// IsYANGGoEnum ensures that LabelEntry_Label implements the yang.GoEnum
-// interface. This ensures that LabelEntry_Label can be identified as a
-// mapped type for a YANG enumeration.
-func (E_LabelEntry_Label) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  LabelEntry_Label.
-func (E_LabelEntry_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_LabelEntry_Label.
-func (e E_LabelEntry_Label) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_LabelEntry_Label")
-}
-
-const (
-	// LabelEntry_Label_UNSET corresponds to the value UNSET of LabelEntry_Label
-	LabelEntry_Label_UNSET E_LabelEntry_Label = 0
-	// LabelEntry_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of LabelEntry_Label
-	LabelEntry_Label_IPV4_EXPLICIT_NULL E_LabelEntry_Label = 1
-	// LabelEntry_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of LabelEntry_Label
-	LabelEntry_Label_ROUTER_ALERT E_LabelEntry_Label = 2
-	// LabelEntry_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of LabelEntry_Label
-	LabelEntry_Label_IPV6_EXPLICIT_NULL E_LabelEntry_Label = 3
-	// LabelEntry_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of LabelEntry_Label
-	LabelEntry_Label_IMPLICIT_NULL E_LabelEntry_Label = 4
-	// LabelEntry_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of LabelEntry_Label
-	LabelEntry_Label_ENTROPY_LABEL_INDICATOR E_LabelEntry_Label = 8
-	// LabelEntry_Label_NO_LABEL corresponds to the value NO_LABEL of LabelEntry_Label
-	LabelEntry_Label_NO_LABEL E_LabelEntry_Label = 9
 )
 
 // E_LabelEntry_PoppedMplsLabelStack is a derived int64 type which is used to represent

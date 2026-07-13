@@ -9,6 +9,7 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-counters.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
   - public/release/models/aft/openconfig-aft-global-filter.yang
@@ -213,6 +214,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "IPV4"},
 		2: {Name: "IPV6"},
 	},
+	"E_AftCounters_LabelEntry_Label": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
 	"E_Aft_EncapsulationHeaderType": {
 		1: {Name: "GRE"},
 		2: {Name: "IPV4"},
@@ -222,6 +231,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		6: {Name: "UDP"},
 		7: {Name: "UDPV4"},
 		8: {Name: "UDPV6"},
+	},
+	"E_Aft_LabelEntry_Label": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
 	},
 	"E_AggregateSidCounter_MplsLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -1461,14 +1478,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_Keychain_Tolerance": {
 		1: {Name: "FOREVER"},
-	},
-	"E_LabelEntry_Label": {
-		1: {Name: "IPV4_EXPLICIT_NULL"},
-		2: {Name: "ROUTER_ALERT"},
-		3: {Name: "IPV6_EXPLICIT_NULL"},
-		4: {Name: "IMPLICIT_NULL"},
-		8: {Name: "ENTROPY_LABEL_INDICATOR"},
-		9: {Name: "NO_LABEL"},
 	},
 	"E_LabelEntry_PoppedMplsLabelStack": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -3434,6 +3443,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/afts/aft-summaries/ipv6-unicast/protocols/protocol/state/origin-protocol": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
 		},
+		"/network-instances/network-instance/afts/counters/mpls/label-entry/state/label": {
+			reflect.TypeOf((E_AftCounters_LabelEntry_Label)(0)),
+		},
 		"/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/decapsulate-header": {
 			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
 		},
@@ -3450,7 +3462,7 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_DecapMplsLabelStack_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/label": {
-			reflect.TypeOf((E_LabelEntry_Label)(0)),
+			reflect.TypeOf((E_Aft_LabelEntry_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack": {
 			reflect.TypeOf((E_LabelEntry_PoppedMplsLabelStack)(0)),

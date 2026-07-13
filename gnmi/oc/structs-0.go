@@ -9,6 +9,7 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-counters.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
   - public/release/models/aft/openconfig-aft-global-filter.yang
@@ -56898,6 +56899,7 @@ func (*NetworkInstance) ΛBelongingModule() string {
 // NetworkInstance_Afts represents the /openconfig-network-instance/network-instances/network-instance/afts YANG schema element.
 type NetworkInstance_Afts struct {
 	AftSummaries          *NetworkInstance_Afts_AftSummaries                                               `path:"aft-summaries" module:"openconfig-aft-summary"`
+	Counters              *NetworkInstance_Afts_Counters                                                   `path:"counters" module:"openconfig-aft-counters"`
 	GlobalFilter          *NetworkInstance_Afts_GlobalFilter                                               `path:"global-filter" module:"openconfig-aft-global-filter"`
 	Ipv4Entry             map[string]*NetworkInstance_Afts_Ipv4Entry                                       `path:"ipv4-unicast/ipv4-entry" module:"openconfig-network-instance/openconfig-network-instance"`
 	Ipv6Entry             map[string]*NetworkInstance_Afts_Ipv6Entry                                       `path:"ipv6-unicast/ipv6-entry" module:"openconfig-network-instance/openconfig-network-instance"`
@@ -57809,6 +57811,16 @@ func (t *NetworkInstance_Afts) GetOrCreateAftSummaries() *NetworkInstance_Afts_A
 	return t.AftSummaries
 }
 
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Afts) GetOrCreateCounters() *NetworkInstance_Afts_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &NetworkInstance_Afts_Counters{}
+	return t.Counters
+}
+
 // GetOrCreateGlobalFilter retrieves the value of the GlobalFilter field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Afts) GetOrCreateGlobalFilter() *NetworkInstance_Afts_GlobalFilter {
@@ -57835,6 +57847,16 @@ func (t *NetworkInstance_Afts) GetOrCreateStateSynced() *NetworkInstance_Afts_St
 func (t *NetworkInstance_Afts) GetAftSummaries() *NetworkInstance_Afts_AftSummaries {
 	if t != nil && t.AftSummaries != nil {
 		return t.AftSummaries
+	}
+	return nil
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from NetworkInstance_Afts. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Afts) GetCounters() *NetworkInstance_Afts_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
 	}
 	return nil
 }
@@ -57868,6 +57890,7 @@ func (t *NetworkInstance_Afts) PopulateDefaults() {
 	}
 	ygot.BuildEmptyTree(t)
 	t.AftSummaries.PopulateDefaults()
+	t.Counters.PopulateDefaults()
 	t.GlobalFilter.PopulateDefaults()
 	t.StateSynced.PopulateDefaults()
 	for _, e := range t.Ipv4Entry {
@@ -58672,6 +58695,1663 @@ func (t *NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_Counters) ΛEnum
 // of NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_Counters.
 func (*NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_Counters) ΛBelongingModule() string {
 	return "openconfig-aft-summary"
+}
+
+// NetworkInstance_Afts_Counters represents the /openconfig-network-instance/network-instances/network-instance/afts/counters YANG schema element.
+type NetworkInstance_Afts_Counters struct {
+	Ipv4Entry             map[string]*NetworkInstance_Afts_Counters_Ipv4Entry                                                `path:"ipv4-unicast/ipv4-entry" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	Ipv6Entry             map[string]*NetworkInstance_Afts_Counters_Ipv6Entry                                                `path:"ipv6-unicast/ipv6-entry" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	LabelEntry            map[NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*NetworkInstance_Afts_Counters_LabelEntry `path:"mpls/label-entry" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	MacEntry              map[string]*NetworkInstance_Afts_Counters_MacEntry                                                 `path:"ethernet/mac-entry" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	NextHop               map[uint64]*NetworkInstance_Afts_Counters_NextHop                                                  `path:"next-hops/next-hop" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PolicyForwardingEntry map[uint64]*NetworkInstance_Afts_Counters_PolicyForwardingEntry                                    `path:"policy-forwarding/policy-forwarding-entry" module:"openconfig-aft-counters/openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters) IsYANGGoStruct() {}
+
+// NewIpv4Entry creates a new entry in the Ipv4Entry list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewIpv4Entry(Prefix string) (*NetworkInstance_Afts_Counters_Ipv4Entry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Ipv4Entry == nil {
+		t.Ipv4Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv4Entry)
+	}
+
+	key := Prefix
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Ipv4Entry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv4Entry", key)
+	}
+
+	t.Ipv4Entry[key] = &NetworkInstance_Afts_Counters_Ipv4Entry{
+		Prefix: &Prefix,
+	}
+
+	return t.Ipv4Entry[key], nil
+}
+
+// RenameIpv4Entry renames an entry in the list Ipv4Entry within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenameIpv4Entry(oldK, newK string) error {
+	if _, ok := t.Ipv4Entry[newK]; ok {
+		return fmt.Errorf("key %v already exists in Ipv4Entry", newK)
+	}
+
+	e, ok := t.Ipv4Entry[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Ipv4Entry", oldK)
+	}
+	e.Prefix = &newK
+
+	t.Ipv4Entry[newK] = e
+	delete(t.Ipv4Entry, oldK)
+	return nil
+}
+
+// GetOrCreateIpv4EntryMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateIpv4EntryMap() map[string]*NetworkInstance_Afts_Counters_Ipv4Entry {
+	if t.Ipv4Entry == nil {
+		t.Ipv4Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv4Entry)
+	}
+	return t.Ipv4Entry
+}
+
+// GetOrCreateIpv4Entry retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateIpv4Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv4Entry {
+
+	key := Prefix
+
+	if v, ok := t.Ipv4Entry[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewIpv4Entry(Prefix)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateIpv4Entry got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetIpv4Entry retrieves the value with the specified key from
+// the Ipv4Entry map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetIpv4Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv4Entry {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Prefix
+
+	if lm, ok := t.Ipv4Entry[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteIpv4Entry deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeleteIpv4Entry(Prefix string) {
+	key := Prefix
+
+	delete(t.Ipv4Entry, key)
+}
+
+// AppendIpv4Entry appends the supplied NetworkInstance_Afts_Counters_Ipv4Entry struct to the
+// list Ipv4Entry of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_Ipv4Entry already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendIpv4Entry(v *NetworkInstance_Afts_Counters_Ipv4Entry) error {
+	if v.Prefix == nil {
+		return fmt.Errorf("invalid nil key received for Prefix")
+	}
+
+	key := *v.Prefix
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Ipv4Entry == nil {
+		t.Ipv4Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv4Entry)
+	}
+
+	if _, ok := t.Ipv4Entry[key]; ok {
+		return fmt.Errorf("duplicate key for list Ipv4Entry %v", key)
+	}
+
+	t.Ipv4Entry[key] = v
+	return nil
+}
+
+// NewIpv6Entry creates a new entry in the Ipv6Entry list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewIpv6Entry(Prefix string) (*NetworkInstance_Afts_Counters_Ipv6Entry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Ipv6Entry == nil {
+		t.Ipv6Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv6Entry)
+	}
+
+	key := Prefix
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Ipv6Entry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv6Entry", key)
+	}
+
+	t.Ipv6Entry[key] = &NetworkInstance_Afts_Counters_Ipv6Entry{
+		Prefix: &Prefix,
+	}
+
+	return t.Ipv6Entry[key], nil
+}
+
+// RenameIpv6Entry renames an entry in the list Ipv6Entry within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenameIpv6Entry(oldK, newK string) error {
+	if _, ok := t.Ipv6Entry[newK]; ok {
+		return fmt.Errorf("key %v already exists in Ipv6Entry", newK)
+	}
+
+	e, ok := t.Ipv6Entry[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Ipv6Entry", oldK)
+	}
+	e.Prefix = &newK
+
+	t.Ipv6Entry[newK] = e
+	delete(t.Ipv6Entry, oldK)
+	return nil
+}
+
+// GetOrCreateIpv6EntryMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateIpv6EntryMap() map[string]*NetworkInstance_Afts_Counters_Ipv6Entry {
+	if t.Ipv6Entry == nil {
+		t.Ipv6Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv6Entry)
+	}
+	return t.Ipv6Entry
+}
+
+// GetOrCreateIpv6Entry retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateIpv6Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv6Entry {
+
+	key := Prefix
+
+	if v, ok := t.Ipv6Entry[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewIpv6Entry(Prefix)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateIpv6Entry got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetIpv6Entry retrieves the value with the specified key from
+// the Ipv6Entry map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetIpv6Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv6Entry {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Prefix
+
+	if lm, ok := t.Ipv6Entry[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteIpv6Entry deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeleteIpv6Entry(Prefix string) {
+	key := Prefix
+
+	delete(t.Ipv6Entry, key)
+}
+
+// AppendIpv6Entry appends the supplied NetworkInstance_Afts_Counters_Ipv6Entry struct to the
+// list Ipv6Entry of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_Ipv6Entry already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendIpv6Entry(v *NetworkInstance_Afts_Counters_Ipv6Entry) error {
+	if v.Prefix == nil {
+		return fmt.Errorf("invalid nil key received for Prefix")
+	}
+
+	key := *v.Prefix
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Ipv6Entry == nil {
+		t.Ipv6Entry = make(map[string]*NetworkInstance_Afts_Counters_Ipv6Entry)
+	}
+
+	if _, ok := t.Ipv6Entry[key]; ok {
+		return fmt.Errorf("duplicate key for list Ipv6Entry %v", key)
+	}
+
+	t.Ipv6Entry[key] = v
+	return nil
+}
+
+// NewLabelEntry creates a new entry in the LabelEntry list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewLabelEntry(Label NetworkInstance_Afts_Counters_LabelEntry_Label_Union) (*NetworkInstance_Afts_Counters_LabelEntry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LabelEntry == nil {
+		t.LabelEntry = make(map[NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*NetworkInstance_Afts_Counters_LabelEntry)
+	}
+
+	key := Label
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LabelEntry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LabelEntry", key)
+	}
+
+	t.LabelEntry[key] = &NetworkInstance_Afts_Counters_LabelEntry{
+		Label: Label,
+	}
+
+	return t.LabelEntry[key], nil
+}
+
+// RenameLabelEntry renames an entry in the list LabelEntry within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenameLabelEntry(oldK, newK NetworkInstance_Afts_Counters_LabelEntry_Label_Union) error {
+	if _, ok := t.LabelEntry[newK]; ok {
+		return fmt.Errorf("key %v already exists in LabelEntry", newK)
+	}
+
+	e, ok := t.LabelEntry[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in LabelEntry", oldK)
+	}
+	e.Label = newK
+
+	t.LabelEntry[newK] = e
+	delete(t.LabelEntry, oldK)
+	return nil
+}
+
+// GetOrCreateLabelEntryMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateLabelEntryMap() map[NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*NetworkInstance_Afts_Counters_LabelEntry {
+	if t.LabelEntry == nil {
+		t.LabelEntry = make(map[NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*NetworkInstance_Afts_Counters_LabelEntry)
+	}
+	return t.LabelEntry
+}
+
+// GetOrCreateLabelEntry retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateLabelEntry(Label NetworkInstance_Afts_Counters_LabelEntry_Label_Union) *NetworkInstance_Afts_Counters_LabelEntry {
+
+	key := Label
+
+	if v, ok := t.LabelEntry[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewLabelEntry(Label)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateLabelEntry got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetLabelEntry retrieves the value with the specified key from
+// the LabelEntry map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetLabelEntry(Label NetworkInstance_Afts_Counters_LabelEntry_Label_Union) *NetworkInstance_Afts_Counters_LabelEntry {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Label
+
+	if lm, ok := t.LabelEntry[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteLabelEntry deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeleteLabelEntry(Label NetworkInstance_Afts_Counters_LabelEntry_Label_Union) {
+	key := Label
+
+	delete(t.LabelEntry, key)
+}
+
+// AppendLabelEntry appends the supplied NetworkInstance_Afts_Counters_LabelEntry struct to the
+// list LabelEntry of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_LabelEntry already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendLabelEntry(v *NetworkInstance_Afts_Counters_LabelEntry) error {
+	key := v.Label
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LabelEntry == nil {
+		t.LabelEntry = make(map[NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*NetworkInstance_Afts_Counters_LabelEntry)
+	}
+
+	if _, ok := t.LabelEntry[key]; ok {
+		return fmt.Errorf("duplicate key for list LabelEntry %v", key)
+	}
+
+	t.LabelEntry[key] = v
+	return nil
+}
+
+// NewMacEntry creates a new entry in the MacEntry list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewMacEntry(MacAddress string) (*NetworkInstance_Afts_Counters_MacEntry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.MacEntry == nil {
+		t.MacEntry = make(map[string]*NetworkInstance_Afts_Counters_MacEntry)
+	}
+
+	key := MacAddress
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.MacEntry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MacEntry", key)
+	}
+
+	t.MacEntry[key] = &NetworkInstance_Afts_Counters_MacEntry{
+		MacAddress: &MacAddress,
+	}
+
+	return t.MacEntry[key], nil
+}
+
+// RenameMacEntry renames an entry in the list MacEntry within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenameMacEntry(oldK, newK string) error {
+	if _, ok := t.MacEntry[newK]; ok {
+		return fmt.Errorf("key %v already exists in MacEntry", newK)
+	}
+
+	e, ok := t.MacEntry[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in MacEntry", oldK)
+	}
+	e.MacAddress = &newK
+
+	t.MacEntry[newK] = e
+	delete(t.MacEntry, oldK)
+	return nil
+}
+
+// GetOrCreateMacEntryMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateMacEntryMap() map[string]*NetworkInstance_Afts_Counters_MacEntry {
+	if t.MacEntry == nil {
+		t.MacEntry = make(map[string]*NetworkInstance_Afts_Counters_MacEntry)
+	}
+	return t.MacEntry
+}
+
+// GetOrCreateMacEntry retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateMacEntry(MacAddress string) *NetworkInstance_Afts_Counters_MacEntry {
+
+	key := MacAddress
+
+	if v, ok := t.MacEntry[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewMacEntry(MacAddress)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateMacEntry got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetMacEntry retrieves the value with the specified key from
+// the MacEntry map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetMacEntry(MacAddress string) *NetworkInstance_Afts_Counters_MacEntry {
+
+	if t == nil {
+		return nil
+	}
+
+	key := MacAddress
+
+	if lm, ok := t.MacEntry[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteMacEntry deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeleteMacEntry(MacAddress string) {
+	key := MacAddress
+
+	delete(t.MacEntry, key)
+}
+
+// AppendMacEntry appends the supplied NetworkInstance_Afts_Counters_MacEntry struct to the
+// list MacEntry of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_MacEntry already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendMacEntry(v *NetworkInstance_Afts_Counters_MacEntry) error {
+	if v.MacAddress == nil {
+		return fmt.Errorf("invalid nil key received for MacAddress")
+	}
+
+	key := *v.MacAddress
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.MacEntry == nil {
+		t.MacEntry = make(map[string]*NetworkInstance_Afts_Counters_MacEntry)
+	}
+
+	if _, ok := t.MacEntry[key]; ok {
+		return fmt.Errorf("duplicate key for list MacEntry %v", key)
+	}
+
+	t.MacEntry[key] = v
+	return nil
+}
+
+// NewNextHop creates a new entry in the NextHop list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewNextHop(Index uint64) (*NetworkInstance_Afts_Counters_NextHop, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.NextHop == nil {
+		t.NextHop = make(map[uint64]*NetworkInstance_Afts_Counters_NextHop)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.NextHop[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list NextHop", key)
+	}
+
+	t.NextHop[key] = &NetworkInstance_Afts_Counters_NextHop{
+		Index: &Index,
+	}
+
+	return t.NextHop[key], nil
+}
+
+// RenameNextHop renames an entry in the list NextHop within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenameNextHop(oldK, newK uint64) error {
+	if _, ok := t.NextHop[newK]; ok {
+		return fmt.Errorf("key %v already exists in NextHop", newK)
+	}
+
+	e, ok := t.NextHop[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in NextHop", oldK)
+	}
+	e.Index = &newK
+
+	t.NextHop[newK] = e
+	delete(t.NextHop, oldK)
+	return nil
+}
+
+// GetOrCreateNextHopMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateNextHopMap() map[uint64]*NetworkInstance_Afts_Counters_NextHop {
+	if t.NextHop == nil {
+		t.NextHop = make(map[uint64]*NetworkInstance_Afts_Counters_NextHop)
+	}
+	return t.NextHop
+}
+
+// GetOrCreateNextHop retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreateNextHop(Index uint64) *NetworkInstance_Afts_Counters_NextHop {
+
+	key := Index
+
+	if v, ok := t.NextHop[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewNextHop(Index)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateNextHop got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetNextHop retrieves the value with the specified key from
+// the NextHop map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetNextHop(Index uint64) *NetworkInstance_Afts_Counters_NextHop {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Index
+
+	if lm, ok := t.NextHop[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteNextHop deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeleteNextHop(Index uint64) {
+	key := Index
+
+	delete(t.NextHop, key)
+}
+
+// AppendNextHop appends the supplied NetworkInstance_Afts_Counters_NextHop struct to the
+// list NextHop of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_NextHop already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendNextHop(v *NetworkInstance_Afts_Counters_NextHop) error {
+	if v.Index == nil {
+		return fmt.Errorf("invalid nil key received for Index")
+	}
+
+	key := *v.Index
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.NextHop == nil {
+		t.NextHop = make(map[uint64]*NetworkInstance_Afts_Counters_NextHop)
+	}
+
+	if _, ok := t.NextHop[key]; ok {
+		return fmt.Errorf("duplicate key for list NextHop %v", key)
+	}
+
+	t.NextHop[key] = v
+	return nil
+}
+
+// NewPolicyForwardingEntry creates a new entry in the PolicyForwardingEntry list of the
+// NetworkInstance_Afts_Counters struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts_Counters) NewPolicyForwardingEntry(Index uint64) (*NetworkInstance_Afts_Counters_PolicyForwardingEntry, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PolicyForwardingEntry == nil {
+		t.PolicyForwardingEntry = make(map[uint64]*NetworkInstance_Afts_Counters_PolicyForwardingEntry)
+	}
+
+	key := Index
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PolicyForwardingEntry[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyForwardingEntry", key)
+	}
+
+	t.PolicyForwardingEntry[key] = &NetworkInstance_Afts_Counters_PolicyForwardingEntry{
+		Index: &Index,
+	}
+
+	return t.PolicyForwardingEntry[key], nil
+}
+
+// RenamePolicyForwardingEntry renames an entry in the list PolicyForwardingEntry within
+// the NetworkInstance_Afts_Counters struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts_Counters) RenamePolicyForwardingEntry(oldK, newK uint64) error {
+	if _, ok := t.PolicyForwardingEntry[newK]; ok {
+		return fmt.Errorf("key %v already exists in PolicyForwardingEntry", newK)
+	}
+
+	e, ok := t.PolicyForwardingEntry[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in PolicyForwardingEntry", oldK)
+	}
+	e.Index = &newK
+
+	t.PolicyForwardingEntry[newK] = e
+	delete(t.PolicyForwardingEntry, oldK)
+	return nil
+}
+
+// GetOrCreatePolicyForwardingEntryMap returns the list (map) from NetworkInstance_Afts_Counters.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts_Counters) GetOrCreatePolicyForwardingEntryMap() map[uint64]*NetworkInstance_Afts_Counters_PolicyForwardingEntry {
+	if t.PolicyForwardingEntry == nil {
+		t.PolicyForwardingEntry = make(map[uint64]*NetworkInstance_Afts_Counters_PolicyForwardingEntry)
+	}
+	return t.PolicyForwardingEntry
+}
+
+// GetOrCreatePolicyForwardingEntry retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts_Counters) GetOrCreatePolicyForwardingEntry(Index uint64) *NetworkInstance_Afts_Counters_PolicyForwardingEntry {
+
+	key := Index
+
+	if v, ok := t.PolicyForwardingEntry[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewPolicyForwardingEntry(Index)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreatePolicyForwardingEntry got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetPolicyForwardingEntry retrieves the value with the specified key from
+// the PolicyForwardingEntry map field of NetworkInstance_Afts_Counters. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts_Counters) GetPolicyForwardingEntry(Index uint64) *NetworkInstance_Afts_Counters_PolicyForwardingEntry {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Index
+
+	if lm, ok := t.PolicyForwardingEntry[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeletePolicyForwardingEntry deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_Counters. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts_Counters) DeletePolicyForwardingEntry(Index uint64) {
+	key := Index
+
+	delete(t.PolicyForwardingEntry, key)
+}
+
+// AppendPolicyForwardingEntry appends the supplied NetworkInstance_Afts_Counters_PolicyForwardingEntry struct to the
+// list PolicyForwardingEntry of NetworkInstance_Afts_Counters. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_Counters_PolicyForwardingEntry already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts_Counters) AppendPolicyForwardingEntry(v *NetworkInstance_Afts_Counters_PolicyForwardingEntry) error {
+	if v.Index == nil {
+		return fmt.Errorf("invalid nil key received for Index")
+	}
+
+	key := *v.Index
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PolicyForwardingEntry == nil {
+		t.PolicyForwardingEntry = make(map[uint64]*NetworkInstance_Afts_Counters_PolicyForwardingEntry)
+	}
+
+	if _, ok := t.PolicyForwardingEntry[key]; ok {
+		return fmt.Errorf("duplicate key for list PolicyForwardingEntry %v", key)
+	}
+
+	t.PolicyForwardingEntry[key] = v
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.Ipv4Entry {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.Ipv6Entry {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.LabelEntry {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.MacEntry {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.NextHop {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.PolicyForwardingEntry {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters.
+func (*NetworkInstance_Afts_Counters) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry struct {
+	OctetsForwarded        *uint64 `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	OctetsForwardedBackup  *uint64 `path:"state/octets-forwarded-backup" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded       *uint64 `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwardedBackup *uint64 `path:"state/packets-forwarded-backup" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	Prefix                 *string `path:"state/prefix|prefix" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"prefix" shadow-module:"openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_Ipv4Entry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_Ipv4Entry) IsYANGGoStruct() {}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetOctetsForwardedBackup retrieves the value of the leaf OctetsForwardedBackup from the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwardedBackup is set, it can
+// safely use t.GetOctetsForwardedBackup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwardedBackup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) GetOctetsForwardedBackup() uint64 {
+	if t == nil || t.OctetsForwardedBackup == nil {
+		return 0
+	}
+	return *t.OctetsForwardedBackup
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// GetPacketsForwardedBackup retrieves the value of the leaf PacketsForwardedBackup from the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwardedBackup is set, it can
+// safely use t.GetPacketsForwardedBackup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwardedBackup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) GetPacketsForwardedBackup() uint64 {
+	if t == nil || t.PacketsForwardedBackup == nil {
+		return 0
+	}
+	return *t.PacketsForwardedBackup
+}
+
+// GetPrefix retrieves the value of the leaf Prefix from the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Prefix is set, it can
+// safely use t.GetPrefix() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Prefix == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) GetPrefix() string {
+	if t == nil || t.Prefix == nil {
+		return ""
+	}
+	return *t.Prefix
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetOctetsForwardedBackup sets the value of the leaf OctetsForwardedBackup in the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) SetOctetsForwardedBackup(v uint64) {
+	t.OctetsForwardedBackup = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// SetPacketsForwardedBackup sets the value of the leaf PacketsForwardedBackup in the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) SetPacketsForwardedBackup(v uint64) {
+	t.PacketsForwardedBackup = &v
+}
+
+// SetPrefix sets the value of the leaf Prefix in the NetworkInstance_Afts_Counters_Ipv4Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) SetPrefix(v string) {
+	t.Prefix = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_Ipv4Entry
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_Ipv4Entry struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	return map[string]interface{}{
+		"prefix": *t.Prefix,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_Ipv4Entry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_Ipv4Entry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_Ipv4Entry.
+func (*NetworkInstance_Afts_Counters_Ipv4Entry) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry struct {
+	OctetsForwarded        *uint64 `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	OctetsForwardedBackup  *uint64 `path:"state/octets-forwarded-backup" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded       *uint64 `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwardedBackup *uint64 `path:"state/packets-forwarded-backup" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	Prefix                 *string `path:"state/prefix|prefix" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"prefix" shadow-module:"openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_Ipv6Entry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_Ipv6Entry) IsYANGGoStruct() {}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetOctetsForwardedBackup retrieves the value of the leaf OctetsForwardedBackup from the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwardedBackup is set, it can
+// safely use t.GetOctetsForwardedBackup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwardedBackup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) GetOctetsForwardedBackup() uint64 {
+	if t == nil || t.OctetsForwardedBackup == nil {
+		return 0
+	}
+	return *t.OctetsForwardedBackup
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// GetPacketsForwardedBackup retrieves the value of the leaf PacketsForwardedBackup from the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwardedBackup is set, it can
+// safely use t.GetPacketsForwardedBackup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwardedBackup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) GetPacketsForwardedBackup() uint64 {
+	if t == nil || t.PacketsForwardedBackup == nil {
+		return 0
+	}
+	return *t.PacketsForwardedBackup
+}
+
+// GetPrefix retrieves the value of the leaf Prefix from the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Prefix is set, it can
+// safely use t.GetPrefix() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Prefix == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) GetPrefix() string {
+	if t == nil || t.Prefix == nil {
+		return ""
+	}
+	return *t.Prefix
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetOctetsForwardedBackup sets the value of the leaf OctetsForwardedBackup in the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) SetOctetsForwardedBackup(v uint64) {
+	t.OctetsForwardedBackup = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// SetPacketsForwardedBackup sets the value of the leaf PacketsForwardedBackup in the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) SetPacketsForwardedBackup(v uint64) {
+	t.PacketsForwardedBackup = &v
+}
+
+// SetPrefix sets the value of the leaf Prefix in the NetworkInstance_Afts_Counters_Ipv6Entry
+// struct.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) SetPrefix(v string) {
+	t.Prefix = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_Ipv6Entry
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_Ipv6Entry struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	return map[string]interface{}{
+		"prefix": *t.Prefix,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_Ipv6Entry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_Ipv6Entry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_Ipv6Entry.
+func (*NetworkInstance_Afts_Counters_Ipv6Entry) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry struct {
+	Label            NetworkInstance_Afts_Counters_LabelEntry_Label_Union `path:"state/label|label" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"label" shadow-module:"openconfig-aft-counters"`
+	OctetsForwarded  *uint64                                              `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded *uint64                                              `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_LabelEntry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_LabelEntry) IsYANGGoStruct() {}
+
+// GetLabel retrieves the value of the leaf Label from the NetworkInstance_Afts_Counters_LabelEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label is set, it can
+// safely use t.GetLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) GetLabel() NetworkInstance_Afts_Counters_LabelEntry_Label_Union {
+	if t == nil || t.Label == nil {
+		return nil
+	}
+	return t.Label
+}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_LabelEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_LabelEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// SetLabel sets the value of the leaf Label in the NetworkInstance_Afts_Counters_LabelEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) SetLabel(v NetworkInstance_Afts_Counters_LabelEntry_Label_Union) {
+	t.Label = v
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_LabelEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_LabelEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_LabelEntry
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_LabelEntry struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"label": t.Label,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_LabelEntry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_LabelEntry.
+func (*NetworkInstance_Afts_Counters_LabelEntry) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_MacEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry struct {
+	MacAddress       *string `path:"state/mac-address|mac-address" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"mac-address" shadow-module:"openconfig-aft-counters"`
+	OctetsForwarded  *uint64 `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded *uint64 `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_MacEntry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_MacEntry) IsYANGGoStruct() {}
+
+// GetMacAddress retrieves the value of the leaf MacAddress from the NetworkInstance_Afts_Counters_MacEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MacAddress is set, it can
+// safely use t.GetMacAddress() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MacAddress == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_MacEntry) GetMacAddress() string {
+	if t == nil || t.MacAddress == nil {
+		return ""
+	}
+	return *t.MacAddress
+}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_MacEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_MacEntry) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_MacEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_MacEntry) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// SetMacAddress sets the value of the leaf MacAddress in the NetworkInstance_Afts_Counters_MacEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_MacEntry) SetMacAddress(v string) {
+	t.MacAddress = &v
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_MacEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_MacEntry) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_MacEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_MacEntry) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_MacEntry
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_MacEntry) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_MacEntry struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_MacEntry) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.MacAddress == nil {
+		return nil, fmt.Errorf("nil value for key MacAddress")
+	}
+
+	return map[string]interface{}{
+		"mac-address": *t.MacAddress,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_MacEntry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_MacEntry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_MacEntry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_MacEntry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_MacEntry.
+func (*NetworkInstance_Afts_Counters_MacEntry) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_NextHop represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop struct {
+	Index            *uint64 `path:"state/index|index" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"index" shadow-module:"openconfig-aft-counters"`
+	OctetsForwarded  *uint64 `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded *uint64 `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_NextHop implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_NextHop) IsYANGGoStruct() {}
+
+// GetIndex retrieves the value of the leaf Index from the NetworkInstance_Afts_Counters_NextHop
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Index is set, it can
+// safely use t.GetIndex() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Index == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_NextHop) GetIndex() uint64 {
+	if t == nil || t.Index == nil {
+		return 0
+	}
+	return *t.Index
+}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_NextHop
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_NextHop) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_NextHop
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_NextHop) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// SetIndex sets the value of the leaf Index in the NetworkInstance_Afts_Counters_NextHop
+// struct.
+func (t *NetworkInstance_Afts_Counters_NextHop) SetIndex(v uint64) {
+	t.Index = &v
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_NextHop
+// struct.
+func (t *NetworkInstance_Afts_Counters_NextHop) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_NextHop
+// struct.
+func (t *NetworkInstance_Afts_Counters_NextHop) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_NextHop
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_NextHop) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_NextHop struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_NextHop) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_NextHop) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_NextHop"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_NextHop) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_NextHop) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_NextHop.
+func (*NetworkInstance_Afts_Counters_NextHop) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry struct {
+	Index            *uint64 `path:"state/index|index" module:"openconfig-aft-counters/openconfig-aft-counters|openconfig-aft-counters" shadow-path:"index" shadow-module:"openconfig-aft-counters"`
+	OctetsForwarded  *uint64 `path:"state/octets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+	PacketsForwarded *uint64 `path:"state/packets-forwarded" module:"openconfig-aft-counters/openconfig-aft-counters"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_Counters_PolicyForwardingEntry implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_Counters_PolicyForwardingEntry) IsYANGGoStruct() {}
+
+// GetIndex retrieves the value of the leaf Index from the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Index is set, it can
+// safely use t.GetIndex() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Index == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) GetIndex() uint64 {
+	if t == nil || t.Index == nil {
+		return 0
+	}
+	return *t.Index
+}
+
+// GetOctetsForwarded retrieves the value of the leaf OctetsForwarded from the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OctetsForwarded is set, it can
+// safely use t.GetOctetsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OctetsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) GetOctetsForwarded() uint64 {
+	if t == nil || t.OctetsForwarded == nil {
+		return 0
+	}
+	return *t.OctetsForwarded
+}
+
+// GetPacketsForwarded retrieves the value of the leaf PacketsForwarded from the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PacketsForwarded is set, it can
+// safely use t.GetPacketsForwarded() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PacketsForwarded == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) GetPacketsForwarded() uint64 {
+	if t == nil || t.PacketsForwarded == nil {
+		return 0
+	}
+	return *t.PacketsForwarded
+}
+
+// SetIndex sets the value of the leaf Index in the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) SetIndex(v uint64) {
+	t.Index = &v
+}
+
+// SetOctetsForwarded sets the value of the leaf OctetsForwarded in the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) SetOctetsForwarded(v uint64) {
+	t.OctetsForwarded = &v
+}
+
+// SetPacketsForwarded sets the value of the leaf PacketsForwarded in the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// struct.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) SetPacketsForwarded(v uint64) {
+	t.PacketsForwarded = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_Counters_PolicyForwardingEntry
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_Counters_PolicyForwardingEntry struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Index == nil {
+		return nil, fmt.Errorf("nil value for key Index")
+	}
+
+	return map[string]interface{}{
+		"index": *t.Index,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_Counters_PolicyForwardingEntry"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_Counters_PolicyForwardingEntry) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_Counters_PolicyForwardingEntry.
+func (*NetworkInstance_Afts_Counters_PolicyForwardingEntry) ΛBelongingModule() string {
+	return "openconfig-aft-counters"
 }
 
 // NetworkInstance_Afts_GlobalFilter represents the /openconfig-network-instance/network-instances/network-instance/afts/global-filter YANG schema element.

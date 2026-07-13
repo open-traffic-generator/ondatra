@@ -7,6 +7,7 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-counters.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
   - public/release/models/aft/openconfig-aft-global-filter.yang
@@ -3154,6 +3155,40 @@ func (n *NetworkInstance_AftsPathAny) AftSummaries() *NetworkInstance_Afts_AftSu
 	return ps
 }
 
+// Counters (container): Unified subtree for AFT entry counters, organized by protocol and entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "counters"
+//	Path from root:       "/network-instances/network-instance/afts/counters"
+func (n *NetworkInstance_AftsPath) Counters() *NetworkInstance_Afts_CountersPath {
+	ps := &NetworkInstance_Afts_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Unified subtree for AFT entry counters, organized by protocol and entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "counters"
+//	Path from root:       "/network-instances/network-instance/afts/counters"
+func (n *NetworkInstance_AftsPathAny) Counters() *NetworkInstance_Afts_CountersPathAny {
+	ps := &NetworkInstance_Afts_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // GlobalFilter (container): Configuration and state for a global filter applied to the
 // AFT. The filter is used to restrict which prefixes from the
 // network instance's AFT are streamed via gNMI; it does not
@@ -3489,7 +3524,7 @@ func (n *NetworkInstance_AftsPathAny) LabelEntryAny() *NetworkInstance_Afts_Labe
 //	Path from parent:     "mpls/label-entry"
 //	Path from root:       "/network-instances/network-instance/afts/mpls/label-entry"
 //
-//	Label: [oc.UnionUint32, oc.E_LabelEntry_Label]
+//	Label: [oc.UnionUint32, oc.E_Aft_LabelEntry_Label]
 func (n *NetworkInstance_AftsPath) LabelEntry(Label oc.NetworkInstance_Afts_LabelEntry_Label_Union) *NetworkInstance_Afts_LabelEntryPath {
 	ps := &NetworkInstance_Afts_LabelEntryPath{
 		NodePath: ygnmi.NewNodePath(
@@ -3510,7 +3545,7 @@ func (n *NetworkInstance_AftsPath) LabelEntry(Label oc.NetworkInstance_Afts_Labe
 //	Path from parent:     "mpls/label-entry"
 //	Path from root:       "/network-instances/network-instance/afts/mpls/label-entry"
 //
-//	Label: [oc.UnionUint32, oc.E_LabelEntry_Label]
+//	Label: [oc.UnionUint32, oc.E_Aft_LabelEntry_Label]
 func (n *NetworkInstance_AftsPathAny) LabelEntry(Label oc.NetworkInstance_Afts_LabelEntry_Label_Union) *NetworkInstance_Afts_LabelEntryPathAny {
 	ps := &NetworkInstance_Afts_LabelEntryPathAny{
 		NodePath: ygnmi.NewNodePath(
@@ -6040,6 +6075,5045 @@ func (n *NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_CountersPathAny)
 		},
 		nil,
 		nil,
+	)
+}
+
+// NetworkInstance_Afts_CountersPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters YANG schema element.
+type NetworkInstance_Afts_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_CountersPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters YANG schema element.
+type NetworkInstance_Afts_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Ipv4EntryAny (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+func (n *NetworkInstance_Afts_CountersPath) Ipv4EntryAny() *NetworkInstance_Afts_Counters_Ipv4EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast", "ipv4-entry"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4EntryAny (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv4EntryAny() *NetworkInstance_Afts_Counters_Ipv4EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast", "ipv4-entry"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4Entry (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+//
+//	Prefix: string
+func (n *NetworkInstance_Afts_CountersPath) Ipv4Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv4EntryPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast", "ipv4-entry"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4Entry (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+//
+//	Prefix: string
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv4Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv4EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast", "ipv4-entry"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4EntryMap (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+func (n *NetworkInstance_Afts_CountersPath) Ipv4EntryMap() *NetworkInstance_Afts_Counters_Ipv4EntryPathMap {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4EntryMap (list): Counters for each IPv4 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4-unicast/ipv4-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv4EntryMap() *NetworkInstance_Afts_Counters_Ipv4EntryPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4EntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-unicast"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6EntryAny (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+func (n *NetworkInstance_Afts_CountersPath) Ipv6EntryAny() *NetworkInstance_Afts_Counters_Ipv6EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast", "ipv6-entry"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6EntryAny (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv6EntryAny() *NetworkInstance_Afts_Counters_Ipv6EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast", "ipv6-entry"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6Entry (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+//
+//	Prefix: string
+func (n *NetworkInstance_Afts_CountersPath) Ipv6Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv6EntryPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast", "ipv6-entry"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6Entry (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+//
+//	Prefix: string
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv6Entry(Prefix string) *NetworkInstance_Afts_Counters_Ipv6EntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast", "ipv6-entry"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6EntryMap (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+func (n *NetworkInstance_Afts_CountersPath) Ipv6EntryMap() *NetworkInstance_Afts_Counters_Ipv6EntryPathMap {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6EntryMap (list): Counters for each IPv6 unicast AFT entry, keyed by prefix.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6-unicast/ipv6-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) Ipv6EntryMap() *NetworkInstance_Afts_Counters_Ipv6EntryPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6EntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-unicast"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntryAny (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+func (n *NetworkInstance_Afts_CountersPath) LabelEntryAny() *NetworkInstance_Afts_Counters_LabelEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls", "label-entry"},
+			map[string]interface{}{"label": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntryAny (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) LabelEntryAny() *NetworkInstance_Afts_Counters_LabelEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls", "label-entry"},
+			map[string]interface{}{"label": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntry (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+//
+//	Label: [oc.UnionUint32, oc.E_AftCounters_LabelEntry_Label]
+func (n *NetworkInstance_Afts_CountersPath) LabelEntry(Label oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union) *NetworkInstance_Afts_Counters_LabelEntryPath {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls", "label-entry"},
+			map[string]interface{}{"label": Label},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntry (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+//
+//	Label: [oc.UnionUint32, oc.E_AftCounters_LabelEntry_Label]
+func (n *NetworkInstance_Afts_CountersPathAny) LabelEntry(Label oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union) *NetworkInstance_Afts_Counters_LabelEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls", "label-entry"},
+			map[string]interface{}{"label": Label},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntryMap (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+func (n *NetworkInstance_Afts_CountersPath) LabelEntryMap() *NetworkInstance_Afts_Counters_LabelEntryPathMap {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelEntryMap (list): Counters for each MPLS AFT entry, keyed by label.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls/label-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) LabelEntryMap() *NetworkInstance_Afts_Counters_LabelEntryPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntryAny (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+func (n *NetworkInstance_Afts_CountersPath) MacEntryAny() *NetworkInstance_Afts_Counters_MacEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet", "mac-entry"},
+			map[string]interface{}{"mac-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntryAny (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) MacEntryAny() *NetworkInstance_Afts_Counters_MacEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet", "mac-entry"},
+			map[string]interface{}{"mac-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntry (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+//
+//	MacAddress: string
+func (n *NetworkInstance_Afts_CountersPath) MacEntry(MacAddress string) *NetworkInstance_Afts_Counters_MacEntryPath {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet", "mac-entry"},
+			map[string]interface{}{"mac-address": MacAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntry (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+//
+//	MacAddress: string
+func (n *NetworkInstance_Afts_CountersPathAny) MacEntry(MacAddress string) *NetworkInstance_Afts_Counters_MacEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet", "mac-entry"},
+			map[string]interface{}{"mac-address": MacAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntryMap (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+func (n *NetworkInstance_Afts_CountersPath) MacEntryMap() *NetworkInstance_Afts_Counters_MacEntryPathMap {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MacEntryMap (list): Counters for each Ethernet AFT entry, keyed by MAC address.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ethernet/mac-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) MacEntryMap() *NetworkInstance_Afts_Counters_MacEntryPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ethernet"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHopAny (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+func (n *NetworkInstance_Afts_CountersPath) NextHopAny() *NetworkInstance_Afts_Counters_NextHopPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHopAny (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+func (n *NetworkInstance_Afts_CountersPathAny) NextHopAny() *NetworkInstance_Afts_Counters_NextHopPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHop (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+//
+//	Index: uint64
+func (n *NetworkInstance_Afts_CountersPath) NextHop(Index uint64) *NetworkInstance_Afts_Counters_NextHopPath {
+	ps := &NetworkInstance_Afts_Counters_NextHopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHop (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+//
+//	Index: uint64
+func (n *NetworkInstance_Afts_CountersPathAny) NextHop(Index uint64) *NetworkInstance_Afts_Counters_NextHopPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHopMap (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+func (n *NetworkInstance_Afts_CountersPath) NextHopMap() *NetworkInstance_Afts_Counters_NextHopPathMap {
+	ps := &NetworkInstance_Afts_Counters_NextHopPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NextHopMap (list): Counters for each Next-Hop AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "next-hops/next-hop"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop"
+func (n *NetworkInstance_Afts_CountersPathAny) NextHopMap() *NetworkInstance_Afts_Counters_NextHopPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_NextHopPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"next-hops"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntryAny (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+func (n *NetworkInstance_Afts_CountersPath) PolicyForwardingEntryAny() *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding", "policy-forwarding-entry"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntryAny (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) PolicyForwardingEntryAny() *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding", "policy-forwarding-entry"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntry (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+//
+//	Index: uint64
+func (n *NetworkInstance_Afts_CountersPath) PolicyForwardingEntry(Index uint64) *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding", "policy-forwarding-entry"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntry (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+//
+//	Index: uint64
+func (n *NetworkInstance_Afts_CountersPathAny) PolicyForwardingEntry(Index uint64) *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding", "policy-forwarding-entry"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntryMap (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+func (n *NetworkInstance_Afts_CountersPath) PolicyForwardingEntryMap() *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PolicyForwardingEntryMap (list): Counters for each Policy Forwarding AFT entry, keyed by index.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "policy-forwarding/policy-forwarding-entry"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry"
+func (n *NetworkInstance_Afts_CountersPathAny) PolicyForwardingEntryMap() *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMapAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"policy-forwarding"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_CountersPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_CountersPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).OctetsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).OctetsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).PacketsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).PacketsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/prefix YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/prefix YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv4Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv4Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv4EntryPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4EntryPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_Ipv4EntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4EntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_Ipv4EntryPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4EntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_Ipv4EntryPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv4EntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) OctetsForwarded() *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwardedBackup (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT backup entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) OctetsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwardedBackup (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT backup entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) OctetsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_OctetsForwardedBackupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) PacketsForwarded() *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwardedBackup (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT backup entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) PacketsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwardedBackup (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT backup entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) PacketsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PacketsForwardedBackupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Prefix (leaf): The IPv4 destination prefix that should be matched to
+// utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/*/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) Prefix() *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Prefix (leaf): The IPv4 destination prefix that should be matched to
+// utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv4-unicast/ipv4-entry/*/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) Prefix() *NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv4Entry_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_Ipv4Entry] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_Ipv4Entry](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_Ipv4Entry] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_Ipv4Entry](
+		"NetworkInstance_Afts_Counters_Ipv4Entry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathMap) State() ygnmi.SingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).Ipv4Entry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ipv4-unicast"},
+			PostRelPath: []string{"openconfig-aft-counters:ipv4-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv4EntryPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_Ipv4Entry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).Ipv4Entry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ipv4-unicast"},
+			PostRelPath: []string{"openconfig-aft-counters:ipv4-entry"},
+		},
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).OctetsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).OctetsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).PacketsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).PacketsForwardedBackup
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/prefix YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/prefix YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_Ipv6Entry).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_Ipv6Entry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_Ipv6EntryPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6EntryPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_Ipv6EntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6EntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_Ipv6EntryPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6EntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_Ipv6EntryPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry YANG schema element.
+type NetworkInstance_Afts_Counters_Ipv6EntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) OctetsForwarded() *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwardedBackup (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT backup entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) OctetsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwardedBackup (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT backup entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/octets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) OctetsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_OctetsForwardedBackupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) PacketsForwarded() *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwardedBackup (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT backup entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) PacketsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwardedBackup (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT backup entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded-backup"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/state/packets-forwarded-backup"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) PacketsForwardedBackup() *NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PacketsForwardedBackupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded-backup"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Prefix (leaf): The IPv6 destination prefix that should be matched to
+// utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/*/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) Prefix() *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Prefix (leaf): The IPv6 destination prefix that should be matched to
+// utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ipv6-unicast/ipv6-entry/*/prefix"
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) Prefix() *NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny {
+	ps := &NetworkInstance_Afts_Counters_Ipv6Entry_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_Ipv6Entry] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_Ipv6Entry](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_Ipv6Entry] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_Ipv6Entry](
+		"NetworkInstance_Afts_Counters_Ipv6Entry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathMap) State() ygnmi.SingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).Ipv6Entry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ipv6-unicast"},
+			PostRelPath: []string{"openconfig-aft-counters:ipv6-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_Ipv6EntryPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_Ipv6Entry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).Ipv6Entry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ipv6-unicast"},
+			PostRelPath: []string{"openconfig-aft-counters:ipv6-entry"},
+		},
+	)
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_LabelPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/label YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_LabelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/label YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_LabelEntry_LabelPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/label"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/label"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_LabelPath) State() ygnmi.SingletonQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union] {
+	return ygnmi.NewSingletonQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).Label
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/label"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/label"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny) State() ygnmi.WildcardQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union] {
+	return ygnmi.NewWildcardQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).Label
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "label"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_LabelEntry_LabelPath) Config() ygnmi.ConfigQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union] {
+	return ygnmi.NewConfigQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).Label
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "label"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny) Config() ygnmi.WildcardQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union] {
+	return ygnmi.NewWildcardQuery[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).Label
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_LabelEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_LabelEntryPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntryPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_LabelEntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_LabelEntryPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_LabelEntryPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry YANG schema element.
+type NetworkInstance_Afts_Counters_LabelEntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Label (leaf): The MPLS label that should be matched to utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/label"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/*/label"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPath) Label() *NetworkInstance_Afts_Counters_LabelEntry_LabelPath {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_LabelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Label (leaf): The MPLS label that should be matched to utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/label"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/*/label"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathAny) Label() *NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_LabelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPath) OctetsForwarded() *NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPath) PacketsForwarded() *NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/mpls/label-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_LabelEntry_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_LabelEntry] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_LabelEntry](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_LabelEntry] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_LabelEntry](
+		"NetworkInstance_Afts_Counters_LabelEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathMap) State() ygnmi.SingletonQuery[map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry] {
+	return ygnmi.NewSingletonQuery[map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).LabelEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:mpls"},
+			PostRelPath: []string{"openconfig-aft-counters:label-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_LabelEntryPathMapAny) State() ygnmi.WildcardQuery[map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry] {
+	return ygnmi.NewWildcardQuery[map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Afts_Counters_LabelEntry_Label_Union]*oc.NetworkInstance_Afts_Counters_LabelEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).LabelEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:mpls"},
+			PostRelPath: []string{"openconfig-aft-counters:label-entry"},
+		},
+	)
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_MacAddressPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/mac-address YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_MacAddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/mac-address YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_MacEntry_MacAddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/mac-address"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/mac-address"
+func (n *NetworkInstance_Afts_Counters_MacEntry_MacAddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mac-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).MacAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/mac-address"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/mac-address"
+func (n *NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mac-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).MacAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "mac-address"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_MacEntry_MacAddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"mac-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).MacAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "mac-address"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"mac-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).MacAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_MacEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_MacEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_MacEntryPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntryPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_MacEntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_MacEntryPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_MacEntryPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_MacEntryPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/ethernet/mac-entry YANG schema element.
+type NetworkInstance_Afts_Counters_MacEntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_MacEntryPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// MacAddress (leaf): The MAC address that should be matched to utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/mac-address"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/*/mac-address"
+func (n *NetworkInstance_Afts_Counters_MacEntryPath) MacAddress() *NetworkInstance_Afts_Counters_MacEntry_MacAddressPath {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_MacAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MacAddress (leaf): The MAC address that should be matched to utilize the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/mac-address"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/*/mac-address"
+func (n *NetworkInstance_Afts_Counters_MacEntryPathAny) MacAddress() *NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_MacAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntryPath) OctetsForwarded() *NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntryPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntryPath) PacketsForwarded() *NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/ethernet/mac-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_MacEntryPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_MacEntry_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_MacEntryPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_MacEntry] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_MacEntry](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_MacEntryPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_MacEntry] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_MacEntry](
+		"NetworkInstance_Afts_Counters_MacEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_MacEntryPathMap) State() ygnmi.SingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_MacEntry] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.NetworkInstance_Afts_Counters_MacEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_MacEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).MacEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ethernet"},
+			PostRelPath: []string{"openconfig-aft-counters:mac-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_MacEntryPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_MacEntry] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.NetworkInstance_Afts_Counters_MacEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.NetworkInstance_Afts_Counters_MacEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).MacEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:ethernet"},
+			PostRelPath: []string{"openconfig-aft-counters:mac-entry"},
+		},
+	)
+}
+
+// NetworkInstance_Afts_Counters_NextHop_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_IndexPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_NextHop_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_IndexPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_NextHop_IndexPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Afts_Counters_NextHop_IndexPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Afts_Counters_NextHop_IndexPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_NextHop_IndexPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_NextHop_IndexPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_NextHop).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_NextHop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop YANG schema element.
+type NetworkInstance_Afts_Counters_NextHopPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop YANG schema element.
+type NetworkInstance_Afts_Counters_NextHopPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_NextHopPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_NextHopPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop YANG schema element.
+type NetworkInstance_Afts_Counters_NextHopPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_NextHopPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/next-hops/next-hop YANG schema element.
+type NetworkInstance_Afts_Counters_NextHopPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_NextHopPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Index (leaf): The index that should be matched to utilize the Next-Hop AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/*/index"
+func (n *NetworkInstance_Afts_Counters_NextHopPath) Index() *NetworkInstance_Afts_Counters_NextHop_IndexPath {
+	ps := &NetworkInstance_Afts_Counters_NextHop_IndexPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Index (leaf): The index that should be matched to utilize the Next-Hop AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/*/index"
+func (n *NetworkInstance_Afts_Counters_NextHopPathAny) Index() *NetworkInstance_Afts_Counters_NextHop_IndexPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHop_IndexPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHopPath) OctetsForwarded() *NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHopPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHop_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHopPath) PacketsForwarded() *NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/next-hops/next-hop/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_NextHopPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_NextHop_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_NextHopPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_NextHop] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_NextHop](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_NextHopPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_NextHop] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_NextHop](
+		"NetworkInstance_Afts_Counters_NextHop",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_NextHopPathMap) State() ygnmi.SingletonQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop] {
+	return ygnmi.NewSingletonQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).NextHop
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:next-hops"},
+			PostRelPath: []string{"openconfig-aft-counters:next-hop"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_NextHopPathMapAny) State() ygnmi.WildcardQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop] {
+	return ygnmi.NewWildcardQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.NetworkInstance_Afts_Counters_NextHop, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).NextHop
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:next-hops"},
+			PostRelPath: []string{"openconfig-aft-counters:next-hop"},
+		},
+	)
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/index YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/index YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/index"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/index"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).OctetsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-aft-counters"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry).PacketsForwarded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntryPath represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntryPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry YANG schema element.
+type NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Index (leaf): The index that should be matched to utilize the Policy Forwarding AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/*/index"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath) Index() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Index (leaf): The index that should be matched to utilize the Policy Forwarding AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/index"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/*/index"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny) Index() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_IndexPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath) OctetsForwarded() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OctetsForwarded (leaf): The number of octets which have matched, and been forwarded,
+// based on the AFT entry
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/octets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/octets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny) OctetsForwarded() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_OctetsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "octets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath) PacketsForwarded() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsForwarded (leaf): The number of packets which have matched, and been forwarded,
+// based on the AFT entry.
+//
+//	Defining module:      "openconfig-aft-counters"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/packets-forwarded"
+//	Path from root:       "/network-instances/network-instance/afts/counters/policy-forwarding/policy-forwarding-entry/state/packets-forwarded"
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny) PacketsForwarded() *NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPathAny {
+	ps := &NetworkInstance_Afts_Counters_PolicyForwardingEntry_PacketsForwardedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packets-forwarded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry](
+		"NetworkInstance_Afts_Counters_PolicyForwardingEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMap) State() ygnmi.SingletonQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry] {
+	return ygnmi.NewSingletonQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).PolicyForwardingEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:policy-forwarding"},
+			PostRelPath: []string{"openconfig-aft-counters:policy-forwarding-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_Counters_PolicyForwardingEntryPathMapAny) State() ygnmi.WildcardQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry] {
+	return ygnmi.NewWildcardQuery[map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry](
+		"NetworkInstance_Afts_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.NetworkInstance_Afts_Counters_PolicyForwardingEntry, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_Counters).PolicyForwardingEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-aft-counters:policy-forwarding"},
+			PostRelPath: []string{"openconfig-aft-counters:policy-forwarding-entry"},
+		},
 	)
 }
 

@@ -9,6 +9,7 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-counters.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
   - public/release/models/aft/openconfig-aft-global-filter.yang
@@ -812,17 +813,48 @@ func (t *Keychain_Key) To_Keychain_Key_KeyId_Union(i interface{}) (Keychain_Key_
 	return nil, fmt.Errorf("cannot convert %v to Keychain_Key_KeyId_Union, unknown union type, got: %T, want any of [string, uint64]", i, i)
 }
 
+// NetworkInstance_Afts_Counters_LabelEntry_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/afts/counters/mpls/label-entry/state/label within the YANG schema.
+// Union type can be one of [E_AftCounters_LabelEntry_Label, UnionUint32].
+type NetworkInstance_Afts_Counters_LabelEntry_Label_Union interface {
+	// Union type can be one of [E_AftCounters_LabelEntry_Label, UnionUint32]
+	Documentation_for_NetworkInstance_Afts_Counters_LabelEntry_Label_Union()
+}
+
+// Documentation_for_NetworkInstance_Afts_Counters_LabelEntry_Label_Union ensures that E_AftCounters_LabelEntry_Label
+// implements the NetworkInstance_Afts_Counters_LabelEntry_Label_Union interface.
+func (E_AftCounters_LabelEntry_Label) Documentation_for_NetworkInstance_Afts_Counters_LabelEntry_Label_Union() {
+}
+
+// Documentation_for_NetworkInstance_Afts_Counters_LabelEntry_Label_Union ensures that UnionUint32
+// implements the NetworkInstance_Afts_Counters_LabelEntry_Label_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Afts_Counters_LabelEntry_Label_Union() {}
+
+// To_NetworkInstance_Afts_Counters_LabelEntry_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Afts_Counters_LabelEntry_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Afts_Counters_LabelEntry) To_NetworkInstance_Afts_Counters_LabelEntry_Label_Union(i interface{}) (NetworkInstance_Afts_Counters_LabelEntry_Label_Union, error) {
+	if v, ok := i.(NetworkInstance_Afts_Counters_LabelEntry_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_Counters_LabelEntry_Label_Union, unknown union type, got: %T, want any of [E_AftCounters_LabelEntry_Label, uint32]", i, i)
+}
+
 // NetworkInstance_Afts_LabelEntry_Label_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/label within the YANG schema.
-// Union type can be one of [E_LabelEntry_Label, UnionUint32].
+// Union type can be one of [E_Aft_LabelEntry_Label, UnionUint32].
 type NetworkInstance_Afts_LabelEntry_Label_Union interface {
-	// Union type can be one of [E_LabelEntry_Label, UnionUint32]
+	// Union type can be one of [E_Aft_LabelEntry_Label, UnionUint32]
 	Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union()
 }
 
-// Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union ensures that E_LabelEntry_Label
+// Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union ensures that E_Aft_LabelEntry_Label
 // implements the NetworkInstance_Afts_LabelEntry_Label_Union interface.
-func (E_LabelEntry_Label) Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union() {}
+func (E_Aft_LabelEntry_Label) Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union() {}
 
 // Documentation_for_NetworkInstance_Afts_LabelEntry_Label_Union ensures that UnionUint32
 // implements the NetworkInstance_Afts_LabelEntry_Label_Union interface.
@@ -839,7 +871,7 @@ func (t *NetworkInstance_Afts_LabelEntry) To_NetworkInstance_Afts_LabelEntry_Lab
 	case uint32:
 		return UnionUint32(v), nil
 	}
-	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_LabelEntry_Label_Union, unknown union type, got: %T, want any of [E_LabelEntry_Label, uint32]", i, i)
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_LabelEntry_Label_Union, unknown union type, got: %T, want any of [E_Aft_LabelEntry_Label, uint32]", i, i)
 }
 
 // NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union is an interface that is implemented by valid types for the union
