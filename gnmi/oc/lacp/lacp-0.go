@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -739,6 +740,187 @@ func (n *Lacp_Interface_FallbackPathAny) Config() ygnmi.WildcardQuery[bool] {
 			ret := gs.(*oc.Lacp_Interface).Fallback
 			if ret == nil {
 				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lacp_Interface_FallbackTimeoutPath represents the /openconfig-lacp/lacp/interfaces/interface/state/fallback-timeout YANG schema element.
+type Lacp_Interface_FallbackTimeoutPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lacp_Interface_FallbackTimeoutPathAny represents the wildcard version of the /openconfig-lacp/lacp/interfaces/interface/state/fallback-timeout YANG schema element.
+type Lacp_Interface_FallbackTimeoutPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lacp_Interface_FallbackTimeoutPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "state/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/state/fallback-timeout"
+func (n *Lacp_Interface_FallbackTimeoutPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"Lacp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fallback-timeout"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lacp_Interface).FallbackTimeout
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "state/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/state/fallback-timeout"
+func (n *Lacp_Interface_FallbackTimeoutPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Lacp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fallback-timeout"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lacp_Interface).FallbackTimeout
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "config/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/config/fallback-timeout"
+func (n *Lacp_Interface_FallbackTimeoutPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"Lacp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fallback-timeout"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lacp_Interface).FallbackTimeout
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "config/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/config/fallback-timeout"
+func (n *Lacp_Interface_FallbackTimeoutPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Lacp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fallback-timeout"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lacp_Interface).FallbackTimeout
+			if ret == nil {
+				var zero uint16
 				return zero, false
 			}
 			return *ret, true
@@ -1701,6 +1883,42 @@ func (n *Lacp_InterfacePathAny) Fallback() *Lacp_Interface_FallbackPathAny {
 	ps := &Lacp_Interface_FallbackPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "fallback"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FallbackTimeout (leaf): The timeout in seconds to wait for LACP PDUs before falling back to a single port.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "*/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/*/fallback-timeout"
+func (n *Lacp_InterfacePath) FallbackTimeout() *Lacp_Interface_FallbackTimeoutPath {
+	ps := &Lacp_Interface_FallbackTimeoutPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fallback-timeout"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FallbackTimeout (leaf): The timeout in seconds to wait for LACP PDUs before falling back to a single port.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "*/fallback-timeout"
+//	Path from root:       "/lacp/interfaces/interface/*/fallback-timeout"
+func (n *Lacp_InterfacePathAny) FallbackTimeout() *Lacp_Interface_FallbackTimeoutPathAny {
+	ps := &Lacp_Interface_FallbackTimeoutPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fallback-timeout"},
 			map[string]interface{}{},
 			n,
 		),

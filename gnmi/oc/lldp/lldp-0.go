@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -1549,6 +1550,187 @@ func (n *Lldp_SystemNamePathAny) Config() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// Lldp_TtlPath represents the /openconfig-lldp/lldp/state/ttl YANG schema element.
+type Lldp_TtlPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_TtlPathAny represents the wildcard version of the /openconfig-lldp/lldp/state/ttl YANG schema element.
+type Lldp_TtlPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_TtlPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/ttl"
+//	Path from root:       "/lldp/state/ttl"
+func (n *Lldp_TtlPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lldp).Ttl
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/ttl"
+//	Path from root:       "/lldp/state/ttl"
+func (n *Lldp_TtlPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lldp).Ttl
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/ttl"
+//	Path from root:       "/lldp/config/ttl"
+func (n *Lldp_TtlPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"Lldp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lldp).Ttl
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/ttl"
+//	Path from root:       "/lldp/config/ttl"
+func (n *Lldp_TtlPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Lldp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Lldp).Ttl
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // LldpPath represents the /openconfig-lldp/lldp YANG schema element.
 type LldpPath struct {
 	*ygnmi.NodePath
@@ -2136,6 +2318,162 @@ func (n *LldpPathAny) SystemName() *Lldp_SystemNamePathAny {
 	ps := &Lldp_SystemNamePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "system-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TlvAny (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+func (n *LldpPath) TlvAny() *Lldp_TlvPathAny {
+	ps := &Lldp_TlvPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs", "tlv"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// TlvAny (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+func (n *LldpPathAny) TlvAny() *Lldp_TlvPathAny {
+	ps := &Lldp_TlvPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs", "tlv"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Tlv (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+//
+//	Name: string
+func (n *LldpPath) Tlv(Name string) *Lldp_TlvPath {
+	ps := &Lldp_TlvPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs", "tlv"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Tlv (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+//
+//	Name: string
+func (n *LldpPathAny) Tlv(Name string) *Lldp_TlvPathAny {
+	ps := &Lldp_TlvPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs", "tlv"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// TlvMap (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+func (n *LldpPath) TlvMap() *Lldp_TlvPathMap {
+	ps := &Lldp_TlvPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TlvMap (list): List of global custom LLDP TLVs
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "custom-tlvs/tlv"
+//	Path from root:       "/lldp/custom-tlvs/tlv"
+func (n *LldpPathAny) TlvMap() *Lldp_TlvPathMapAny {
+	ps := &Lldp_TlvPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"custom-tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ttl (leaf): Time-to-live value for LLDP PDUs transmitted by this system.
+// This value is carried in the TTL TLV and indicates the time
+// interval for which information contained in the LLDP PDU is
+// valid at the receiving system.
+// Note: The TTL value is independent from the hello-timer interval.
+// The hello-timer controls how frequently LLDP PDUs are transmitted,
+// while the TTL value indicates the validity duration of information
+// contained in those PDUs at the receiving system.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/ttl"
+//	Path from root:       "/lldp/*/ttl"
+func (n *LldpPath) Ttl() *Lldp_TtlPath {
+	ps := &Lldp_TtlPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ttl"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ttl (leaf): Time-to-live value for LLDP PDUs transmitted by this system.
+// This value is carried in the TTL TLV and indicates the time
+// interval for which information contained in the LLDP PDU is
+// valid at the receiving system.
+// Note: The TTL value is independent from the hello-timer interval.
+// The hello-timer controls how frequently LLDP PDUs are transmitted,
+// while the TTL value indicates the validity duration of information
+// contained in those PDUs at the receiving system.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/ttl"
+//	Path from root:       "/lldp/*/ttl"
+func (n *LldpPathAny) Ttl() *Lldp_TtlPathAny {
+	ps := &Lldp_TtlPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ttl"},
 			map[string]interface{}{},
 			n,
 		),
@@ -3534,6 +3872,175 @@ func (n *Lldp_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Lldp_Counters] {
 	)
 }
 
+// Lldp_Interface_CustomTlvNamesPath represents the /openconfig-lldp/lldp/interfaces/interface/state/custom-tlv-names YANG schema element.
+type Lldp_Interface_CustomTlvNamesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_CustomTlvNamesPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/state/custom-tlv-names YANG schema element.
+type Lldp_Interface_CustomTlvNamesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_CustomTlvNamesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/state/custom-tlv-names"
+func (n *Lldp_Interface_CustomTlvNamesPath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewSingletonQuery[[]string](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "custom-tlv-names"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.Lldp_Interface).CustomTlvNames
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/state/custom-tlv-names"
+func (n *Lldp_Interface_CustomTlvNamesPathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "custom-tlv-names"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.Lldp_Interface).CustomTlvNames
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/config/custom-tlv-names"
+func (n *Lldp_Interface_CustomTlvNamesPath) Config() ygnmi.ConfigQuery[[]string] {
+	return ygnmi.NewConfigQuery[[]string](
+		"Lldp_Interface",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "custom-tlv-names"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.Lldp_Interface).CustomTlvNames
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/config/custom-tlv-names"
+func (n *Lldp_Interface_CustomTlvNamesPathAny) Config() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"Lldp_Interface",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "custom-tlv-names"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.Lldp_Interface).CustomTlvNames
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lldp_Interface_EnabledPath represents the /openconfig-lldp/lldp/interfaces/interface/state/enabled YANG schema element.
 type Lldp_Interface_EnabledPath struct {
 	*ygnmi.NodePath
@@ -3698,6 +4205,204 @@ func (n *Lldp_Interface_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
 			ret := gs.(*oc.Lldp_Interface).Enabled
 			if ret == nil {
 				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Interface_LastGoodPacketReceivedPath represents the /openconfig-lldp/lldp/interfaces/interface/state/last-good-packet-received YANG schema element.
+type Lldp_Interface_LastGoodPacketReceivedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_LastGoodPacketReceivedPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/state/last-good-packet-received YANG schema element.
+type Lldp_Interface_LastGoodPacketReceivedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_LastGoodPacketReceivedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/lldp/interfaces/interface/state/last-good-packet-received"
+func (n *Lldp_Interface_LastGoodPacketReceivedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Lldp_Interface).LastGoodPacketReceived
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/lldp/interfaces/interface/state/last-good-packet-received"
+func (n *Lldp_Interface_LastGoodPacketReceivedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Lldp_Interface).LastGoodPacketReceived
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Interface_LastPacketTransmittedPath represents the /openconfig-lldp/lldp/interfaces/interface/state/last-packet-transmitted YANG schema element.
+type Lldp_Interface_LastPacketTransmittedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_LastPacketTransmittedPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/state/last-packet-transmitted YANG schema element.
+type Lldp_Interface_LastPacketTransmittedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_LastPacketTransmittedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/lldp/interfaces/interface/state/last-packet-transmitted"
+func (n *Lldp_Interface_LastPacketTransmittedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Lldp_Interface).LastPacketTransmitted
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/lldp/interfaces/interface/state/last-packet-transmitted"
+func (n *Lldp_Interface_LastPacketTransmittedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Lldp_Interface).LastPacketTransmitted
+			if ret == nil {
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -3896,6 +4601,187 @@ func (n *Lldp_Interface_NamePathAny) Config() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// Lldp_Interface_PortDescriptionPath represents the /openconfig-lldp/lldp/interfaces/interface/state/port-description YANG schema element.
+type Lldp_Interface_PortDescriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_PortDescriptionPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/state/port-description YANG schema element.
+type Lldp_Interface_PortDescriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_PortDescriptionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/port-description"
+//	Path from root:       "/lldp/interfaces/interface/state/port-description"
+func (n *Lldp_Interface_PortDescriptionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port-description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface).PortDescription
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/port-description"
+//	Path from root:       "/lldp/interfaces/interface/state/port-description"
+func (n *Lldp_Interface_PortDescriptionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port-description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface).PortDescription
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/port-description"
+//	Path from root:       "/lldp/interfaces/interface/config/port-description"
+func (n *Lldp_Interface_PortDescriptionPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "port-description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface).PortDescription
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/port-description"
+//	Path from root:       "/lldp/interfaces/interface/config/port-description"
+func (n *Lldp_Interface_PortDescriptionPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "port-description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface).PortDescription
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lldp_InterfacePath represents the /openconfig-lldp/lldp/interfaces/interface YANG schema element.
 type Lldp_InterfacePath struct {
 	*ygnmi.NodePath
@@ -3960,6 +4846,50 @@ func (n *Lldp_InterfacePathAny) Counters() *Lldp_Interface_CountersPathAny {
 	return ps
 }
 
+// CustomTlvNames (leaf-list): References to global custom TLV names to be advertised on this
+// interface. If a custom TLV name is present in this list, the
+// corresponding custom TLV will be advertised in LLDP PDUs transmitted
+// on this interface. If a custom TLV name is not present in this list,
+// it will not be advertised on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/*/custom-tlv-names"
+func (n *Lldp_InterfacePath) CustomTlvNames() *Lldp_Interface_CustomTlvNamesPath {
+	ps := &Lldp_Interface_CustomTlvNamesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "custom-tlv-names"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CustomTlvNames (leaf-list): References to global custom TLV names to be advertised on this
+// interface. If a custom TLV name is present in this list, the
+// corresponding custom TLV will be advertised in LLDP PDUs transmitted
+// on this interface. If a custom TLV name is not present in this list,
+// it will not be advertised on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/custom-tlv-names"
+//	Path from root:       "/lldp/interfaces/interface/*/custom-tlv-names"
+func (n *Lldp_InterfacePathAny) CustomTlvNames() *Lldp_Interface_CustomTlvNamesPathAny {
+	ps := &Lldp_Interface_CustomTlvNamesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "custom-tlv-names"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // Enabled (leaf): Enable or disable the LLDP protocol on the interface.
 //
 //	Defining module:      "openconfig-lldp"
@@ -3988,6 +4918,78 @@ func (n *Lldp_InterfacePathAny) Enabled() *Lldp_Interface_EnabledPathAny {
 	ps := &Lldp_Interface_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastGoodPacketReceived (leaf): Timestamp of the last valid LLDP packet received on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/lldp/interfaces/interface/state/last-good-packet-received"
+func (n *Lldp_InterfacePath) LastGoodPacketReceived() *Lldp_Interface_LastGoodPacketReceivedPath {
+	ps := &Lldp_Interface_LastGoodPacketReceivedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastGoodPacketReceived (leaf): Timestamp of the last valid LLDP packet received on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/lldp/interfaces/interface/state/last-good-packet-received"
+func (n *Lldp_InterfacePathAny) LastGoodPacketReceived() *Lldp_Interface_LastGoodPacketReceivedPathAny {
+	ps := &Lldp_Interface_LastGoodPacketReceivedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastPacketTransmitted (leaf): Timestamp of the last LLDP packet transmitted on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/lldp/interfaces/interface/state/last-packet-transmitted"
+func (n *Lldp_InterfacePath) LastPacketTransmitted() *Lldp_Interface_LastPacketTransmittedPath {
+	ps := &Lldp_Interface_LastPacketTransmittedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastPacketTransmitted (leaf): Timestamp of the last LLDP packet transmitted on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/lldp/interfaces/interface/state/last-packet-transmitted"
+func (n *Lldp_InterfacePathAny) LastPacketTransmitted() *Lldp_Interface_LastPacketTransmittedPathAny {
+	ps := &Lldp_Interface_LastPacketTransmittedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
 			map[string]interface{}{},
 			n,
 		),
@@ -4134,6 +5136,60 @@ func (n *Lldp_InterfacePathAny) NeighborMap() *Lldp_Interface_NeighborPathMapAny
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// PortDescription (leaf): The binary string advertised in the 'Port Description' TLV
+// (Type 3) of LLDP.
+// When this leaf is populated, its value must be used as the
+// advertised port description, overriding any system-generated
+// strings or the generic interface description found in
+// /interfaces/interface/config/description.
+//
+// If this leaf is not populated, the implementation
+// should default to advertising the value of
+// /interfaces/interface/state/description.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/port-description"
+//	Path from root:       "/lldp/interfaces/interface/*/port-description"
+func (n *Lldp_InterfacePath) PortDescription() *Lldp_Interface_PortDescriptionPath {
+	ps := &Lldp_Interface_PortDescriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port-description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PortDescription (leaf): The binary string advertised in the 'Port Description' TLV
+// (Type 3) of LLDP.
+// When this leaf is populated, its value must be used as the
+// advertised port description, overriding any system-generated
+// strings or the generic interface description found in
+// /interfaces/interface/config/description.
+//
+// If this leaf is not populated, the implementation
+// should default to advertising the value of
+// /interfaces/interface/state/description.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/port-description"
+//	Path from root:       "/lldp/interfaces/interface/*/port-description"
+func (n *Lldp_InterfacePathAny) PortDescription() *Lldp_Interface_PortDescriptionPathAny {
+	ps := &Lldp_Interface_PortDescriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port-description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -9175,6 +10231,105 @@ func (n *Lldp_Interface_Neighbor_MgmtAddressPathMapAny) State() ygnmi.WildcardQu
 	)
 }
 
+// Lldp_Interface_Neighbor_Tlv_NamePath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name YANG schema element.
+type Lldp_Interface_Neighbor_Tlv_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_Neighbor_Tlv_NamePathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name YANG schema element.
+type Lldp_Interface_Neighbor_Tlv_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_Tlv_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *Lldp_Interface_Neighbor_Tlv_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Interface_Neighbor_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *Lldp_Interface_Neighbor_Tlv_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface_Neighbor_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lldp_Interface_Neighbor_Tlv_OuiPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/oui YANG schema element.
 type Lldp_Interface_Neighbor_Tlv_OuiPath struct {
 	*ygnmi.NodePath
@@ -9839,6 +10994,48 @@ type Lldp_Interface_Neighbor_TlvPathMapAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *Lldp_Interface_Neighbor_TlvPathMap) PathOriginName() string {
 	return "openconfig"
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *Lldp_Interface_Neighbor_TlvPath) Name() *Lldp_Interface_Neighbor_Tlv_NamePath {
+	ps := &Lldp_Interface_Neighbor_Tlv_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *Lldp_Interface_Neighbor_TlvPathAny) Name() *Lldp_Interface_Neighbor_Tlv_NamePathAny {
+	ps := &Lldp_Interface_Neighbor_Tlv_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Oui (leaf): The organizationally unique identifier field shall contain
@@ -10740,6 +11937,1355 @@ func (n *Lldp_MgmtAddressPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.
 		&ygnmi.CompressionInfo{
 			PreRelPath:  []string{"openconfig-lldp:mgmt-addresses"},
 			PostRelPath: []string{"openconfig-lldp:mgmt-address"},
+		},
+	)
+}
+
+// Lldp_Tlv_NamePath represents the /openconfig-lldp/lldp/custom-tlvs/tlv/state/name YANG schema element.
+type Lldp_Tlv_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Tlv_NamePathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv/state/name YANG schema element.
+type Lldp_Tlv_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Tlv_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/name"
+func (n *Lldp_Tlv_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/name"
+func (n *Lldp_Tlv_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/name"
+func (n *Lldp_Tlv_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/name"
+func (n *Lldp_Tlv_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Tlv_OuiPath represents the /openconfig-lldp/lldp/custom-tlvs/tlv/state/oui YANG schema element.
+type Lldp_Tlv_OuiPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Tlv_OuiPathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv/state/oui YANG schema element.
+type Lldp_Tlv_OuiPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Tlv_OuiPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/oui"
+func (n *Lldp_Tlv_OuiPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "oui"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Oui
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/oui"
+func (n *Lldp_Tlv_OuiPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "oui"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Oui
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/oui"
+func (n *Lldp_Tlv_OuiPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "oui"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Oui
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/oui"
+func (n *Lldp_Tlv_OuiPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "oui"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Oui
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Tlv_OuiSubtypePath represents the /openconfig-lldp/lldp/custom-tlvs/tlv/state/oui-subtype YANG schema element.
+type Lldp_Tlv_OuiSubtypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Tlv_OuiSubtypePathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv/state/oui-subtype YANG schema element.
+type Lldp_Tlv_OuiSubtypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Tlv_OuiSubtypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/oui-subtype"
+func (n *Lldp_Tlv_OuiSubtypePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "oui-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).OuiSubtype
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/oui-subtype"
+func (n *Lldp_Tlv_OuiSubtypePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "oui-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).OuiSubtype
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/oui-subtype"
+func (n *Lldp_Tlv_OuiSubtypePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "oui-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).OuiSubtype
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/oui-subtype"
+func (n *Lldp_Tlv_OuiSubtypePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "oui-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Tlv).OuiSubtype
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Tlv_TypePath represents the /openconfig-lldp/lldp/custom-tlvs/tlv/state/type YANG schema element.
+type Lldp_Tlv_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Tlv_TypePathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv/state/type YANG schema element.
+type Lldp_Tlv_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Tlv_TypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/type"
+func (n *Lldp_Tlv_TypePath) State() ygnmi.SingletonQuery[int32] {
+	return ygnmi.NewSingletonQuery[int32](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (int32, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Type
+			if ret == nil {
+				var zero int32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/type"
+func (n *Lldp_Tlv_TypePathAny) State() ygnmi.WildcardQuery[int32] {
+	return ygnmi.NewWildcardQuery[int32](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (int32, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Type
+			if ret == nil {
+				var zero int32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/type"
+func (n *Lldp_Tlv_TypePath) Config() ygnmi.ConfigQuery[int32] {
+	return ygnmi.NewConfigQuery[int32](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (int32, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Type
+			if ret == nil {
+				var zero int32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/type"
+func (n *Lldp_Tlv_TypePathAny) Config() ygnmi.WildcardQuery[int32] {
+	return ygnmi.NewWildcardQuery[int32](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (int32, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Type
+			if ret == nil {
+				var zero int32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Tlv_ValuePath represents the /openconfig-lldp/lldp/custom-tlvs/tlv/state/value YANG schema element.
+type Lldp_Tlv_ValuePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Tlv_ValuePathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv/state/value YANG schema element.
+type Lldp_Tlv_ValuePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Tlv_ValuePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/value"
+func (n *Lldp_Tlv_ValuePath) State() ygnmi.SingletonQuery[oc.Binary] {
+	return ygnmi.NewSingletonQuery[oc.Binary](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.Binary, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Value
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/state/value"
+func (n *Lldp_Tlv_ValuePathAny) State() ygnmi.WildcardQuery[oc.Binary] {
+	return ygnmi.NewWildcardQuery[oc.Binary](
+		"Lldp_Tlv",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.Binary, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Value
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/value"
+func (n *Lldp_Tlv_ValuePath) Config() ygnmi.ConfigQuery[oc.Binary] {
+	return ygnmi.NewConfigQuery[oc.Binary](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.Binary, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Value
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/config/value"
+func (n *Lldp_Tlv_ValuePathAny) Config() ygnmi.WildcardQuery[oc.Binary] {
+	return ygnmi.NewWildcardQuery[oc.Binary](
+		"Lldp_Tlv",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.Binary, bool) {
+			ret := gs.(*oc.Lldp_Tlv).Value
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_TlvPath represents the /openconfig-lldp/lldp/custom-tlvs/tlv YANG schema element.
+type Lldp_TlvPath struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_TlvPathAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv YANG schema element.
+type Lldp_TlvPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_TlvPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Lldp_TlvPathMap represents the /openconfig-lldp/lldp/custom-tlvs/tlv YANG schema element.
+type Lldp_TlvPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_TlvPathMapAny represents the wildcard version of the /openconfig-lldp/lldp/custom-tlvs/tlv YANG schema element.
+type Lldp_TlvPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_TlvPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/name"
+func (n *Lldp_TlvPath) Name() *Lldp_Tlv_NamePath {
+	ps := &Lldp_Tlv_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/name"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/name"
+func (n *Lldp_TlvPathAny) Name() *Lldp_Tlv_NamePathAny {
+	ps := &Lldp_Tlv_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Oui (leaf): The organizationally unique identifier field shall contain
+// the organization's OUI as defined in Clause 9 of IEEE Std
+// 802. The high-order octet is 0 and the low-order 3 octets
+// are the SMI Network Management Private Enterprise Code of
+// the Vendor in network byte order, as defined in the
+// 'Assigned Numbers' RFC [RFC3232].
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/oui"
+func (n *Lldp_TlvPath) Oui() *Lldp_Tlv_OuiPath {
+	ps := &Lldp_Tlv_OuiPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "oui"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Oui (leaf): The organizationally unique identifier field shall contain
+// the organization's OUI as defined in Clause 9 of IEEE Std
+// 802. The high-order octet is 0 and the low-order 3 octets
+// are the SMI Network Management Private Enterprise Code of
+// the Vendor in network byte order, as defined in the
+// 'Assigned Numbers' RFC [RFC3232].
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/oui"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/oui"
+func (n *Lldp_TlvPathAny) Oui() *Lldp_Tlv_OuiPathAny {
+	ps := &Lldp_Tlv_OuiPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "oui"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OuiSubtype (leaf): The organizationally defined subtype field shall contain a
+// unique subtype value assigned by the defining organization.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/oui-subtype"
+func (n *Lldp_TlvPath) OuiSubtype() *Lldp_Tlv_OuiSubtypePath {
+	ps := &Lldp_Tlv_OuiSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "oui-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OuiSubtype (leaf): The organizationally defined subtype field shall contain a
+// unique subtype value assigned by the defining organization.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/oui-subtype"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/oui-subtype"
+func (n *Lldp_TlvPathAny) OuiSubtype() *Lldp_Tlv_OuiSubtypePathAny {
+	ps := &Lldp_Tlv_OuiSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "oui-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): The integer value identifying the type of information
+// contained in the value field.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/type"
+func (n *Lldp_TlvPath) Type() *Lldp_Tlv_TypePath {
+	ps := &Lldp_Tlv_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): The integer value identifying the type of information
+// contained in the value field.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/type"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/type"
+func (n *Lldp_TlvPathAny) Type() *Lldp_Tlv_TypePathAny {
+	ps := &Lldp_Tlv_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Value (leaf): A variable-length octet-string containing the
+// instance-specific information for this TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/value"
+func (n *Lldp_TlvPath) Value() *Lldp_Tlv_ValuePath {
+	ps := &Lldp_Tlv_ValuePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "value"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Value (leaf): A variable-length octet-string containing the
+// instance-specific information for this TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/value"
+//	Path from root:       "/lldp/custom-tlvs/tlv/*/value"
+func (n *Lldp_TlvPathAny) Value() *Lldp_Tlv_ValuePathAny {
+	ps := &Lldp_Tlv_ValuePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "value"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPath) State() ygnmi.SingletonQuery[*oc.Lldp_Tlv] {
+	return ygnmi.NewSingletonQuery[*oc.Lldp_Tlv](
+		"Lldp_Tlv",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathAny) State() ygnmi.WildcardQuery[*oc.Lldp_Tlv] {
+	return ygnmi.NewWildcardQuery[*oc.Lldp_Tlv](
+		"Lldp_Tlv",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPath) Config() ygnmi.ConfigQuery[*oc.Lldp_Tlv] {
+	return ygnmi.NewConfigQuery[*oc.Lldp_Tlv](
+		"Lldp_Tlv",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathAny) Config() ygnmi.WildcardQuery[*oc.Lldp_Tlv] {
+	return ygnmi.NewWildcardQuery[*oc.Lldp_Tlv](
+		"Lldp_Tlv",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathMap) State() ygnmi.SingletonQuery[map[string]*oc.Lldp_Tlv] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Lldp_Tlv](
+		"Lldp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Tlv, bool) {
+			ret := gs.(*oc.Lldp).Tlv
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:custom-tlvs"},
+			PostRelPath: []string{"openconfig-lldp:tlv"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Lldp_Tlv] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Lldp_Tlv](
+		"Lldp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Tlv, bool) {
+			ret := gs.(*oc.Lldp).Tlv
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:custom-tlvs"},
+			PostRelPath: []string{"openconfig-lldp:tlv"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.Lldp_Tlv] {
+	return ygnmi.NewConfigQuery[map[string]*oc.Lldp_Tlv](
+		"Lldp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Tlv, bool) {
+			ret := gs.(*oc.Lldp).Tlv
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:custom-tlvs"},
+			PostRelPath: []string{"openconfig-lldp:tlv"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Lldp_TlvPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.Lldp_Tlv] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Lldp_Tlv](
+		"Lldp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Tlv, bool) {
+			ret := gs.(*oc.Lldp).Tlv
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:custom-tlvs"},
+			PostRelPath: []string{"openconfig-lldp:tlv"},
 		},
 	)
 }

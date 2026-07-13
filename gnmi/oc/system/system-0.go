@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -56786,6 +56787,105 @@ func (n *System_MacAddressPathAny) Config() ygnmi.WildcardQuery[*oc.System_MacAd
 	)
 }
 
+// System_Memory_AvailablePath represents the /openconfig-system/system/memory/state/available YANG schema element.
+type System_Memory_AvailablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Memory_AvailablePathAny represents the wildcard version of the /openconfig-system/system/memory/state/available YANG schema element.
+type System_Memory_AvailablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Memory_AvailablePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_Memory_AvailablePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Memory",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Memory).Available
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Memory) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_Memory_AvailablePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Memory",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Memory).Available
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Memory) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_Memory_FreePath represents the /openconfig-system/system/memory/state/free YANG schema element.
 type System_Memory_FreePath struct {
 	*ygnmi.NodePath
@@ -57195,6 +57295,50 @@ type System_MemoryPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *System_MemoryPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// Available (leaf): The amount of memory that is available for use.
+//
+// In addition to the memory reported by free, this leaf also includes
+// memory used for system caches and buffers that can be
+// reclaimed by the operating system.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_MemoryPath) Available() *System_Memory_AvailablePath {
+	ps := &System_Memory_AvailablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Available (leaf): The amount of memory that is available for use.
+//
+// In addition to the memory reported by free, this leaf also includes
+// memory used for system caches and buffers that can be
+// reclaimed by the operating system.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_MemoryPathAny) Available() *System_Memory_AvailablePathAny {
+	ps := &System_Memory_AvailablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Counters (container): Counters for tracking system memory errors
@@ -67262,6 +67406,187 @@ func (n *System_SshServer_EnablePathAny) Config() ygnmi.WildcardQuery[bool] {
 	)
 }
 
+// System_SshServer_HostCertificatePath represents the /openconfig-system/system/ssh-server/state/host-certificate YANG schema element.
+type System_SshServer_HostCertificatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_SshServer_HostCertificatePathAny represents the wildcard version of the /openconfig-system/system/ssh-server/state/host-certificate YANG schema element.
+type System_SshServer_HostCertificatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_SshServer_HostCertificatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/host-certificate"
+//	Path from root:       "/system/ssh-server/state/host-certificate"
+func (n *System_SshServer_HostCertificatePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_SshServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/host-certificate"
+//	Path from root:       "/system/ssh-server/state/host-certificate"
+func (n *System_SshServer_HostCertificatePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_SshServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/host-certificate"
+//	Path from root:       "/system/ssh-server/config/host-certificate"
+func (n *System_SshServer_HostCertificatePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_SshServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/host-certificate"
+//	Path from root:       "/system/ssh-server/config/host-certificate"
+func (n *System_SshServer_HostCertificatePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_SshServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_SshServer_ProtocolVersionPath represents the /openconfig-system/system/ssh-server/state/protocol-version YANG schema element.
 type System_SshServer_ProtocolVersionPath struct {
 	*ygnmi.NodePath
@@ -68347,6 +68672,42 @@ func (n *System_SshServerPathAny) Enable() *System_SshServer_EnablePathAny {
 	ps := &System_SshServer_EnablePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HostCertificate (leaf): SSH Host Certificate string. This is the full content of an openssh host certificate
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/host-certificate"
+//	Path from root:       "/system/ssh-server/*/host-certificate"
+func (n *System_SshServerPath) HostCertificate() *System_SshServer_HostCertificatePath {
+	ps := &System_SshServer_HostCertificatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "host-certificate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HostCertificate (leaf): SSH Host Certificate string. This is the full content of an openssh host certificate
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/host-certificate"
+//	Path from root:       "/system/ssh-server/*/host-certificate"
+func (n *System_SshServerPathAny) HostCertificate() *System_SshServer_HostCertificatePathAny {
+	ps := &System_SshServer_HostCertificatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "host-certificate"},
 			map[string]interface{}{},
 			n,
 		),

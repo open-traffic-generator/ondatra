@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -11046,6 +11047,204 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_EnabledPathAny) Config() ygnmi.Wil
 	)
 }
 
+// TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPathAny represents the wildcard version of the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"TerminalDevice_Channel_Ethernet_Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp).LastGoodPacketReceived
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"TerminalDevice_Channel_Ethernet_Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp).LastGoodPacketReceived
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPathAny represents the wildcard version of the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"TerminalDevice_Channel_Ethernet_Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp).LastPacketTransmitted
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"TerminalDevice_Channel_Ethernet_Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp).LastPacketTransmitted
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // TerminalDevice_Channel_Ethernet_Lldp_SnoopingPath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/state/snooping YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp_SnoopingPath struct {
 	*ygnmi.NodePath
@@ -11304,6 +11503,78 @@ func (n *TerminalDevice_Channel_Ethernet_LldpPathAny) Enabled() *TerminalDevice_
 	ps := &TerminalDevice_Channel_Ethernet_Lldp_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastGoodPacketReceived (leaf): Timestamp of the last valid LLDP packet received on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received"
+func (n *TerminalDevice_Channel_Ethernet_LldpPath) LastGoodPacketReceived() *TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastGoodPacketReceived (leaf): Timestamp of the last valid LLDP packet received on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-good-packet-received"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-good-packet-received"
+func (n *TerminalDevice_Channel_Ethernet_LldpPathAny) LastGoodPacketReceived() *TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPathAny {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_LastGoodPacketReceivedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-good-packet-received"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastPacketTransmitted (leaf): Timestamp of the last LLDP packet transmitted on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted"
+func (n *TerminalDevice_Channel_Ethernet_LldpPath) LastPacketTransmitted() *TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastPacketTransmitted (leaf): Timestamp of the last LLDP packet transmitted on this interface.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/last-packet-transmitted"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/state/last-packet-transmitted"
+func (n *TerminalDevice_Channel_Ethernet_LldpPathAny) LastPacketTransmitted() *TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPathAny {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_LastPacketTransmittedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-packet-transmitted"},
 			map[string]interface{}{},
 			n,
 		),
@@ -15062,6 +15333,105 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPathMapAny) State() ygnmi.
 	)
 }
 
+// TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePathAny represents the wildcard version of the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/name"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/name"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_OuiPath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/oui YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_OuiPath struct {
 	*ygnmi.NodePath
@@ -15726,6 +16096,48 @@ type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvPathMapAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvPathMap) PathOriginName() string {
 	return "openconfig"
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/name"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvPath) Name() *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Administrative name of the custom TLV for human identification
+// and reference purposes, allowing operators to define a template
+// once at the global level and then reference it by name elsewhere
+// rather than by their numeric type, OUI, and subtype values.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/name"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv/state/name"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvPathAny) Name() *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePathAny {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Oui (leaf): The organizationally unique identifier field shall contain

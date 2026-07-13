@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -635,6 +636,42 @@ func (n *QosPathAny) InterfaceMap() *Qos_InterfacePathMapAny {
 	ps := &Qos_InterfacePathMapAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"interfaces"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PacketTrim (container): Container for switch level packet trimming
+// parameters.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "packet-trim"
+//	Path from root:       "/qos/packet-trim"
+func (n *QosPath) PacketTrim() *Qos_PacketTrimPath {
+	ps := &Qos_PacketTrimPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packet-trim"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PacketTrim (container): Container for switch level packet trimming
+// parameters.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "packet-trim"
+//	Path from root:       "/qos/packet-trim"
+func (n *QosPathAny) PacketTrim() *Qos_PacketTrimPathAny {
+	ps := &Qos_PacketTrimPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packet-trim"},
 			map[string]interface{}{},
 			n,
 		),
@@ -2950,6 +2987,187 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAn
 	)
 }
 
+// Qos_BufferAllocationProfile_Queue_TrimEnablePath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/trim-enable YANG schema element.
+type Qos_BufferAllocationProfile_Queue_TrimEnablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_BufferAllocationProfile_Queue_TrimEnablePathAny represents the wildcard version of the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/trim-enable YANG schema element.
+type Qos_BufferAllocationProfile_Queue_TrimEnablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_BufferAllocationProfile_Queue_TrimEnablePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/trim-enable"
+func (n *Qos_BufferAllocationProfile_Queue_TrimEnablePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).TrimEnable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/trim-enable"
+func (n *Qos_BufferAllocationProfile_Queue_TrimEnablePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).TrimEnable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/trim-enable"
+func (n *Qos_BufferAllocationProfile_Queue_TrimEnablePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "trim-enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).TrimEnable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/trim-enable"
+func (n *Qos_BufferAllocationProfile_Queue_TrimEnablePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "trim-enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).TrimEnable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Qos_BufferAllocationProfile_Queue_UseSharedBufferPath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/use-shared-buffer YANG schema element.
 type Qos_BufferAllocationProfile_Queue_UseSharedBufferPath struct {
 	*ygnmi.NodePath
@@ -3457,6 +3675,54 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) StaticSharedBufferLimitTempor
 	ps := &Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "static-shared-buffer-limit-temporal"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimEnable (leaf): Flag to enable packet trimming per queue. If leaf is set
+// to false, the packet should be completely discarded,
+// without preserving any part of the data. If leaf is set to
+// true, the packet must be trimmed instead of discarded.
+// Typically, this involves truncating the payload while
+// preserving the packet header for notification or
+// diagnostic purposes.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/trim-enable"
+func (n *Qos_BufferAllocationProfile_QueuePath) TrimEnable() *Qos_BufferAllocationProfile_Queue_TrimEnablePath {
+	ps := &Qos_BufferAllocationProfile_Queue_TrimEnablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "trim-enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimEnable (leaf): Flag to enable packet trimming per queue. If leaf is set
+// to false, the packet should be completely discarded,
+// without preserving any part of the data. If leaf is set to
+// true, the packet must be trimmed instead of discarded.
+// Typically, this involves truncating the payload while
+// preserving the packet header for notification or
+// diagnostic purposes.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/trim-enable"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/trim-enable"
+func (n *Qos_BufferAllocationProfile_QueuePathAny) TrimEnable() *Qos_BufferAllocationProfile_Queue_TrimEnablePathAny {
+	ps := &Qos_BufferAllocationProfile_Queue_TrimEnablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "trim-enable"},
 			map[string]interface{}{},
 			n,
 		),
@@ -6215,6 +6481,42 @@ func (n *Qos_Classifier_Term_ConditionsPath) PathOriginName() string {
 	return "openconfig"
 }
 
+// Fabric (container): Enclosing container for managing device-specific fabric
+// attributes.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "fabric"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric"
+func (n *Qos_Classifier_Term_ConditionsPath) Fabric() *Qos_Classifier_Term_Conditions_FabricPath {
+	ps := &Qos_Classifier_Term_Conditions_FabricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Fabric (container): Enclosing container for managing device-specific fabric
+// attributes.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "fabric"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric"
+func (n *Qos_Classifier_Term_ConditionsPathAny) Fabric() *Qos_Classifier_Term_Conditions_FabricPathAny {
+	ps := &Qos_Classifier_Term_Conditions_FabricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Ipv4 (container): Top level container for IPv4 match field data
 //
 //	Defining module:      "openconfig-packet-match"
@@ -6464,6 +6766,348 @@ func (n *Qos_Classifier_Term_ConditionsPath) Config() ygnmi.ConfigQuery[*oc.Qos_
 func (n *Qos_Classifier_Term_ConditionsPathAny) Config() ygnmi.WildcardQuery[*oc.Qos_Classifier_Term_Conditions] {
 	return ygnmi.NewWildcardQuery[*oc.Qos_Classifier_Term_Conditions](
 		"Qos_Classifier_Term_Conditions",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/fabric/state/fabric-priority YANG schema element.
+type Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/fabric/state/fabric-priority YANG schema element.
+type Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/state/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Fabric).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/state/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Fabric).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/config/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Fabric).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/config/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Fabric).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Qos_Classifier_Term_Conditions_FabricPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/fabric YANG schema element.
+type Qos_Classifier_Term_Conditions_FabricPath struct {
+	*ygnmi.NodePath
+}
+
+// Qos_Classifier_Term_Conditions_FabricPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/fabric YANG schema element.
+type Qos_Classifier_Term_Conditions_FabricPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_Classifier_Term_Conditions_FabricPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// FabricPriority (leaf): Specifies the priority for the forwarding group for local
+// transmission through the device (e.g., across the internal
+// switching fabric). The priority is expressed as a numerical
+// value where higher values indicate higher precedence. For
+// example, traffic with fabric priority 128 is treated with
+// higher priority than traffic with fabric priority 0.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/*/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_FabricPath) FabricPriority() *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath {
+	ps := &Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fabric-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FabricPriority (leaf): Specifies the priority for the forwarding group for local
+// transmission through the device (e.g., across the internal
+// switching fabric). The priority is expressed as a numerical
+// value where higher values indicate higher precedence. For
+// example, traffic with fabric priority 128 is treated with
+// higher priority than traffic with fabric priority 0.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/fabric-priority"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/fabric/*/fabric-priority"
+func (n *Qos_Classifier_Term_Conditions_FabricPathAny) FabricPriority() *Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny {
+	ps := &Qos_Classifier_Term_Conditions_Fabric_FabricPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fabric-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Qos_Classifier_Term_Conditions_FabricPath) State() ygnmi.SingletonQuery[*oc.Qos_Classifier_Term_Conditions_Fabric] {
+	return ygnmi.NewSingletonQuery[*oc.Qos_Classifier_Term_Conditions_Fabric](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Qos_Classifier_Term_Conditions_FabricPathAny) State() ygnmi.WildcardQuery[*oc.Qos_Classifier_Term_Conditions_Fabric] {
+	return ygnmi.NewWildcardQuery[*oc.Qos_Classifier_Term_Conditions_Fabric](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Qos_Classifier_Term_Conditions_FabricPath) Config() ygnmi.ConfigQuery[*oc.Qos_Classifier_Term_Conditions_Fabric] {
+	return ygnmi.NewConfigQuery[*oc.Qos_Classifier_Term_Conditions_Fabric](
+		"Qos_Classifier_Term_Conditions_Fabric",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Qos_Classifier_Term_Conditions_FabricPathAny) Config() ygnmi.WildcardQuery[*oc.Qos_Classifier_Term_Conditions_Fabric] {
+	return ygnmi.NewWildcardQuery[*oc.Qos_Classifier_Term_Conditions_Fabric](
+		"Qos_Classifier_Term_Conditions_Fabric",
 		false,
 		true,
 		false,
@@ -33943,6 +34587,561 @@ func (n *Qos_Interface_Output_SchedulerPolicy_SchedulerPathMapAny) State() ygnmi
 	)
 }
 
+// Qos_PacketTrim_FabricPriorityPath represents the /openconfig-qos/qos/packet-trim/state/fabric-priority YANG schema element.
+type Qos_PacketTrim_FabricPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_PacketTrim_FabricPriorityPathAny represents the wildcard version of the /openconfig-qos/qos/packet-trim/state/fabric-priority YANG schema element.
+type Qos_PacketTrim_FabricPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_PacketTrim_FabricPriorityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/fabric-priority"
+//	Path from root:       "/qos/packet-trim/state/fabric-priority"
+func (n *Qos_PacketTrim_FabricPriorityPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"Qos_PacketTrim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/fabric-priority"
+//	Path from root:       "/qos/packet-trim/state/fabric-priority"
+func (n *Qos_PacketTrim_FabricPriorityPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_PacketTrim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/fabric-priority"
+//	Path from root:       "/qos/packet-trim/config/fabric-priority"
+func (n *Qos_PacketTrim_FabricPriorityPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"Qos_PacketTrim",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/fabric-priority"
+//	Path from root:       "/qos/packet-trim/config/fabric-priority"
+func (n *Qos_PacketTrim_FabricPriorityPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_PacketTrim",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fabric-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).FabricPriority
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Qos_PacketTrim_SymmetricDscpPath represents the /openconfig-qos/qos/packet-trim/state/symmetric-dscp YANG schema element.
+type Qos_PacketTrim_SymmetricDscpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_PacketTrim_SymmetricDscpPathAny represents the wildcard version of the /openconfig-qos/qos/packet-trim/state/symmetric-dscp YANG schema element.
+type Qos_PacketTrim_SymmetricDscpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_PacketTrim_SymmetricDscpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/state/symmetric-dscp"
+func (n *Qos_PacketTrim_SymmetricDscpPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"Qos_PacketTrim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "symmetric-dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).SymmetricDscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/state/symmetric-dscp"
+func (n *Qos_PacketTrim_SymmetricDscpPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_PacketTrim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "symmetric-dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).SymmetricDscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/config/symmetric-dscp"
+func (n *Qos_PacketTrim_SymmetricDscpPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"Qos_PacketTrim",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "symmetric-dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).SymmetricDscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/config/symmetric-dscp"
+func (n *Qos_PacketTrim_SymmetricDscpPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Qos_PacketTrim",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "symmetric-dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_PacketTrim).SymmetricDscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_PacketTrim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Qos_PacketTrimPath represents the /openconfig-qos/qos/packet-trim YANG schema element.
+type Qos_PacketTrimPath struct {
+	*ygnmi.NodePath
+}
+
+// Qos_PacketTrimPathAny represents the wildcard version of the /openconfig-qos/qos/packet-trim YANG schema element.
+type Qos_PacketTrimPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Qos_PacketTrimPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// FabricPriority (leaf): Traffic class used to transmit trimmed
+// packets.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/fabric-priority"
+//	Path from root:       "/qos/packet-trim/*/fabric-priority"
+func (n *Qos_PacketTrimPath) FabricPriority() *Qos_PacketTrim_FabricPriorityPath {
+	ps := &Qos_PacketTrim_FabricPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fabric-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FabricPriority (leaf): Traffic class used to transmit trimmed
+// packets.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/fabric-priority"
+//	Path from root:       "/qos/packet-trim/*/fabric-priority"
+func (n *Qos_PacketTrimPathAny) FabricPriority() *Qos_PacketTrim_FabricPriorityPathAny {
+	ps := &Qos_PacketTrim_FabricPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fabric-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SymmetricDscp (leaf): The DSCP value for the notification packet
+// (sometimes called a 'symmetric packet') sent back
+// to the source when a packet is trimmed.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/*/symmetric-dscp"
+func (n *Qos_PacketTrimPath) SymmetricDscp() *Qos_PacketTrim_SymmetricDscpPath {
+	ps := &Qos_PacketTrim_SymmetricDscpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "symmetric-dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SymmetricDscp (leaf): The DSCP value for the notification packet
+// (sometimes called a 'symmetric packet') sent back
+// to the source when a packet is trimmed.
+//
+//	Defining module:      "openconfig-qos"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/symmetric-dscp"
+//	Path from root:       "/qos/packet-trim/*/symmetric-dscp"
+func (n *Qos_PacketTrimPathAny) SymmetricDscp() *Qos_PacketTrim_SymmetricDscpPathAny {
+	ps := &Qos_PacketTrim_SymmetricDscpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "symmetric-dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Qos_PacketTrimPath) State() ygnmi.SingletonQuery[*oc.Qos_PacketTrim] {
+	return ygnmi.NewSingletonQuery[*oc.Qos_PacketTrim](
+		"Qos_PacketTrim",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Qos_PacketTrimPathAny) State() ygnmi.WildcardQuery[*oc.Qos_PacketTrim] {
+	return ygnmi.NewWildcardQuery[*oc.Qos_PacketTrim](
+		"Qos_PacketTrim",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Qos_PacketTrimPath) Config() ygnmi.ConfigQuery[*oc.Qos_PacketTrim] {
+	return ygnmi.NewConfigQuery[*oc.Qos_PacketTrim](
+		"Qos_PacketTrim",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Qos_PacketTrimPathAny) Config() ygnmi.WildcardQuery[*oc.Qos_PacketTrim] {
+	return ygnmi.NewWildcardQuery[*oc.Qos_PacketTrim](
+		"Qos_PacketTrim",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Qos_Queue_NamePath represents the /openconfig-qos/qos/queues/queue/state/name YANG schema element.
 type Qos_Queue_NamePath struct {
 	*ygnmi.NodePath
@@ -36606,7 +37805,7 @@ func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MaxThresholdPercent() *Q
 	return ps
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// MinThreshold (leaf): The minimum threshold parameter for a RED-managed queue in bytes.
 // When the average queue length is less than minth, all packets are admitted
 // to the queue.  Mututally exclusive with min-threshold-percent and
 // max-threshold-percent.
@@ -36627,7 +37826,7 @@ func (n *Qos_QueueManagementProfile_Red_UniformPath) MinThreshold() *Qos_QueueMa
 	return ps
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// MinThreshold (leaf): The minimum threshold parameter for a RED-managed queue in bytes.
 // When the average queue length is less than minth, all packets are admitted
 // to the queue.  Mututally exclusive with min-threshold-percent and
 // max-threshold-percent.
@@ -36648,7 +37847,7 @@ func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MinThreshold() *Qos_Queu
 	return ps
 }
 
-// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// MinThresholdPercent (leaf): The minimum threshold parameter for a RED-managed queue in percent.
 // When the average queue length is less than minth, all packets are
 // admitted to the queue.  Mutually exclusive with min-threshold and
 // max-threshold.
@@ -36669,7 +37868,7 @@ func (n *Qos_QueueManagementProfile_Red_UniformPath) MinThresholdPercent() *Qos_
 	return ps
 }
 
-// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// MinThresholdPercent (leaf): The minimum threshold parameter for a RED-managed queue in percent.
 // When the average queue length is less than minth, all packets are
 // admitted to the queue.  Mutually exclusive with min-threshold and
 // max-threshold.
@@ -38620,7 +39819,7 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MaxThresholdPercent() *
 	return ps
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// MinThreshold (leaf): The minimum threshold parameter for a RED-managed queue in bytes.
 // When the average queue length is less than minth, all packets are admitted
 // to the queue.  Mututally exclusive with min-threshold-percent and
 // max-threshold-percent.
@@ -38641,7 +39840,7 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPath) MinThreshold() *Qos_QueueM
 	return ps
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// MinThreshold (leaf): The minimum threshold parameter for a RED-managed queue in bytes.
 // When the average queue length is less than minth, all packets are admitted
 // to the queue.  Mututally exclusive with min-threshold-percent and
 // max-threshold-percent.
@@ -38662,7 +39861,7 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MinThreshold() *Qos_Que
 	return ps
 }
 
-// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// MinThresholdPercent (leaf): The minimum threshold parameter for a RED-managed queue in percent.
 // When the average queue length is less than minth, all packets are
 // admitted to the queue.  Mutually exclusive with min-threshold and
 // max-threshold.
@@ -38683,7 +39882,7 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPath) MinThresholdPercent() *Qos
 	return ps
 }
 
-// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// MinThresholdPercent (leaf): The minimum threshold parameter for a RED-managed queue in percent.
 // When the average queue length is less than minth, all packets are
 // admitted to the queue.  Mutually exclusive with min-threshold and
 // max-threshold.

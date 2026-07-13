@@ -18,7 +18,7 @@
 
 set -e
 
-OC_VERSION="v5.6.0"
+OC_VERSION="v5.8.0"
 
 git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
@@ -32,6 +32,7 @@ YANG_FILES=(
   public/release/models/acl/openconfig-packet-match.yang
   public/release/models/aft/openconfig-aft-common.yang
   public/release/models/aft/openconfig-aft-ethernet.yang
+  public/release/models/aft/openconfig-aft-global-filter.yang
   public/release/models/aft/openconfig-aft-ipv4.yang
   public/release/models/aft/openconfig-aft-ipv6.yang
   public/release/models/aft/openconfig-aft-mpls.yang

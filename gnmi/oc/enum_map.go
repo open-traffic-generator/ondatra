@@ -11,6 +11,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -419,6 +420,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Cpu_Index": {
 		1: {Name: "ALL"},
 	},
+	"E_DecapMplsLabelStack_Label": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
 	"E_DefaultMetric_Flags": {
 		1: {Name: "INTERNAL"},
 	},
@@ -431,6 +440,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9: {Name: "NO_LABEL"},
 	},
 	"E_Egress_PushLabel": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
+	"E_EncapMplsLabelStack_Label": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
 		2: {Name: "ROUTER_ALERT"},
 		3: {Name: "IPV6_EXPLICIT_NULL"},
@@ -1156,6 +1173,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "FEC_RS528", DefiningModule: "openconfig-if-ethernet"},
 		4: {Name: "FEC_RS544", DefiningModule: "openconfig-if-ethernet"},
 		5: {Name: "FEC_RS544_2X_INTERLEAVE", DefiningModule: "openconfig-if-ethernet"},
+		6: {Name: "FEC_RS544_2X_INTERLEAVE_CL172", DefiningModule: "openconfig-if-ethernet"},
+		7: {Name: "FEC_RS544_2X_INTERLEAVE_ETC", DefiningModule: "openconfig-if-ethernet"},
+		8: {Name: "FEC_RS544_LOW_LATENCY", DefiningModule: "openconfig-if-ethernet"},
 	},
 	"E_IfIp_IpAddressOrigin": {
 		1: {Name: "OTHER"},
@@ -1686,8 +1706,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "ADMIN_UP", DefiningModule: "openconfig-mpls-types"},
 	},
 	"E_MplsTypes_TUNNEL_TYPE": {
-		1: {Name: "P2MP", DefiningModule: "openconfig-mpls-types"},
-		2: {Name: "P2P", DefiningModule: "openconfig-mpls-types"},
+		1: {Name: "BYPASS_P2P", DefiningModule: "openconfig-mpls-types"},
+		2: {Name: "P2MP", DefiningModule: "openconfig-mpls-types"},
+		3: {Name: "P2P", DefiningModule: "openconfig-mpls-types"},
 	},
 	"E_Mpls_CspfTieBreaking": {
 		1: {Name: "RANDOM"},
@@ -2120,6 +2141,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "ENTROPY_LABEL_INDICATOR"},
 		9: {Name: "NO_LABEL"},
 	},
+	"E_PolicyForwarding_FORWARDING_ACTION": {
+		1: {Name: "DROP", DefiningModule: "openconfig-policy-forwarding"},
+		2: {Name: "FORWARD", DefiningModule: "openconfig-policy-forwarding"},
+		3: {Name: "REJECT", DefiningModule: "openconfig-policy-forwarding"},
+	},
 	"E_PolicyTypes_ATTRIBUTE_COMPARISON": {
 		1: {Name: "ATTRIBUTE_EQ", DefiningModule: "openconfig-policy-types"},
 		2: {Name: "ATTRIBUTE_GE", DefiningModule: "openconfig-policy-types"},
@@ -2146,6 +2172,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Policy_Type": {
 		1: {Name: "PBR_POLICY"},
 		2: {Name: "VRF_SELECTION_POLICY"},
+		3: {Name: "MATCH_ACTION_POLICY"},
 	},
 	"E_PortSet_ExcludePort": {
 		1: {Name: "ANY"},
@@ -2576,8 +2603,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		32: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
 		33: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
 		34: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		35: {Name: "ETH_800GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		36: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
+		35: {Name: "ETH_800GBASE_2XFR4", DefiningModule: "openconfig-transport-types"},
+		36: {Name: "ETH_800GBASE_DR8", DefiningModule: "openconfig-transport-types"},
+		37: {Name: "ETH_800GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		38: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_FIBER_CONNECTOR_TYPE": {
 		1: {Name: "AOC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
@@ -3417,11 +3446,17 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/origin-protocol": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
 		},
+		"/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_DecapMplsLabelStack_Label)(0)),
+		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/label": {
 			reflect.TypeOf((E_LabelEntry_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack": {
 			reflect.TypeOf((E_LabelEntry_PoppedMplsLabelStack)(0)),
+		},
+		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_EncapMplsLabelStack_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack": {
 			reflect.TypeOf((E_Mpls_MplsLabelStack)(0)),
@@ -3858,6 +3893,15 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/policy-forwarding/policies/policy/config/type": {
 			reflect.TypeOf((E_Policy_Type)(0)),
 		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/forwarding-action": {
+			reflect.TypeOf((E_PolicyForwarding_FORWARDING_ACTION)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action": {
+			reflect.TypeOf((E_PolicyForwarding_FORWARDING_ACTION)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/address-family": {
+			reflect.TypeOf((E_Types_ADDRESS_FAMILY)(0)),
+		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/ipv4/config/fragment-offsets": {
 			reflect.TypeOf((E_Ipv4_FragmentOffsets)(0)),
 		},
@@ -3905,6 +3949,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/l2/state/ethertype": {
 			reflect.TypeOf((E_PacketMatchTypes_ETHERTYPE)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family": {
+			reflect.TypeOf((E_Types_ADDRESS_FAMILY)(0)),
 		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/config/builtin-detail": {
 			reflect.TypeOf((E_Transport_BuiltinDetail)(0)),
@@ -4935,6 +4982,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/segment-routing/srlbs/srlb/state/dataplane-type": {
 			reflect.TypeOf((E_SegmentRouting_SrDataplaneType)(0)),
+		},
+		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_EncapMplsLabelStack_Label)(0)),
 		},
 		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/state/decapsulate-header": {
 			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),

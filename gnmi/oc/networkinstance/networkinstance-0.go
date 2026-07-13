@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -3153,6 +3154,58 @@ func (n *NetworkInstance_AftsPathAny) AftSummaries() *NetworkInstance_Afts_AftSu
 	return ps
 }
 
+// GlobalFilter (container): Configuration and state for a global filter applied to the
+// AFT. The filter is used to restrict which prefixes from the
+// network instance's AFT are streamed via gNMI; it does not
+// affect which prefixes are installed in the forwarding plane
+// (hardware FIB). All gNMI clients subscribing to the IPv4 or
+// IPv6 AFT for this network instance will only receive data
+// corresponding to prefixes accepted by the configured
+// filter policy. Prefixes rejected by the policy are omitted
+// from the streamed AFT state for every subscriber, regardless
+// of the client.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "global-filter"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter"
+func (n *NetworkInstance_AftsPath) GlobalFilter() *NetworkInstance_Afts_GlobalFilterPath {
+	ps := &NetworkInstance_Afts_GlobalFilterPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global-filter"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// GlobalFilter (container): Configuration and state for a global filter applied to the
+// AFT. The filter is used to restrict which prefixes from the
+// network instance's AFT are streamed via gNMI; it does not
+// affect which prefixes are installed in the forwarding plane
+// (hardware FIB). All gNMI clients subscribing to the IPv4 or
+// IPv6 AFT for this network instance will only receive data
+// corresponding to prefixes accepted by the configured
+// filter policy. Prefixes rejected by the policy are omitted
+// from the streamed AFT state for every subscriber, regardless
+// of the client.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "global-filter"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter"
+func (n *NetworkInstance_AftsPathAny) GlobalFilter() *NetworkInstance_Afts_GlobalFilterPathAny {
+	ps := &NetworkInstance_Afts_GlobalFilterPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global-filter"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Ipv4EntryAny (list): List of the IPv4 unicast entries within the abstract
 // forwarding table. This list is keyed by the destination IPv4
 // prefix.
@@ -4145,6 +4198,56 @@ func (n *NetworkInstance_AftsPathAny) State() ygnmi.WildcardQuery[*oc.NetworkIns
 	)
 }
 
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_AftsPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Afts] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Afts](
+		"NetworkInstance_Afts",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_AftsPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts](
+		"NetworkInstance_Afts",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Afts_AftSummariesPath represents the /openconfig-network-instance/network-instances/network-instance/afts/aft-summaries YANG schema element.
 type NetworkInstance_Afts_AftSummariesPath struct {
 	*ygnmi.NodePath
@@ -4259,6 +4362,56 @@ func (n *NetworkInstance_Afts_AftSummariesPathAny) State() ygnmi.WildcardQuery[*
 		"NetworkInstance_Afts_AftSummaries",
 		true,
 		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummariesPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Afts_AftSummaries] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Afts_AftSummaries](
+		"NetworkInstance_Afts_AftSummaries",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummariesPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_AftSummaries] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_AftSummaries](
+		"NetworkInstance_Afts_AftSummaries",
+		false,
+		true,
 		false,
 		false,
 		true,
@@ -4430,6 +4583,56 @@ func (n *NetworkInstance_Afts_AftSummaries_Ipv4UnicastPathAny) State() ygnmi.Wil
 		"NetworkInstance_Afts_AftSummaries_Ipv4Unicast",
 		true,
 		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummaries_Ipv4UnicastPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv4Unicast] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv4Unicast](
+		"NetworkInstance_Afts_AftSummaries_Ipv4Unicast",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummaries_Ipv4UnicastPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv4Unicast] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv4Unicast](
+		"NetworkInstance_Afts_AftSummaries_Ipv4Unicast",
+		false,
+		true,
 		false,
 		false,
 		true,
@@ -5205,6 +5408,56 @@ func (n *NetworkInstance_Afts_AftSummaries_Ipv6UnicastPathAny) State() ygnmi.Wil
 	)
 }
 
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummaries_Ipv6UnicastPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv6Unicast] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv6Unicast](
+		"NetworkInstance_Afts_AftSummaries_Ipv6Unicast",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_AftSummaries_Ipv6UnicastPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv6Unicast] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_AftSummaries_Ipv6Unicast](
+		"NetworkInstance_Afts_AftSummaries_Ipv6Unicast",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_OriginProtocolPath represents the /openconfig-network-instance/network-instances/network-instance/afts/aft-summaries/ipv6-unicast/protocols/protocol/state/origin-protocol YANG schema element.
 type NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_OriginProtocolPath struct {
 	*ygnmi.NodePath
@@ -5771,6 +6024,575 @@ func (n *NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_CountersPathAny)
 		"NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_Counters",
 		true,
 		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath represents the /openconfig-network-instance/network-instances/network-instance/afts/global-filter/state/ipv4-policy YANG schema element.
+type NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/global-filter/state/ipv4-policy YANG schema element.
+type NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "state/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/state/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ipv4-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv4Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "state/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/state/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ipv4-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv4Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "config/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/config/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ipv4-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv4Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "config/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/config/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ipv4-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv4Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath represents the /openconfig-network-instance/network-instances/network-instance/afts/global-filter/state/ipv6-policy YANG schema element.
+type NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/global-filter/state/ipv6-policy YANG schema element.
+type NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "state/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/state/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ipv6-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv6Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "state/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/state/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ipv6-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv6Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "config/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/config/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ipv6-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv6Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-aft-global-filter"
+//	Path from parent:     "config/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/config/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ipv6-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_GlobalFilter).Ipv6Policy
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_GlobalFilter) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Afts_GlobalFilterPath represents the /openconfig-network-instance/network-instances/network-instance/afts/global-filter YANG schema element.
+type NetworkInstance_Afts_GlobalFilterPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_GlobalFilterPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/global-filter YANG schema element.
+type NetworkInstance_Afts_GlobalFilterPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_GlobalFilterPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Ipv4Policy (leaf): Reference to a routing policy that is used to filter the
+// IPv4 prefixes that are streamed from the FIB. This does
+// not affect which prefixes are installed in the FIB. The
+// policy may, for example, use an explicit prefix set to
+// match prefixes, or match prefixes that are more specific than
+// a given prefix.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/*/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilterPath) Ipv4Policy() *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath {
+	ps := &NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ipv4-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ipv4Policy (leaf): Reference to a routing policy that is used to filter the
+// IPv4 prefixes that are streamed from the FIB. This does
+// not affect which prefixes are installed in the FIB. The
+// policy may, for example, use an explicit prefix set to
+// match prefixes, or match prefixes that are more specific than
+// a given prefix.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ipv4-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/*/ipv4-policy"
+func (n *NetworkInstance_Afts_GlobalFilterPathAny) Ipv4Policy() *NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny {
+	ps := &NetworkInstance_Afts_GlobalFilter_Ipv4PolicyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ipv4-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ipv6Policy (leaf): Reference to a routing policy that is used to filter the
+// IPv6 prefixes that are streamed from the FIB. This does
+// not affect which prefixes are installed in the FIB. The
+// policy may, for example, use an explicit prefix set to
+// match prefixes, or match prefixes that are more specific than
+// a given prefix.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/*/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilterPath) Ipv6Policy() *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath {
+	ps := &NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ipv6-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ipv6Policy (leaf): Reference to a routing policy that is used to filter the
+// IPv6 prefixes that are streamed from the FIB. This does
+// not affect which prefixes are installed in the FIB. The
+// policy may, for example, use an explicit prefix set to
+// match prefixes, or match prefixes that are more specific than
+// a given prefix.
+//
+//	Defining module:      "openconfig-aft-global-filter"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ipv6-policy"
+//	Path from root:       "/network-instances/network-instance/afts/global-filter/*/ipv6-policy"
+func (n *NetworkInstance_Afts_GlobalFilterPathAny) Ipv6Policy() *NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny {
+	ps := &NetworkInstance_Afts_GlobalFilter_Ipv6PolicyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ipv6-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_GlobalFilterPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_GlobalFilter] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_GlobalFilter](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_GlobalFilterPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_GlobalFilter] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_GlobalFilter](
+		"NetworkInstance_Afts_GlobalFilter",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_GlobalFilterPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Afts_GlobalFilter] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Afts_GlobalFilter](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_GlobalFilterPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_GlobalFilter] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_GlobalFilter](
+		"NetworkInstance_Afts_GlobalFilter",
+		false,
+		true,
 		false,
 		false,
 		true,
@@ -7266,6 +8088,98 @@ func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) State() ygnmi.Wildcard
 		},
 		nil,
 		nil,
+	)
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPath represents the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPath) PathOriginName() string {
+	return ""
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMap) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMap) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap](
+		"NetworkInstance_Afts_LabelEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_LabelEntry).DecapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:decap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:decap-mpls-label-stack"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStackPathMapAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap](
+		"NetworkInstance_Afts_LabelEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_LabelEntry).DecapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_LabelEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:decap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:decap-mpls-label-stack"},
+		},
 	)
 }
 
@@ -12382,9 +13296,65 @@ func (n *NetworkInstance_Afts_NextHop_EncapHeader_MplsPath) PathOriginName() str
 	return "openconfig"
 }
 
+// EncapMplsLabelStackMap (list): A stack of MPLS label values.  The first entry in the list is the
+// label at the bottom of the stack.  The bottom of the stack is adjacent
+// to the MPLS payload. This supports duplicate labels.
+//
+// For example, a packet with a label stack of two labels, the bottom
+// label being 42 and the top label being 8072 will be represented with
+// a leaf-list of [42, 8072].  The resulting packet, starting with the
+// beginning of the packet will be '[8072][42][Payload]'.
+//
+// Note: a swap operation is reflected by entries in the
+// decap-mpls-label-stack and the encap-mpls-label-stack
+//
+//	Defining module:      "openconfig-aft-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "encap-mpls-label-stacks/encap-mpls-label-stack"
+//	Path from root:       "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack"
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_MplsPath) EncapMplsLabelStackMap() *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap {
+	ps := &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encap-mpls-label-stacks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapMplsLabelStackMap (list): A stack of MPLS label values.  The first entry in the list is the
+// label at the bottom of the stack.  The bottom of the stack is adjacent
+// to the MPLS payload. This supports duplicate labels.
+//
+// For example, a packet with a label stack of two labels, the bottom
+// label being 42 and the top label being 8072 will be represented with
+// a leaf-list of [42, 8072].  The resulting packet, starting with the
+// beginning of the packet will be '[8072][42][Payload]'.
+//
+// Note: a swap operation is reflected by entries in the
+// decap-mpls-label-stack and the encap-mpls-label-stack
+//
+//	Defining module:      "openconfig-aft-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "encap-mpls-label-stacks/encap-mpls-label-stack"
+//	Path from root:       "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack"
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_MplsPathAny) EncapMplsLabelStackMap() *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMapAny {
+	ps := &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encap-mpls-label-stacks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // MplsLabelStack (leaf-list): A stack of MPLS label values.  The first entry in the list is the
 // label at the bottom of the stack.  The bottom of the stack is adjacent
-// to the MPLS payload.
+// to the MPLS payload. This does not support duplicate labels.
+//
+// This node is deprecated in favor of the list encap-mpls-label-stack.
 //
 // For example, a packet with a label stack of two labels, the bottom
 // label being 42 and the top label being 8072 will be represented with
@@ -12412,7 +13382,9 @@ func (n *NetworkInstance_Afts_NextHop_EncapHeader_MplsPath) MplsLabelStack() *Ne
 
 // MplsLabelStack (leaf-list): A stack of MPLS label values.  The first entry in the list is the
 // label at the bottom of the stack.  The bottom of the stack is adjacent
-// to the MPLS payload.
+// to the MPLS payload. This does not support duplicate labels.
+//
+// This node is deprecated in favor of the list encap-mpls-label-stack.
 //
 // For example, a packet with a label stack of two labels, the bottom
 // label being 42 and the top label being 8072 will be represented with
@@ -12523,6 +13495,98 @@ func (n *NetworkInstance_Afts_NextHop_EncapHeader_MplsPathAny) State() ygnmi.Wil
 		},
 		nil,
 		nil,
+	)
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPath represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPath) PathOriginName() string {
+	return ""
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMap) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap](
+		"NetworkInstance_Afts_NextHop_EncapHeader_Mpls",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls).EncapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:encap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:encap-mpls-label-stack"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStackPathMapAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap](
+		"NetworkInstance_Afts_NextHop_EncapHeader_Mpls",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls).EncapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Afts_NextHop_EncapHeader_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:encap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:encap-mpls-label-stack"},
+		},
 	)
 }
 
@@ -71791,7 +72855,7 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_TunnelPathAny) Source() *Netw
 	return ps
 }
 
-// Type (leaf): Tunnel type, p2p or p2mp
+// Type (leaf): Tunnel type, p2p, p2mp or bypass_p2p
 //
 //	Defining module:      "openconfig-mpls-te"
 //	Instantiating module: "openconfig-network-instance"
@@ -71809,7 +72873,7 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_TunnelPath) Type() *NetworkIn
 	return ps
 }
 
-// Type (leaf): Tunnel type, p2p or p2mp
+// Type (leaf): Tunnel type, p2p, p2mp or bypass_p2p
 //
 //	Defining module:      "openconfig-mpls-te"
 //	Instantiating module: "openconfig-network-instance"
@@ -126290,6 +127354,183 @@ func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_Byp
 	)
 }
 
+// NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/state/bypass-tunnel YANG schema element.
+type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/state/bypass-tunnel YANG schema element.
+type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/state/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewSingletonQuery[[]string](
+		"NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "bypass-tunnel"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection).BypassTunnel
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/state/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "bypass-tunnel"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection).BypassTunnel
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/config/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath) Config() ygnmi.ConfigQuery[[]string] {
+	return ygnmi.NewConfigQuery[[]string](
+		"NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "bypass-tunnel"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection).BypassTunnel
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/config/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny) Config() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "bypass-tunnel"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection).BypassTunnel
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_LinkProtectionStyleRequestedPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/state/link-protection-style-requested YANG schema element.
 type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_LinkProtectionStyleRequestedPath struct {
 	*ygnmi.NodePath
@@ -126512,6 +127753,52 @@ func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_ProtectionPath
 	ps := &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassOptimizeIntervalPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "bypass-optimize-interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BypassTunnel (leaf-list): List of references to named tunnels to be used as bypass
+// LSPs. This allows associating multiple bypass tunnels with
+// a single protected interface to provide different Merge
+// Points (Link/Node protection). In cases where multiple
+// valid bypass tunnels exist, the selection priority is
+// implementation-dependent.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/*/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_ProtectionPath) BypassTunnel() *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath {
+	ps := &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "bypass-tunnel"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BypassTunnel (leaf-list): List of references to named tunnels to be used as bypass
+// LSPs. This allows associating multiple bypass tunnels with
+// a single protected interface to provide different Merge
+// Points (Link/Node protection). In cases where multiple
+// valid bypass tunnels exist, the selection priority is
+// implementation-dependent.
+//
+//	Defining module:      "openconfig-mpls-rsvp"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/bypass-tunnel"
+//	Path from root:       "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection/*/bypass-tunnel"
+func (n *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_ProtectionPathAny) BypassTunnel() *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny {
+	ps := &NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection_BypassTunnelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "bypass-tunnel"},
 			map[string]interface{}{},
 			n,
 		),
@@ -145004,6 +146291,356 @@ func (n *NetworkInstance_PolicyForwarding_PolicyPathMapAny) Config() ygnmi.Wildc
 	)
 }
 
+// NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath) State() ygnmi.SingletonQuery[oc.E_Types_ADDRESS_FAMILY] {
+	return ygnmi.NewSingletonQuery[oc.E_Types_ADDRESS_FAMILY](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address-family"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Types_ADDRESS_FAMILY, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).AddressFamily
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny) State() ygnmi.WildcardQuery[oc.E_Types_ADDRESS_FAMILY] {
+	return ygnmi.NewWildcardQuery[oc.E_Types_ADDRESS_FAMILY](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address-family"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Types_ADDRESS_FAMILY, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).AddressFamily
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath) Config() ygnmi.ConfigQuery[oc.E_Types_ADDRESS_FAMILY] {
+	return ygnmi.NewConfigQuery[oc.E_Types_ADDRESS_FAMILY](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "address-family"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Types_ADDRESS_FAMILY, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).AddressFamily
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny) Config() ygnmi.WildcardQuery[oc.E_Types_ADDRESS_FAMILY] {
+	return ygnmi.NewWildcardQuery[oc.E_Types_ADDRESS_FAMILY](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "address-family"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Types_ADDRESS_FAMILY, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).AddressFamily
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/description YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/description YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_PolicyForwarding_Policy_Rule_MatchedOctetsPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/matched-octets YANG schema element.
 type NetworkInstance_PolicyForwarding_Policy_Rule_MatchedOctetsPath struct {
 	*ygnmi.NodePath
@@ -145445,6 +147082,80 @@ func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Action() *NetworkI
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// AddressFamily (leaf): The type determines the address family allowed in the
+// policy-forwarding match entries belonging to the rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/*/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) AddressFamily() *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address-family"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AddressFamily (leaf): The type determines the address family allowed in the
+// policy-forwarding match entries belonging to the rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/address-family"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/*/address-family"
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) AddressFamily() *NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_AddressFamilyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address-family"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Description (leaf): A user defined description of a rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/*/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePath) Description() *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Description (leaf): A user defined description of a rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/description"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/*/description"
+func (n *NetworkInstance_PolicyForwarding_Policy_RulePathAny) Description() *NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_DescriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -147184,6 +148895,187 @@ func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_IpTtlPathAny) Confi
 	)
 }
 
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/log YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/log YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "log"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action).Log
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "log"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action).Log
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "log"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action).Log
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/config/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "log"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action).Log
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_PolicyForwarding_Policy_Rule_Action_NetworkInstancePath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/state/network-instance YANG schema element.
 type NetworkInstance_PolicyForwarding_Policy_Rule_Action_NetworkInstancePath struct {
 	*ygnmi.NodePath
@@ -148434,7 +150326,45 @@ func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Encapsulate
 	return ps
 }
 
-// IpTtl (leaf): If set, this leaf causes the local system to not decrement the TTL
+// Forwarding (container): Container for ocpf forwarding actions.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "forwarding"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Forwarding() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"forwarding"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Forwarding (container): Container for ocpf forwarding actions.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "forwarding"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Forwarding() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"forwarding"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// IpTtl (leaf): This leaf is deprecated and may be removed in a future OC model
+// release. Instead use the ttl leaf in the appropriate the address
+// family container.
+//
+// If set, this leaf causes the local system to not decrement the TTL
 // and instead re-write the IP TTL of matching packets to the specified
 // value.
 //
@@ -148458,7 +150388,11 @@ func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) IpTtl() *Netwo
 	return ps
 }
 
-// IpTtl (leaf): If set, this leaf causes the local system to not decrement the TTL
+// IpTtl (leaf): This leaf is deprecated and may be removed in a future OC model
+// release. Instead use the ttl leaf in the appropriate the address
+// family container.
+//
+// If set, this leaf causes the local system to not decrement the TTL
 // and instead re-write the IP TTL of matching packets to the specified
 // value.
 //
@@ -148478,6 +150412,150 @@ func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) IpTtl() *Ne
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// Ipv4 (container): Container for forwarding policy actions related to IPv4.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Ipv4() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4 (container): Container for forwarding policy actions related to IPv4.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv4"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Ipv4() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6 (container): Container for forwarding policy actions related to IPv6.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Ipv6() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6 (container): Container for forwarding policy actions related to IPv6.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "ipv6"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Ipv6() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Log (leaf): Create a system logging message when this rule is matched.  Note,
+// this is intended to be used for debugging purposes.  Enabling per
+// packet logging is expected to have significant performance
+// limitations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/*/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Log() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "log"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Log (leaf): Create a system logging message when this rule is matched.  Note,
+// this is intended to be used for debugging purposes.  Enabling per
+// packet logging is expected to have significant performance
+// limitations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/log"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/*/log"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Log() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_LogPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "log"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mpls (container): Container for forwarding policy actions related to MPLS.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPath) Mpls() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Mpls (container): Container for forwarding policy actions related to MPLS.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "mpls"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_ActionPathAny) Mpls() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mpls"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -150459,6 +152537,2017 @@ func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_EncapsulateGre_Targ
 			PreRelPath:  []string{"openconfig-network-instance:targets"},
 			PostRelPath: []string{"openconfig-network-instance:target"},
 		},
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath) State() ygnmi.SingletonQuery[oc.E_PolicyForwarding_FORWARDING_ACTION] {
+	return ygnmi.NewSingletonQuery[oc.E_PolicyForwarding_FORWARDING_ACTION](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "forwarding-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyForwarding_FORWARDING_ACTION, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).ForwardingAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny) State() ygnmi.WildcardQuery[oc.E_PolicyForwarding_FORWARDING_ACTION] {
+	return ygnmi.NewWildcardQuery[oc.E_PolicyForwarding_FORWARDING_ACTION](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "forwarding-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyForwarding_FORWARDING_ACTION, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).ForwardingAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath) Config() ygnmi.ConfigQuery[oc.E_PolicyForwarding_FORWARDING_ACTION] {
+	return ygnmi.NewConfigQuery[oc.E_PolicyForwarding_FORWARDING_ACTION](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "forwarding-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyForwarding_FORWARDING_ACTION, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).ForwardingAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny) Config() ygnmi.WildcardQuery[oc.E_PolicyForwarding_FORWARDING_ACTION] {
+	return ygnmi.NewWildcardQuery[oc.E_PolicyForwarding_FORWARDING_ACTION](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "forwarding-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyForwarding_FORWARDING_ACTION, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).ForwardingAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/qos-forwarding-group YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/qos-forwarding-group YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "qos-forwarding-group"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).QosForwardingGroup
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "qos-forwarding-group"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).QosForwardingGroup
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "qos-forwarding-group"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).QosForwardingGroup
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "qos-forwarding-group"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding).QosForwardingGroup
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// ForwardingAction (leaf): Specifies the if the packet should be forwarded.  One forwarding
+// action must be specified for each rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/*/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath) ForwardingAction() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "forwarding-action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ForwardingAction (leaf): Specifies the if the packet should be forwarded.  One forwarding
+// action must be specified for each rule.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/forwarding-action"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/*/forwarding-action"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny) ForwardingAction() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_ForwardingActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "forwarding-action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// QosForwardingGroup (leaf): When set, the packet should be mapped into the specified qos
+// forwarding-group. The policy-forwarding rule functions as a qos classfier.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/*/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath) QosForwardingGroup() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "qos-forwarding-group"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// QosForwardingGroup (leaf): When set, the packet should be mapped into the specified qos
+// forwarding-group. The policy-forwarding rule functions as a qos classfier.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/qos-forwarding-group"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/*/qos-forwarding-group"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny) QosForwardingGroup() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding_QosForwardingGroupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "qos-forwarding-group"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_ForwardingPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/dscp YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/dscp YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/config/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/config/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/ttl YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/ttl YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Ttl
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/state/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Ttl
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/config/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Ttl
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/config/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ttl"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4).Ttl
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path) PathOriginName() string {
+	return "openconfig"
+}
+
+// Dscp (leaf): Set the matching packet DSCP value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/*/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path) Dscp() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Dscp (leaf): Set the matching packet DSCP value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/*/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny) Dscp() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_DscpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ttl (leaf): If set, this leaf causes the local system to not decrement the TTL
+// and instead re-write the IP TTL of matching packets to the specified
+// value.
+//
+// When this leaf is not set, the TTL value of the matching packet is
+// not affected by this policy and should be processed according to
+// normal forwarding rules.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/*/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path) Ttl() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ttl"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Ttl (leaf): If set, this leaf causes the local system to not decrement the TTL
+// and instead re-write the IP TTL of matching packets to the specified
+// value.
+//
+// When this leaf is not set, the TTL value of the matching packet is
+// not affected by this policy and should be processed according to
+// normal forwarding rules.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/ttl"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4/*/ttl"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny) Ttl() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4_TtlPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ttl"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path) State() ygnmi.SingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4Path) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4PathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/dscp YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/dscp YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/config/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/config/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dscp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).Dscp
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/hop-limit YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/hop-limit YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hop-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).HopLimit
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/state/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hop-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).HopLimit
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/config/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "hop-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).HopLimit
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/config/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "hop-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6).HopLimit
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path) PathOriginName() string {
+	return "openconfig"
+}
+
+// Dscp (leaf): Set the matching packet DSCP value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/*/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path) Dscp() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Dscp (leaf): Set the matching packet DSCP value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dscp"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/*/dscp"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny) Dscp() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_DscpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dscp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HopLimit (leaf): If set, this leaf causes the local system to not decrement the hop
+// limit and instead re-write the hop limit of matching packets to the
+// specified value.
+//
+// When this leaf is not set, the hop limit value of the matching packet
+// is not affected by this policy and should be processed according to
+// normal forwarding rules.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/*/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path) HopLimit() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "hop-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HopLimit (leaf): If set, this leaf causes the local system to not decrement the hop
+// limit and instead re-write the hop limit of matching packets to the
+// specified value.
+//
+// When this leaf is not set, the hop limit value of the matching packet
+// is not affected by this policy and should be processed according to
+// normal forwarding rules.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/hop-limit"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6/*/hop-limit"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny) HopLimit() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6_HopLimitPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "hop-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path) State() ygnmi.SingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6Path) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6PathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/state/mpls-traffic-class YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/state/mpls-traffic-class YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/state/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mpls-traffic-class"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls).MplsTrafficClass
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/state/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mpls-traffic-class"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls).MplsTrafficClass
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/config/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mpls-traffic-class"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls).MplsTrafficClass
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/config/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mpls-traffic-class"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls).MplsTrafficClass
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// MplsTrafficClass (leaf): Set the MPLS traffic class (EXP) value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/*/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath) MplsTrafficClass() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mpls-traffic-class"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MplsTrafficClass (leaf): Set the MPLS traffic class (EXP) value.
+//
+//	Defining module:      "openconfig-pf-forwarding-policies"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/mpls-traffic-class"
+//	Path from root:       "/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls/*/mpls-traffic-class"
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny) MplsTrafficClass() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny {
+	ps := &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls_MplsTrafficClassPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mpls-traffic-class"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_PolicyForwarding_Policy_Rule_Action_MplsPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls](
+		"NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
 	)
 }
 
@@ -259296,6 +263385,60 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 	return ps
 }
 
+// EncapMplsLabelStackMap (list): A stack of MPLS label values.  The first entry in the list is the
+// label at the bottom of the stack.  The bottom of the stack is adjacent
+// to the MPLS payload. This supports duplicate labels.
+//
+// For example, a packet with a label stack of two labels, the bottom
+// label being 42 and the top label being 8072 will be represented with
+// a leaf-list of [42, 8072].  The resulting packet, starting with the
+// beginning of the packet will be '[8072][42][Payload]'.
+//
+// Note: a swap operation is reflected by entries in the
+// decap-mpls-label-stack and the encap-mpls-label-stack
+//
+//	Defining module:      "openconfig-aft-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "encap-mpls-label-stacks/encap-mpls-label-stack"
+//	Path from root:       "/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack"
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHopPath) EncapMplsLabelStackMap() *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap {
+	ps := &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encap-mpls-label-stacks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapMplsLabelStackMap (list): A stack of MPLS label values.  The first entry in the list is the
+// label at the bottom of the stack.  The bottom of the stack is adjacent
+// to the MPLS payload. This supports duplicate labels.
+//
+// For example, a packet with a label stack of two labels, the bottom
+// label being 42 and the top label being 8072 will be represented with
+// a leaf-list of [42, 8072].  The resulting packet, starting with the
+// beginning of the packet will be '[8072][42][Payload]'.
+//
+// Note: a swap operation is reflected by entries in the
+// decap-mpls-label-stack and the encap-mpls-label-stack
+//
+//	Defining module:      "openconfig-aft-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "encap-mpls-label-stacks/encap-mpls-label-stack"
+//	Path from root:       "/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack"
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHopPathAny) EncapMplsLabelStackMap() *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMapAny {
+	ps := &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encap-mpls-label-stacks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // EncapsulateHeader (leaf): When forwarding a packet to the specified next-hop the local
 // system performs an encapsulation of the packet - adding the
 // specified header type.
@@ -259628,7 +263771,8 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 // next-hop
 //   - the stack is encoded as a leaf list whereby the order of the
 //     entries is such that the first entry in the list is the
-//     label at the bottom of the stack to be pushed.
+//     label at the bottom of the stack to be pushed. This does not
+//     support duplicate labels.
 //
 // To this end, a packet which is to forwarded to a device using
 // a service label of 42, and a transport label of 8072 will be
@@ -259640,10 +263784,8 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 // A swap operation is reflected by entries in the
 // popped-mpls-label-stack and pushed-mpls-label-stack nodes.
 //
-// This node must be supported in addition to the
-// encap-headers/encap-header tree.  A future release of OpenConfig
-// will deprecate this node in favor of the
-// encap-headers/encap-header subtree.
+// This node is deprecated in favor of the encap-headers/encap-header
+// subtree.
 //
 //	Defining module:      "openconfig-aft-common"
 //	Instantiating module: "openconfig-network-instance"
@@ -259665,7 +263807,8 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 // next-hop
 //   - the stack is encoded as a leaf list whereby the order of the
 //     entries is such that the first entry in the list is the
-//     label at the bottom of the stack to be pushed.
+//     label at the bottom of the stack to be pushed. This does not
+//     support duplicate labels.
 //
 // To this end, a packet which is to forwarded to a device using
 // a service label of 42, and a transport label of 8072 will be
@@ -259677,10 +263820,8 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 // A swap operation is reflected by entries in the
 // popped-mpls-label-stack and pushed-mpls-label-stack nodes.
 //
-// This node must be supported in addition to the
-// encap-headers/encap-header tree.  A future release of OpenConfig
-// will deprecate this node in favor of the
-// encap-headers/encap-header subtree.
+// This node is deprecated in favor of the encap-headers/encap-header
+// subtree.
 //
 //	Defining module:      "openconfig-aft-common"
 //	Instantiating module: "openconfig-network-instance"
@@ -260444,6 +264585,102 @@ func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 		},
 		nil,
 		nil,
+	)
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPath represents the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPath) PathOriginName() string {
+	return ""
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap represents the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMap) State() ygnmi.SingletonQuery[*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap](
+		"NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop).EncapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:encap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:encap-mpls-label-stack"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStackPathMapAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap](
+		"NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap, bool) {
+			ret := gs.(*oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop).EncapMplsLabelStack
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:encap-mpls-label-stacks"},
+			PostRelPath: []string{"openconfig-network-instance:encap-mpls-label-stack"},
+		},
 	)
 }
 

@@ -11,6 +11,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -872,6 +873,38 @@ func (t *NetworkInstance_Afts_LabelEntry) To_NetworkInstance_Afts_LabelEntry_Pop
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union, unknown union type, got: %T, want any of [E_LabelEntry_PoppedMplsLabelStack, uint32]", i, i)
 }
 
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack/state/label within the YANG schema.
+// Union type can be one of [E_DecapMplsLabelStack_Label, UnionUint32].
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union interface {
+	// Union type can be one of [E_DecapMplsLabelStack_Label, UnionUint32]
+	Documentation_for_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union()
+}
+
+// Documentation_for_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union ensures that E_DecapMplsLabelStack_Label
+// implements the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union interface.
+func (E_DecapMplsLabelStack_Label) Documentation_for_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union() {
+}
+
+// Documentation_for_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union ensures that UnionUint32
+// implements the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union() {
+}
+
+// To_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) To_NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union(i interface{}) (NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union, error) {
+	if v, ok := i.(NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union, unknown union type, got: %T, want any of [E_DecapMplsLabelStack_Label, uint32]", i, i)
+}
+
 // NetworkInstance_Afts_NextHop_PushedMplsLabelStack_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/pushed-mpls-label-stack within the YANG schema.
 // Union type can be one of [E_NextHop_PushedMplsLabelStack, UnionUint32].
@@ -933,6 +966,38 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) To_NetworkInstance_Afts_
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union, unknown union type, got: %T, want any of [E_Mpls_MplsLabelStack, uint32]", i, i)
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack/state/label within the YANG schema.
+// Union type can be one of [E_EncapMplsLabelStack_Label, UnionUint32].
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union interface {
+	// Union type can be one of [E_EncapMplsLabelStack_Label, UnionUint32]
+	Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union()
+}
+
+// Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union ensures that E_EncapMplsLabelStack_Label
+// implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union interface.
+func (E_EncapMplsLabelStack_Label) Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union() {
+}
+
+// Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union ensures that UnionUint32
+// implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union() {
+}
+
+// To_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) To_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union(i interface{}) (NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union, error) {
+	if v, ok := i.(NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union, unknown union type, got: %T, want any of [E_EncapMplsLabelStack_Label, uint32]", i, i)
 }
 
 // NetworkInstance_Afts_PolicyForwardingEntry_IpProtocol_Union is an interface that is implemented by valid types for the union
@@ -3005,6 +3070,38 @@ func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_PushedMplsLabelStack_Union, unknown union type, got: %T, want any of [E_NextHop_PushedMplsLabelStack, uint32]", i, i)
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack/state/label within the YANG schema.
+// Union type can be one of [E_EncapMplsLabelStack_Label, UnionUint32].
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union interface {
+	// Union type can be one of [E_EncapMplsLabelStack_Label, UnionUint32]
+	Documentation_for_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union()
+}
+
+// Documentation_for_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union ensures that E_EncapMplsLabelStack_Label
+// implements the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union interface.
+func (E_EncapMplsLabelStack_Label) Documentation_for_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union() {
+}
+
+// Documentation_for_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union ensures that UnionUint32
+// implements the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union() {
+}
+
+// To_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) To_NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union(i interface{}) (NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union, error) {
+	if v, ok := i.(NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union, unknown union type, got: %T, want any of [E_EncapMplsLabelStack_Label, uint32]", i, i)
 }
 
 // NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_Sid_Value_Union is an interface that is implemented by valid types for the union

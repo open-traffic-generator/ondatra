@@ -9,6 +9,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -2984,7 +2985,7 @@ func (n *InterfacePathAny) Aggregation() *Interface_AggregationPathAny {
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -3002,7 +3003,7 @@ func (n *InterfacePath) Counters() *Interface_CountersPath {
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -5291,7 +5292,7 @@ func (n *Interface_AggregationPathAny) Member() *Interface_Aggregation_MemberPat
 	return ps
 }
 
-// MinLinks (leaf): Specifies the mininum number of member
+// MinLinks (leaf): Specifies the minimum number of member
 // interfaces that must be active for the aggregate interface
 // to be available
 //
@@ -5311,7 +5312,7 @@ func (n *Interface_AggregationPath) MinLinks() *Interface_Aggregation_MinLinksPa
 	return ps
 }
 
-// MinLinks (leaf): Specifies the mininum number of member
+// MinLinks (leaf): Specifies the minimum number of member
 // interfaces that must be active for the aggregate interface
 // to be available
 //
@@ -9551,7 +9552,7 @@ func (n *Interface_CountersPathAny) OutUnicastPkts() *Interface_Counters_OutUnic
 }
 
 // Resets (leaf): Number of times the interface hardware has been reset.  The
-// triggers and effects of this event are hardware-specifc.
+// triggers and effects of this event are hardware-specific.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -9570,7 +9571,7 @@ func (n *Interface_CountersPath) Resets() *Interface_Counters_ResetsPath {
 }
 
 // Resets (leaf): Number of times the interface hardware has been reset.  The
-// triggers and effects of this event are hardware-specifc.
+// triggers and effects of this event are hardware-specific.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -50688,7 +50689,7 @@ func (n *Interface_SubinterfacePathAny) AdminStatus() *Interface_Subinterface_Ad
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -50706,7 +50707,7 @@ func (n *Interface_SubinterfacePath) Counters() *Interface_Subinterface_Counters
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"

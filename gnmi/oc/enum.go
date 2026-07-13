@@ -11,6 +11,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft-common.yang
   - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-global-filter.yang
   - public/release/models/aft/openconfig-aft-ipv4.yang
   - public/release/models/aft/openconfig-aft-ipv6.yang
   - public/release/models/aft/openconfig-aft-mpls.yang
@@ -1625,6 +1626,43 @@ const (
 	Cpu_Index_ALL E_Cpu_Index = 1
 )
 
+// E_DecapMplsLabelStack_Label is a derived int64 type which is used to represent
+// the enumerated node DecapMplsLabelStack_Label. An additional value named
+// DecapMplsLabelStack_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_DecapMplsLabelStack_Label int64
+
+// IsYANGGoEnum ensures that DecapMplsLabelStack_Label implements the yang.GoEnum
+// interface. This ensures that DecapMplsLabelStack_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_DecapMplsLabelStack_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  DecapMplsLabelStack_Label.
+func (E_DecapMplsLabelStack_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_DecapMplsLabelStack_Label.
+func (e E_DecapMplsLabelStack_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_DecapMplsLabelStack_Label")
+}
+
+const (
+	// DecapMplsLabelStack_Label_UNSET corresponds to the value UNSET of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_UNSET E_DecapMplsLabelStack_Label = 0
+	// DecapMplsLabelStack_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IPV4_EXPLICIT_NULL E_DecapMplsLabelStack_Label = 1
+	// DecapMplsLabelStack_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_ROUTER_ALERT E_DecapMplsLabelStack_Label = 2
+	// DecapMplsLabelStack_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IPV6_EXPLICIT_NULL E_DecapMplsLabelStack_Label = 3
+	// DecapMplsLabelStack_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IMPLICIT_NULL E_DecapMplsLabelStack_Label = 4
+	// DecapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR E_DecapMplsLabelStack_Label = 8
+	// DecapMplsLabelStack_Label_NO_LABEL corresponds to the value NO_LABEL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_NO_LABEL E_DecapMplsLabelStack_Label = 9
+)
+
 // E_DefaultMetric_Flags is a derived int64 type which is used to represent
 // the enumerated node DefaultMetric_Flags. An additional value named
 // DefaultMetric_Flags_UNSET is added to the enumeration which is used as
@@ -1724,6 +1762,43 @@ const (
 	Egress_PushLabel_ENTROPY_LABEL_INDICATOR E_Egress_PushLabel = 8
 	// Egress_PushLabel_NO_LABEL corresponds to the value NO_LABEL of Egress_PushLabel
 	Egress_PushLabel_NO_LABEL E_Egress_PushLabel = 9
+)
+
+// E_EncapMplsLabelStack_Label is a derived int64 type which is used to represent
+// the enumerated node EncapMplsLabelStack_Label. An additional value named
+// EncapMplsLabelStack_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_EncapMplsLabelStack_Label int64
+
+// IsYANGGoEnum ensures that EncapMplsLabelStack_Label implements the yang.GoEnum
+// interface. This ensures that EncapMplsLabelStack_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_EncapMplsLabelStack_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  EncapMplsLabelStack_Label.
+func (E_EncapMplsLabelStack_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_EncapMplsLabelStack_Label.
+func (e E_EncapMplsLabelStack_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_EncapMplsLabelStack_Label")
+}
+
+const (
+	// EncapMplsLabelStack_Label_UNSET corresponds to the value UNSET of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_UNSET E_EncapMplsLabelStack_Label = 0
+	// EncapMplsLabelStack_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IPV4_EXPLICIT_NULL E_EncapMplsLabelStack_Label = 1
+	// EncapMplsLabelStack_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_ROUTER_ALERT E_EncapMplsLabelStack_Label = 2
+	// EncapMplsLabelStack_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IPV6_EXPLICIT_NULL E_EncapMplsLabelStack_Label = 3
+	// EncapMplsLabelStack_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IMPLICIT_NULL E_EncapMplsLabelStack_Label = 4
+	// EncapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR E_EncapMplsLabelStack_Label = 8
+	// EncapMplsLabelStack_Label_NO_LABEL corresponds to the value NO_LABEL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_NO_LABEL E_EncapMplsLabelStack_Label = 9
 )
 
 // E_EndpointPeer_PeerState is a derived int64 type which is used to represent
@@ -4096,6 +4171,12 @@ const (
 	IfEthernet_INTERFACE_FEC_FEC_RS544 E_IfEthernet_INTERFACE_FEC = 4
 	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE corresponds to the value FEC_RS544_2X_INTERLEAVE of IfEthernet_INTERFACE_FEC
 	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE E_IfEthernet_INTERFACE_FEC = 5
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_CL172 corresponds to the value FEC_RS544_2X_INTERLEAVE_CL172 of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_CL172 E_IfEthernet_INTERFACE_FEC = 6
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_ETC corresponds to the value FEC_RS544_2X_INTERLEAVE_ETC of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_ETC E_IfEthernet_INTERFACE_FEC = 7
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_LOW_LATENCY corresponds to the value FEC_RS544_LOW_LATENCY of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_LOW_LATENCY E_IfEthernet_INTERFACE_FEC = 8
 )
 
 // E_IfIp_IpAddressOrigin is a derived int64 type which is used to represent
@@ -7046,10 +7127,12 @@ func (e E_MplsTypes_TUNNEL_TYPE) String() string {
 const (
 	// MplsTypes_TUNNEL_TYPE_UNSET corresponds to the value UNSET of MplsTypes_TUNNEL_TYPE
 	MplsTypes_TUNNEL_TYPE_UNSET E_MplsTypes_TUNNEL_TYPE = 0
+	// MplsTypes_TUNNEL_TYPE_BYPASS_P2P corresponds to the value BYPASS_P2P of MplsTypes_TUNNEL_TYPE
+	MplsTypes_TUNNEL_TYPE_BYPASS_P2P E_MplsTypes_TUNNEL_TYPE = 1
 	// MplsTypes_TUNNEL_TYPE_P2MP corresponds to the value P2MP of MplsTypes_TUNNEL_TYPE
-	MplsTypes_TUNNEL_TYPE_P2MP E_MplsTypes_TUNNEL_TYPE = 1
+	MplsTypes_TUNNEL_TYPE_P2MP E_MplsTypes_TUNNEL_TYPE = 2
 	// MplsTypes_TUNNEL_TYPE_P2P corresponds to the value P2P of MplsTypes_TUNNEL_TYPE
-	MplsTypes_TUNNEL_TYPE_P2P E_MplsTypes_TUNNEL_TYPE = 2
+	MplsTypes_TUNNEL_TYPE_P2P E_MplsTypes_TUNNEL_TYPE = 3
 )
 
 // E_Mpls_CspfTieBreaking is a derived int64 type which is used to represent
@@ -9486,6 +9569,39 @@ const (
 	PolicyForwardingEntry_MplsLabel_NO_LABEL E_PolicyForwardingEntry_MplsLabel = 9
 )
 
+// E_PolicyForwarding_FORWARDING_ACTION is a derived int64 type which is used to represent
+// the enumerated node PolicyForwarding_FORWARDING_ACTION. An additional value named
+// PolicyForwarding_FORWARDING_ACTION_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PolicyForwarding_FORWARDING_ACTION int64
+
+// IsYANGGoEnum ensures that PolicyForwarding_FORWARDING_ACTION implements the yang.GoEnum
+// interface. This ensures that PolicyForwarding_FORWARDING_ACTION can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PolicyForwarding_FORWARDING_ACTION) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PolicyForwarding_FORWARDING_ACTION.
+func (E_PolicyForwarding_FORWARDING_ACTION) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_PolicyForwarding_FORWARDING_ACTION.
+func (e E_PolicyForwarding_FORWARDING_ACTION) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PolicyForwarding_FORWARDING_ACTION")
+}
+
+const (
+	// PolicyForwarding_FORWARDING_ACTION_UNSET corresponds to the value UNSET of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_UNSET E_PolicyForwarding_FORWARDING_ACTION = 0
+	// PolicyForwarding_FORWARDING_ACTION_DROP corresponds to the value DROP of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_DROP E_PolicyForwarding_FORWARDING_ACTION = 1
+	// PolicyForwarding_FORWARDING_ACTION_FORWARD corresponds to the value FORWARD of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_FORWARD E_PolicyForwarding_FORWARDING_ACTION = 2
+	// PolicyForwarding_FORWARDING_ACTION_REJECT corresponds to the value REJECT of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_REJECT E_PolicyForwarding_FORWARDING_ACTION = 3
+)
+
 // E_PolicyTypes_ATTRIBUTE_COMPARISON is a derived int64 type which is used to represent
 // the enumerated node PolicyTypes_ATTRIBUTE_COMPARISON. An additional value named
 // PolicyTypes_ATTRIBUTE_COMPARISON_UNSET is added to the enumeration which is used as
@@ -9626,6 +9742,8 @@ const (
 	Policy_Type_PBR_POLICY E_Policy_Type = 1
 	// Policy_Type_VRF_SELECTION_POLICY corresponds to the value VRF_SELECTION_POLICY of Policy_Type
 	Policy_Type_VRF_SELECTION_POLICY E_Policy_Type = 2
+	// Policy_Type_MATCH_ACTION_POLICY corresponds to the value MATCH_ACTION_POLICY of Policy_Type
+	Policy_Type_MATCH_ACTION_POLICY E_Policy_Type = 3
 )
 
 // E_PortSet_ExcludePort is a derived int64 type which is used to represent
@@ -11933,10 +12051,14 @@ const (
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 33
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR corresponds to the value ETH_4X10GBASE_SR of TransportTypes_ETHERNET_PMD_TYPE
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 34
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XFR4 corresponds to the value ETH_800GBASE_2XFR4 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XFR4 E_TransportTypes_ETHERNET_PMD_TYPE = 35
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_DR8 corresponds to the value ETH_800GBASE_DR8 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_DR8 E_TransportTypes_ETHERNET_PMD_TYPE = 36
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR corresponds to the value ETH_800GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 35
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 37
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED corresponds to the value ETH_UNDEFINED of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 36
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 38
 )
 
 // E_TransportTypes_FIBER_CONNECTOR_TYPE is a derived int64 type which is used to represent
