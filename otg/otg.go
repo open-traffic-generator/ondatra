@@ -94,7 +94,7 @@ func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 		t.Logf("Skipping link-up step for %s", o.ate)
 		return
 	}
-	//logLinkStates(t, o.ate, cfg, "before setting link state actual link is", 10, "UP", 500)
+	// logLinkStates(t, o.ate, cfg, "before setting link state actual link is", 10, "UP", 500)
 	warnsLinkup, errLinkup := o.setLinkState(context.Background(), gosnappi.StatePortLinkState.UP)
 	if errLinkup != nil {
 		t.Fatalf("PushConfig(t) on %s: failed to set port link state up: %v", o.ate, errLinkup)
@@ -112,6 +112,11 @@ func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 // ports reach that state or timeoutSec elapses; "NONE" logs immediately.
 // Telemetry errors and timeouts are tolerated silently.
 func logLinkStates(t testing.TB, ate binding.ATE, cfg gosnappi.Config, when string, timeoutSec int, expectedState string, pollIntervalMs int) {
+	start := time.Now()
+	defer func() {
+		t.Logf("logLinkStates took %s", time.Since(start))
+	}()
+
 	const queryTimeout = 10 * time.Second
 	ctx := context.Background()
 	gnmiClient, err := rawapis.FetchOTGGNMI(ctx, ate)
